@@ -50,7 +50,7 @@
       "name": "MultiPlus-II 48/5000/70-50",
       "category": "Інвертори / Зарядні пристрої",
       "boxNumber": "Б/Н",
-      "receivedQty": 4,
+      "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T13:06:11.229Z"
@@ -1465,19 +1465,6 @@
     }
   ],
   "logs": [
-    {
-      "id": "log-1791378371229",
-      "timestamp": "2026-10-07T13:06:11.229Z",
-      "type": "IN",
-      "sku": "PMP482505012",
-      "productName": "MultiPlus-II 48/5000/70-50",
-      "boxNumber": "Б/Н",
-      "changeQty": 3,
-      "prevBalance": 1,
-      "newBalance": 4,
-      "orderId": "43543534654",
-      "note": "Прихід"
-    },
     {
       "id": "log-prod-1791377188476-64-hist-0",
       "timestamp": "2026-10-07T12:00:00.000Z",
