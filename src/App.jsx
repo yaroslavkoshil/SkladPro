@@ -350,9 +350,13 @@ export default function App() {
       else { updatedReceived += qty; newBalance = currentBalance + qty; }
 
       const finalBox = box.trim() ? box.trim().toUpperCase() : targetProduct.boxNumber;
+      // Only update the product's primary boxNumber if it didn't have one yet
+      const updatedBox = targetProduct.boxNumber && targetProduct.boxNumber !== 'Б/Н' 
+        ? targetProduct.boxNumber 
+        : finalBox;
 
       updatedProducts = products.map(p => p.id === targetProduct.id ? 
-        { ...p, receivedQty: updatedReceived, sentQty: updatedSent, boxNumber: finalBox, updatedAt: new Date().toISOString() } : p);
+        { ...p, receivedQty: updatedReceived, sentQty: updatedSent, boxNumber: updatedBox, updatedAt: new Date().toISOString() } : p);
 
       newLogs = [{
         id: `log-${Date.now()}`, timestamp: new Date().toISOString(), type: type, sku: targetProduct.sku,
