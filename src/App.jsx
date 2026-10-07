@@ -659,12 +659,12 @@ export default function App() {
                         <tr>
                           <th className="p-4 pl-6">Артикул (SKU)</th>
                           <th className="p-4">Назва товару</th>
-                          <th className="p-4">Місце / Коробка</th>
                           <th className="p-4 text-center">Всього отримано</th>
                           <th className="p-4 text-center">Відправлено</th>
                           <th className="p-4 text-center">Поточний залишок</th>
+                          <th className="p-4 text-center">Дії та Картка</th>
                           <th className="p-4 text-center">Контроль точності</th>
-                          <th className="p-4 pr-6 text-center">Дії та Картка</th>
+                          <th className="p-4 pr-6 text-center">Місце / Коробка</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
@@ -683,11 +683,6 @@ export default function App() {
                                   </div>
                                 </div>
                               </td>
-                              <td className="p-4">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 rounded-lg text-slate-700 font-mono text-xs border border-slate-200 font-bold">
-                                  <Box className="w-3.5 h-3.5 text-slate-400"/> #{p.boxNumber}
-                                </span>
-                              </td>
                               <td className="p-4 text-center font-bold text-emerald-600">+{p.receivedQty}</td>
                               <td className="p-4 text-center font-bold text-amber-500">-{p.sentQty}</td>
                               <td className="p-4 text-center">
@@ -695,14 +690,19 @@ export default function App() {
                                 <span className="text-xs text-slate-400 ml-1">шт.</span>
                               </td>
                               <td className="p-4 text-center">
+                                <button onClick={() => openProductModal(p)} className="px-3 py-1.5 border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1.5">
+                                  <Info className="w-4 h-4"/> Картка & Історія
+                                </button>
+                              </td>
+                              <td className="p-4 text-center">
                                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold text-emerald-700 border border-emerald-200 bg-emerald-50">
                                   <CheckCircle className="w-3.5 h-3.5" /> 100% Точно
                                 </span>
                               </td>
                               <td className="p-4 pr-6 text-center">
-                                <button onClick={() => openProductModal(p)} className="px-3 py-1.5 border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1.5">
-                                  <Info className="w-4 h-4"/> Картка & Історія
-                                </button>
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 rounded-lg text-slate-700 font-mono text-xs border border-slate-200 font-bold">
+                                  <Box className="w-3.5 h-3.5 text-slate-400"/> #{p.boxNumber}
+                                </span>
                               </td>
                             </tr>
                           );
