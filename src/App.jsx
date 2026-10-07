@@ -3,13 +3,21 @@ import {
   Package, Truck, History, CheckCircle2, AlertTriangle, XCircle, Search, 
   PlusCircle, MinusCircle, Box, Download, Upload, RefreshCw, BarChart3, 
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle,
-  Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu
+  Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X
 } from 'lucide-react';
 
 const INITIAL_PRODUCTS = [
   {
     id: 'prod-1', sku: 'ART-1001', name: 'Бездротові навушники AirSound Pro', boxNumber: 'A1',
     receivedQty: 150, sentQty: 45, minQty: 10, updatedAt: new Date(Date.now() - 86400000 * 2).toISOString()
+  },
+  {
+    id: 'prod-2', sku: 'ART-1002', name: 'Смарт-годинник FitTracker V2', boxNumber: 'B2',
+    receivedQty: 80, sentQty: 75, minQty: 15, updatedAt: new Date(Date.now() - 86400000 * 1).toISOString()
+  },
+  {
+    id: 'prod-3', sku: 'ART-1003', name: 'Портативний павербанк 20000mAh', boxNumber: 'A1',
+    receivedQty: 200, sentQty: 200, minQty: 20, updatedAt: new Date().toISOString()
   }
 ];
 
@@ -18,10 +26,20 @@ const INITIAL_LOGS = [
     id: 'log-1', timestamp: new Date(Date.now() - 86400000 * 3).toISOString(), type: 'IN',
     sku: 'ART-1001', productName: 'Бездротові навушники AirSound Pro', boxNumber: 'A1',
     changeQty: 150, prevBalance: 0, newBalance: 150, orderId: 'SUP-8841', note: 'Початковий прихід'
+  },
+  {
+    id: 'log-2', timestamp: new Date(Date.now() - 86400000 * 2).toISOString(), type: 'OUT',
+    sku: 'ART-1001', productName: 'Бездротові навушники AirSound Pro', boxNumber: 'A1',
+    changeQty: 20, prevBalance: 150, newBalance: 130, orderId: 'ORD-1092', note: 'Щоденна відправка'
+  },
+  {
+    id: 'log-3', timestamp: new Date(Date.now() - 86400000 * 1).toISOString(), type: 'OUT',
+    sku: 'ART-1001', productName: 'Бездротові навушники AirSound Pro', boxNumber: 'A1',
+    changeQty: 25, prevBalance: 130, newBalance: 105, orderId: 'ORD-1105', note: 'Замовлення Rozetka'
   }
 ];
 
-// Helper functions for safe base64 encoding (supports UTF-8 / Cyrillic)
+// Helper functions for safe base64 encoding
 const b64EncodeUnicode = (str) => {
   return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
       function toSolidBytes(match, p1) { return String.fromCharCode('0x' + p1); }));
@@ -46,7 +64,6 @@ export default function App() {
   // GitHub Sync State
   const [githubConfig, setGithubConfig] = useState(() => {
     const saved = localStorage.getItem('wh_github_config');
-    // Pre-fill owner and repo for the public read
     return saved ? JSON.parse(saved) : { token: '', owner: 'yaroslavkoshil', repo: 'SkladPro', path: 'database.json' };
   });
   const [fileSha, setFileSha] = useState(null);
@@ -61,12 +78,17 @@ export default function App() {
   // Navigation
   const [activeTab, setActiveTab] = useState('inventory');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Filters
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBoxFilter, setSelectedBoxFilter] = useState('ALL');
   const [statusFilter, setStatusFilter] = useState('ALL');
+  
+  // UI State
   const [notification, setNotification] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Operation Form State
+  // Operation Form State (for generic New Operation tab)
   const [opType, setOpType] = useState('OUT');
   const [opSku, setOpSku] = useState('');
   const [opQty, setOpQty] = useState('');
@@ -74,7 +96,12 @@ export default function App() {
   const [opNote, setOpNote] = useState('');
   const [opOrderRef, setOpOrderRef] = useState('');
   const [newProductName, setNewProductName] = useState('');
-  const [newMinQty, setNewMinQty] = useState('10');
+  
+  // Modal Quick Operation State
+  const [modalOpType, setModalOpType] = useState('OUT');
+  const [modalOpQty, setModalOpQty] = useState('1');
+  const [modalOpNote, setModalOpNote] = useState('');
+  const [modalOpOrderRef, setModalOpOrderRef] = useState('');
 
   // Save to LocalStorage
   useEffect(() => { localStorage.setItem('wh_products_v1', JSON.stringify(products)); }, [products]);
@@ -90,23 +117,21 @@ export default function App() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (adminPassword === '0000') {
-      setIsAdmin(true);
-      setAdminPassword('');
+      setIsAdmin(true); setAdminPassword('');
       showNotice('Доступ дозволено. Режим редагування увімкнено!');
-      setActiveTab('operations');
+      setActiveTab('inventory');
     } else {
       showNotice('Невірний пароль!', 'error');
     }
   };
 
   const handleLogout = () => {
-    setIsAdmin(false);
-    setActiveTab('inventory');
+    setIsAdmin(false); setActiveTab('inventory');
     showNotice('Ви вийшли з режиму адміністратора');
   };
 
   // -----------------------------------------------------
-  // GitHub Cloud Synchronization Logic
+  // GitHub Cloud Synchronization
   // -----------------------------------------------------
   const hasGithubSetup = !!(githubConfig.owner && githubConfig.repo);
 
@@ -114,9 +139,7 @@ export default function App() {
     if (!hasGithubSetup) return;
     setSyncStatus('syncing');
     try {
-      // First try to fetch from raw github content (works if repo is public, without token)
       const rawRes = await fetch(`https://raw.githubusercontent.com/${githubConfig.owner}/${githubConfig.repo}/main/${githubConfig.path}?t=${Date.now()}`);
-      
       if (rawRes.ok) {
         const parsed = await rawRes.json();
         if (parsed.products) setProducts(parsed.products);
@@ -124,7 +147,6 @@ export default function App() {
         setSyncStatus('success');
         showNotice('Дані успішно завантажено!');
         
-        // Try to fetch SHA silently in background for future pushes (requires token)
         if (githubConfig.token) {
            fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
               headers: { 'Authorization': `token ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
@@ -133,7 +155,6 @@ export default function App() {
         return;
       }
 
-      // Fallback to API if private (requires token)
       if (!githubConfig.token) throw new Error('Для приватного репозиторію потрібен токен');
 
       const res = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
@@ -141,7 +162,6 @@ export default function App() {
       });
       if (res.status === 404) {
         setSyncStatus('success');
-        showNotice('Файл бази не знайдено на GitHub. Буде створено при збереженні.');
         return;
       }
       if (!res.ok) throw new Error('Network response was not ok');
@@ -155,30 +175,20 @@ export default function App() {
     } catch (err) {
       console.error(err);
       setSyncStatus('error');
-      showNotice('Помилка завантаження. Можливо репозиторій приватний.', 'error');
     }
   };
 
   const pushToGithub = async (newProducts, newLogs) => {
-    if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
-       showNotice('Для збереження потрібен токен в налаштуваннях!', 'error');
-       return;
-    }
+    if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) return;
     setSyncStatus('syncing');
     try {
       const content = b64EncodeUnicode(JSON.stringify({ products: newProducts, logs: newLogs }, null, 2));
-      const body = {
-        message: `SkladControl update: ${new Date().toLocaleString('uk-UA')}`,
-        content: content,
-      };
+      const body = { message: `SkladControl update: ${new Date().toLocaleString('uk-UA')}`, content: content };
       try {
         const getRes = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
             headers: { 'Authorization': `token ${githubConfig.token}` }
         });
-        if (getRes.ok) {
-            const data = await getRes.json();
-            body.sha = data.sha;
-        }
+        if (getRes.ok) { const data = await getRes.json(); body.sha = data.sha; }
       } catch(e) { }
 
       const res = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
@@ -191,7 +201,6 @@ export default function App() {
       const data = await res.json();
       setFileSha(data.content.sha);
       setSyncStatus('success');
-      showNotice('Зміни успішно збережено на GitHub!');
     } catch (err) {
       console.error(err);
       setSyncStatus('error');
@@ -231,69 +240,106 @@ export default function App() {
     });
     return { totalItemsCount, totalReceived, totalSent, totalInStock, mismatchedCount, isPerfectBalance: mismatchedCount === 0 };
   }, [products]);
+  
+  const boxAnalytics = useMemo(() => {
+    const boxes = {};
+    products.forEach(p => {
+      const box = p.boxNumber.toUpperCase() || 'Б/Н';
+      if(!boxes[box]) boxes[box] = { count: 0, items: 0, products: [] };
+      boxes[box].count += 1;
+      boxes[box].items += (p.receivedQty - p.sentQty);
+      boxes[box].products.push(p);
+    });
+    return boxes;
+  }, [products]);
 
-  const handleExecuteOperation = async (e) => {
-    e.preventDefault();
-    if (!isAdmin) return showNotice('У вас немає прав для редагування', 'error');
-
-    const qty = parseInt(opQty, 10);
-    if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
-
+  // Core execution logic for both New Operation form and Modal Quick Operation
+  const executeOperationCore = async (type, sku, qty, box, note, orderRef, newName = null, newMin = 10) => {
+    if (!isAdmin) { showNotice('У вас немає прав для редагування', 'error'); return false; }
+    
     let updatedProducts = [...products];
     let newLogs = [...logs];
 
-    if (opType === 'NEW') {
-      const trimmedSku = opSku.trim().toUpperCase();
-      if (!trimmedSku || !newProductName.trim()) return showNotice('Заповніть обов’язкові поля', 'error');
-      if (products.some(p => p.sku.toUpperCase() === trimmedSku)) return showNotice(`Артикул "${trimmedSku}" вже існує!`, 'error');
+    if (type === 'NEW') {
+      const trimmedSku = sku.trim().toUpperCase();
+      if (!trimmedSku || !newName?.trim()) { showNotice('Заповніть обов’язкові поля', 'error'); return false; }
+      if (products.some(p => p.sku.toUpperCase() === trimmedSku)) { showNotice(`Артикул "${trimmedSku}" вже існує!`, 'error'); return false; }
 
-      const box = opBox.trim().toUpperCase() || 'Б/Н';
+      const finalBox = box.trim().toUpperCase() || 'Б/Н';
       updatedProducts = [{
-        id: `prod-${Date.now()}`, sku: trimmedSku, name: newProductName.trim(), boxNumber: box,
-        receivedQty: qty, sentQty: 0, minQty: parseInt(newMinQty, 10) || 5, updatedAt: new Date().toISOString()
+        id: `prod-${Date.now()}`, sku: trimmedSku, name: newName.trim(), boxNumber: finalBox,
+        receivedQty: qty, sentQty: 0, minQty: newMin, updatedAt: new Date().toISOString()
       }, ...products];
 
       newLogs = [{
         id: `log-${Date.now()}`, timestamp: new Date().toISOString(), type: 'IN', sku: trimmedSku,
-        productName: newProductName.trim(), boxNumber: box, changeQty: qty, prevBalance: 0, newBalance: qty,
-        orderId: opOrderRef || 'ПР-НОВИЙ', note: opNote || 'Створення нового артикулу'
+        productName: newName.trim(), boxNumber: finalBox, changeQty: qty, prevBalance: 0, newBalance: qty,
+        orderId: orderRef || 'ПР-НОВИЙ', note: note || 'Створення нового артикулу'
       }, ...logs];
 
-      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef('');
       showNotice(`Успішно додано новий артикул ${trimmedSku}!`);
     } else {
-      const targetProduct = products.find(p => p.sku.toUpperCase() === opSku.trim().toUpperCase());
-      if (!targetProduct) return showNotice(`Товар "${opSku}" не знайдено`, 'error');
+      const targetProduct = products.find(p => p.sku.toUpperCase() === sku.trim().toUpperCase());
+      if (!targetProduct) { showNotice(`Товар "${sku}" не знайдено`, 'error'); return false; }
 
       const currentBalance = targetProduct.receivedQty - targetProduct.sentQty;
-      if (opType === 'OUT' && qty > currentBalance) return showNotice(`Доступний залишок: ${currentBalance} шт.`, 'error');
+      if (type === 'OUT' && qty > currentBalance) { showNotice(`Доступний залишок: ${currentBalance} шт.`, 'error'); return false; }
 
       let updatedReceived = targetProduct.receivedQty;
       let updatedSent = targetProduct.sentQty;
       let newBalance = currentBalance;
 
-      if (opType === 'OUT') { updatedSent += qty; newBalance = currentBalance - qty; } 
+      if (type === 'OUT') { updatedSent += qty; newBalance = currentBalance - qty; } 
       else { updatedReceived += qty; newBalance = currentBalance + qty; }
 
-      const finalBox = opBox.trim() ? opBox.trim().toUpperCase() : targetProduct.boxNumber;
+      const finalBox = box.trim() ? box.trim().toUpperCase() : targetProduct.boxNumber;
 
       updatedProducts = products.map(p => p.id === targetProduct.id ? 
         { ...p, receivedQty: updatedReceived, sentQty: updatedSent, boxNumber: finalBox, updatedAt: new Date().toISOString() } : p);
 
       newLogs = [{
-        id: `log-${Date.now()}`, timestamp: new Date().toISOString(), type: opType, sku: targetProduct.sku,
+        id: `log-${Date.now()}`, timestamp: new Date().toISOString(), type: type, sku: targetProduct.sku,
         productName: targetProduct.name, boxNumber: finalBox, changeQty: qty, prevBalance: currentBalance,
-        newBalance: newBalance, orderId: opOrderRef || (opType === 'OUT' ? 'ВІДПР' : 'ПОПОВНЕННЯ'),
-        note: opNote || (opType === 'OUT' ? 'Списання' : 'Прихід')
+        newBalance: newBalance, orderId: orderRef || (type === 'OUT' ? 'ВІДПР' : 'ПОПОВНЕННЯ'),
+        note: note || (type === 'OUT' ? 'Списання' : 'Прихід')
       }, ...logs];
 
-      showNotice(opType === 'OUT' ? `Списано ${qty} шт.` : `Отримано +${qty} шт.`);
-      setOpQty(''); setOpNote(''); setOpOrderRef('');
+      showNotice(type === 'OUT' ? `Списано ${qty} шт.` : `Отримано +${qty} шт.`);
     }
 
     setProducts(updatedProducts);
     setLogs(newLogs);
     if (githubConfig.token) await pushToGithub(updatedProducts, newLogs);
+    
+    // Update selected product if modal is open
+    if (selectedProduct) {
+      const updatedSelect = updatedProducts.find(p => p.id === selectedProduct.id);
+      setSelectedProduct(updatedSelect);
+    }
+    return true;
+  };
+
+  const handleExecuteOperation = async (e) => {
+    e.preventDefault();
+    const qty = parseInt(opQty, 10);
+    if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
+    
+    const success = await executeOperationCore(opType, opSku, qty, opBox, opNote, opOrderRef, newProductName, parseInt(newMinQty, 10) || 5);
+    if (success) {
+      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef('');
+    }
+  };
+
+  const handleModalOperation = async (e) => {
+    e.preventDefault();
+    if (!selectedProduct) return;
+    const qty = parseInt(modalOpQty, 10);
+    if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
+    
+    const success = await executeOperationCore(modalOpType, selectedProduct.sku, qty, '', modalOpNote, modalOpOrderRef);
+    if (success) {
+      setModalOpQty('1'); setModalOpNote(''); setModalOpOrderRef('');
+    }
   };
 
   const exportDataJSON = () => {
@@ -321,11 +367,19 @@ export default function App() {
     }
   };
 
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setModalOpType('OUT');
+    setModalOpQty('1');
+    setModalOpNote('');
+    setModalOpOrderRef('');
+  };
+
   const TABS = [
     { id: 'inventory', label: 'Товари та Залишки', icon: Layers, adminOnly: false },
     { id: 'history', label: 'Історія змін', icon: History, adminOnly: false },
-    { id: 'operations', label: 'Провести операцію', icon: Truck, adminOnly: true },
-    { id: 'reconciliation', label: 'Звірка та Експорт', icon: BarChart3, adminOnly: true },
+    { id: 'operations', label: 'Реєстрація операції', icon: Truck, adminOnly: true },
+    { id: 'reconciliation', label: 'Звірка та Аналітика', icon: BarChart3, adminOnly: false }, // Made public for manager to see analytics
     { id: 'settings', label: 'Налаштування хмари', icon: Settings, adminOnly: true },
   ];
 
@@ -344,7 +398,6 @@ export default function App() {
               <p className="text-[10px] uppercase font-bold text-indigo-500 tracking-wider">Pro Edition</p>
             </div>
           </div>
-          {/* Mobile close button */}
           <button onClick={() => setIsMobileMenuOpen(false)} className="md:hidden text-slate-400 hover:text-slate-600">
             <XCircle className="w-5 h-5" />
           </button>
@@ -359,9 +412,7 @@ export default function App() {
                 key={tab.id}
                 onClick={() => { setActiveTab(tab.id); setIsMobileMenuOpen(false); }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                  isActive 
-                    ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' 
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                  isActive ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
                 <Icon className={`w-5 h-5 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`} />
@@ -422,12 +473,12 @@ export default function App() {
         )}
 
         <main className="flex-1 overflow-y-auto p-4 md:p-8">
-          <div className="max-w-6xl mx-auto space-y-6">
+          <div className="max-w-7xl mx-auto space-y-6">
 
-            {/* Global Metrics Header (Rendered on most tabs) */}
+            {/* Global Metrics Header */}
             {activeTab !== 'settings' && activeTab !== 'operations' && activeTab !== 'login' && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-slate-100 rounded-lg"><Package className="w-4 h-4 text-slate-600" /></div>
                     <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Позицій</span>
@@ -435,27 +486,27 @@ export default function App() {
                   <div className="text-3xl font-extrabold text-slate-800">{summaryMetrics.totalItemsCount}</div>
                 </div>
                 
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-emerald-50 rounded-lg"><ArrowDownLeft className="w-4 h-4 text-emerald-600" /></div>
                     <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Отримано</span>
                   </div>
-                  <div className="text-3xl font-extrabold text-emerald-600">{summaryMetrics.totalReceived}</div>
+                  <div className="text-3xl font-extrabold text-emerald-600">+{summaryMetrics.totalReceived}</div>
                 </div>
 
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-amber-50 rounded-lg"><ArrowUpRight className="w-4 h-4 text-amber-600" /></div>
                     <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Відправлено</span>
                   </div>
-                  <div className="text-3xl font-extrabold text-amber-500">{summaryMetrics.totalSent}</div>
+                  <div className="text-3xl font-extrabold text-amber-500">-{summaryMetrics.totalSent}</div>
                 </div>
 
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -z-10 opacity-50"></div>
                   <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-indigo-50 rounded-lg"><Box className="w-4 h-4 text-indigo-600" /></div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Залишок</span>
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">В наявності</span>
                   </div>
                   <div className="text-3xl font-extrabold text-indigo-600">{summaryMetrics.totalInStock}</div>
                 </div>
@@ -472,16 +523,11 @@ export default function App() {
                 <p className="text-sm text-slate-500 mb-8">Введіть пароль для доступу до редагування залишків та налаштувань.</p>
                 <form onSubmit={handleLogin}>
                   <input 
-                    type="password" 
-                    placeholder="Пароль" 
-                    value={adminPassword}
-                    onChange={(e) => setAdminPassword(e.target.value)}
+                    type="password" placeholder="Пароль" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)}
                     className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl p-4 text-center text-xl tracking-widest text-slate-800 outline-none transition-all mb-4" 
                     autoFocus
                   />
-                  <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 rounded-xl font-bold transition-all">
-                    Увійти
-                  </button>
+                  <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 rounded-xl font-bold transition-all">Увійти</button>
                 </form>
               </div>
             )}
@@ -490,11 +536,10 @@ export default function App() {
             {activeTab === 'settings' && isAdmin && (
               <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
                 <h2 className="text-2xl font-extrabold text-slate-800 mb-2 flex items-center gap-3">
-                  <Server className="w-7 h-7 text-indigo-600" />
-                  Хмарна синхронізація
+                  <Server className="w-7 h-7 text-indigo-600" /> Хмарна синхронізація
                 </h2>
                 <p className="text-sm text-slate-500 mb-8 leading-relaxed">
-                  Налаштуйте з'єднання з вашим приватним GitHub репозиторієм. Всі зміни залишків будуть автоматично зберігатися. Це забезпечить надійне збереження даних і можливість працювати з різних пристроїв.
+                  Налаштуйте з'єднання з вашим публічним GitHub репозиторієм. Для редагування необхідний токен доступу.
                 </p>
                 
                 <div className="space-y-5">
@@ -533,8 +578,7 @@ export default function App() {
             {activeTab === 'operations' && isAdmin && (
               <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
                 <h2 className="text-2xl font-extrabold text-slate-800 mb-6 flex items-center gap-3">
-                  <Truck className="w-7 h-7 text-indigo-600" />
-                  Реєстрація операції
+                  <Truck className="w-7 h-7 text-indigo-600" /> Реєстрація операції
                 </h2>
                 <form onSubmit={handleExecuteOperation} className="space-y-5">
                   <div className="flex p-1 bg-slate-100 rounded-xl mb-6">
@@ -555,7 +599,7 @@ export default function App() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <input required type="number" placeholder="Кількість шт" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none font-bold" />
-                    <input placeholder="Коробка (A1, B2...)" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none font-mono" />
+                    <input placeholder="Коробка (A1...)" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none font-mono" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <input placeholder="Замовлення/Документ" value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none" />
@@ -569,56 +613,99 @@ export default function App() {
               </div>
             )}
 
-            {/* INVENTORY TAB */}
+            {/* INVENTORY TAB - DETAILED RICH VIEW */}
             {activeTab === 'inventory' && (
               <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap items-center gap-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                  <div className="relative flex-1 min-w-[200px]">
-                    <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input type="text" placeholder="Пошук артикулу чи назви..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 pl-10 pr-4 py-2.5 rounded-xl text-sm outline-none transition-all" />
+                {/* Filter Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                  <div className="relative flex-1 min-w-[250px] max-w-lg">
+                    <Search className="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input type="text" placeholder="Пошук за артикулом, назвою чи коробкою..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 pl-11 pr-4 py-3 rounded-xl text-sm outline-none transition-all" />
                   </div>
-                  <div className="flex items-center gap-2 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200">
-                    <Filter className="w-4 h-4 text-slate-400" />
-                    <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-transparent text-sm text-slate-700 font-medium outline-none cursor-pointer">
-                      <option value="ALL">Всі статуси</option>
-                      <option value="IN_STOCK">В наявності</option>
-                      <option value="LOW_STOCK">Закінчується</option>
-                      <option value="OUT_OF_STOCK">Немає в наявності</option>
-                    </select>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-200">
+                      <Box className="w-4 h-4 text-slate-400" />
+                      <select value={selectedBoxFilter} onChange={(e) => setSelectedBoxFilter(e.target.value)} className="bg-transparent text-sm text-slate-700 font-medium outline-none cursor-pointer">
+                        <option value="ALL">Всі коробки ({allBoxes.length})</option>
+                        {allBoxes.map(b => <option key={b} value={b}>Коробка #{b}</option>)}
+                      </select>
+                    </div>
+                    <div className="flex items-center gap-2 bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-200">
+                      <Filter className="w-4 h-4 text-slate-400" />
+                      <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-transparent text-sm text-slate-700 font-medium outline-none cursor-pointer">
+                        <option value="ALL">Всі статуси</option>
+                        <option value="IN_STOCK">В наявності</option>
+                        <option value="LOW_STOCK">Закінчується</option>
+                        <option value="OUT_OF_STOCK">Немає в наявності</option>
+                      </select>
+                    </div>
+                    {isAdmin && (
+                      <button onClick={() => setActiveTab('operations')} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold shadow-md shadow-indigo-600/20 flex items-center gap-2">
+                        <PlusCircle className="w-4 h-4" /> Додати товар
+                      </button>
+                    )}
                   </div>
                 </div>
 
+                {/* Detailed Table */}
                 <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm whitespace-nowrap">
                       <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                        <tr><th className="p-4">Артикул</th><th className="p-4 w-full">Назва</th><th className="p-4">Місце</th><th className="p-4 text-right">Залишок</th></tr>
+                        <tr>
+                          <th className="p-4 pl-6">Артикул (SKU)</th>
+                          <th className="p-4">Назва товару</th>
+                          <th className="p-4">Місце / Коробка</th>
+                          <th className="p-4 text-center">Всього отримано</th>
+                          <th className="p-4 text-center">Відправлено</th>
+                          <th className="p-4 text-center">Поточний залишок</th>
+                          <th className="p-4 text-center">Контроль точності</th>
+                          <th className="p-4 pr-6 text-center">Дії та Картка</th>
+                        </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
                         {filteredProducts.map(p => {
                           const bal = p.receivedQty - p.sentQty;
                           return (
                             <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
-                              <td className="p-4 font-mono font-bold text-indigo-600">{p.sku}</td>
+                              <td className="p-4 pl-6 font-mono font-bold text-indigo-600">{p.sku}</td>
                               <td className="p-4 font-medium text-slate-800">
-                                {p.name}
-                                {bal <= 0 && <span className="ml-3 px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-rose-100 text-rose-600">Немає</span>}
-                                {bal > 0 && bal <= p.minQty && <span className="ml-3 px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-100 text-amber-600">Закінчується</span>}
+                                <div className="flex flex-col gap-1">
+                                  <span>{p.name}</span>
+                                  <div>
+                                    {bal <= 0 && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-rose-100 text-rose-700 border border-rose-200">Немає в наявності</span>}
+                                    {bal > 0 && bal <= p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-100 text-amber-700 border border-amber-200">Закінчується ({bal} шт)</span>}
+                                    {bal > p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">В наявності</span>}
+                                  </div>
+                                </div>
                               </td>
                               <td className="p-4">
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 rounded-lg text-slate-600 font-mono text-xs border border-slate-200">
-                                  #{p.boxNumber}
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 rounded-lg text-slate-700 font-mono text-xs border border-slate-200 font-bold">
+                                  <Box className="w-3.5 h-3.5 text-slate-400"/> #{p.boxNumber}
                                 </span>
                               </td>
-                              <td className="p-4 text-right">
-                                <span className={`text-base font-extrabold ${bal <= 0 ? 'text-rose-500' : 'text-slate-800'}`}>{bal}</span>
-                                <span className="text-xs text-slate-400 ml-1">шт</span>
+                              <td className="p-4 text-center font-bold text-emerald-600">+{p.receivedQty}</td>
+                              <td className="p-4 text-center font-bold text-amber-500">-{p.sentQty}</td>
+                              <td className="p-4 text-center">
+                                <span className={`text-lg font-extrabold ${bal <= 0 ? 'text-rose-500' : 'text-slate-800'}`}>{bal}</span>
+                                <span className="text-xs text-slate-400 ml-1">шт.</span>
+                              </td>
+                              <td className="p-4 text-center">
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold text-emerald-700 border border-emerald-200 bg-emerald-50">
+                                  <CheckCircle className="w-3.5 h-3.5" /> 100% Точно
+                                </span>
+                              </td>
+                              <td className="p-4 pr-6 text-center">
+                                <button onClick={() => openProductModal(p)} className="px-3 py-1.5 border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1.5">
+                                  <Info className="w-4 h-4"/> Картка & Історія
+                                </button>
                               </td>
                             </tr>
                           );
                         })}
                         {filteredProducts.length === 0 && (
-                          <tr><td colSpan="4" className="p-8 text-center text-slate-400 font-medium">Нічого не знайдено</td></tr>
+                          <tr><td colSpan="8" className="p-8 text-center text-slate-400 font-medium">Нічого не знайдено</td></tr>
                         )}
                       </tbody>
                     </table>
@@ -627,45 +714,65 @@ export default function App() {
               </div>
             )}
 
-            {/* HISTORY TAB */}
+            {/* DETAILED HISTORY TAB */}
             {activeTab === 'history' && (
               <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                  <h3 className="font-extrabold text-slate-800 flex items-center gap-2">
-                    <History className="w-5 h-5 text-indigo-600" /> Журнал операцій
-                  </h3>
-                  <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
-                    {logs.length} записів
+                <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                  <div>
+                    <h3 className="text-lg font-extrabold text-slate-800 flex items-center gap-2">
+                      <History className="w-5 h-5 text-indigo-600" /> Хронологічний журнал операцій
+                    </h3>
+                    <p className="text-sm text-slate-500 mt-1">Повна історія відправок, приходів та змін по кожному товару</p>
+                  </div>
+                  <span className="text-xs font-bold text-slate-600 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
+                    Загалом записів: {logs.length}
                   </span>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-sm whitespace-nowrap">
                     <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      <tr><th className="p-4">Час</th><th className="p-4">Тип</th><th className="p-4">Товар</th><th className="p-4">Зміна</th><th className="p-4 text-right">Залишок</th></tr>
+                      <tr>
+                        <th className="p-4 pl-6">Дата та час</th>
+                        <th className="p-4">Тип</th>
+                        <th className="p-4">Артикул / Назва</th>
+                        <th className="p-4 text-center">Коробка</th>
+                        <th className="p-4 text-center">Зміна</th>
+                        <th className="p-4 text-center">Залишок після</th>
+                        <th className="p-4 pr-6">Документ / Примітка</th>
+                      </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {logs.map(log => (
                         <tr key={log.id} className="hover:bg-slate-50/80 transition-colors">
-                          <td className="p-4 text-xs font-medium text-slate-400">{new Date(log.timestamp).toLocaleString('uk-UA')}</td>
+                          <td className="p-4 pl-6 text-xs font-medium text-slate-500">{new Date(log.timestamp).toLocaleString('uk-UA')}</td>
                           <td className="p-4">
                             {log.type === 'OUT' ? (
-                              <span className="inline-flex items-center gap-1 text-[10px] uppercase font-extrabold px-2 py-1 rounded bg-amber-100 text-amber-700">
-                                Відправка
+                              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded bg-amber-50 text-amber-700 border border-amber-200">
+                                <ArrowUpRight className="w-3.5 h-3.5"/> Відправка
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1 text-[10px] uppercase font-extrabold px-2 py-1 rounded bg-emerald-100 text-emerald-700">
-                                Прихід
+                              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                <ArrowDownLeft className="w-3.5 h-3.5"/> Прихід
                               </span>
                             )}
                           </td>
                           <td className="p-4">
                             <span className="font-mono font-bold text-indigo-600 mr-2">{log.sku}</span>
-                            <span className="text-slate-600 text-xs hidden md:inline">{log.productName}</span>
+                            <span className="text-slate-800 font-medium text-sm">{log.productName}</span>
                           </td>
-                          <td className={`p-4 font-extrabold text-base ${log.type==='OUT'?'text-amber-500':'text-emerald-500'}`}>
+                          <td className="p-4 text-center">
+                             <span className="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">#{log.boxNumber}</span>
+                          </td>
+                          <td className={`p-4 text-center font-extrabold text-base ${log.type==='OUT'?'text-amber-500':'text-emerald-500'}`}>
                             {log.type === 'OUT' ? '-' : '+'}{log.changeQty}
                           </td>
-                          <td className="p-4 text-right font-bold text-slate-800">{log.newBalance} шт</td>
+                          <td className="p-4 text-center font-bold text-slate-800">
+                            {log.newBalance} <span className="text-xs text-slate-400 font-normal">шт.</span>
+                          </td>
+                          <td className="p-4 pr-6 text-slate-600 text-sm">
+                            {log.orderId && <span className="font-bold text-slate-700 mr-2">[{log.orderId}]</span>}
+                            {log.note}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -676,26 +783,206 @@ export default function App() {
 
             {/* RECONCILIATION TAB */}
             {activeTab === 'reconciliation' && (
-              <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
-                <h3 className="text-xl font-extrabold text-slate-800 mb-6 flex items-center gap-2">
-                  <BarChart3 className="w-6 h-6 text-indigo-600" />
-                  Резервне копіювання бази
-                </h3>
-                <div className="flex flex-wrap gap-4">
-                  <button onClick={exportDataJSON} className="px-5 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-all flex items-center gap-2 shadow-sm">
-                    <Download className="w-5 h-5"/> Зберегти файл (Експорт)
-                  </button>
-                  <label className="px-5 py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl font-bold transition-all flex items-center gap-2 shadow-sm cursor-pointer">
-                    <Upload className="w-5 h-5 text-indigo-600"/> Завантажити файл (Імпорт)
-                    <input type="file" className="hidden" onChange={importDataJSON}/>
-                  </label>
+              <div className="space-y-6">
+                
+                {/* Auto Balance Module */}
+                <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <h3 className="text-lg font-extrabold text-slate-800 flex items-center gap-2 mb-1">
+                      <BarChart3 className="w-5 h-5 text-indigo-600" /> Модуль Автоматичної Звірки та Балансу
+                    </h3>
+                    <p className="text-sm text-slate-500">Перевірка математичної точності та відсутності розбіжностей за формулою: <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700">Отримано = Залишок + Відправлено</code></p>
+                  </div>
+                  {summaryMetrics.isPerfectBalance ? (
+                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl font-bold">
+                      <CheckCircle className="w-5 h-5" /> Баланс 100% Збігається
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-rose-50 text-rose-700 border border-rose-200 rounded-xl font-bold">
+                      <AlertTriangle className="w-5 h-5" /> Знайдено розбіжності ({summaryMetrics.mismatchedCount})
+                    </span>
+                  )}
                 </div>
+
+                {/* Box Analytics */}
+                <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+                  <h3 className="text-lg font-extrabold text-slate-800 flex items-center gap-2 mb-6">
+                    <Box className="w-5 h-5 text-indigo-600" /> Аналітика завантаженості за коробками
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {Object.entries(boxAnalytics).map(([box, data]) => (
+                      <div key={box} className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="font-bold text-slate-700 flex items-center gap-1.5"><Box className="w-4 h-4 text-indigo-500"/> Коробка <span className="text-indigo-600">#{box}</span></span>
+                          <span className="text-xs font-bold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">{data.count} артикулів</span>
+                        </div>
+                        <div className="text-2xl font-extrabold text-slate-800 mb-4">{data.items} <span className="text-sm font-normal text-slate-500">од. товарів</span></div>
+                        <div className="mt-auto space-y-1">
+                           {data.products.slice(0, 3).map(p => (
+                             <div key={p.id} className="flex justify-between text-xs text-slate-500 items-center">
+                               <span className="truncate pr-2">{p.sku} - {p.name}</span>
+                               <span className="font-bold whitespace-nowrap">{p.receivedQty - p.sentQty} шт</span>
+                             </div>
+                           ))}
+                           {data.products.length > 3 && <div className="text-xs text-slate-400 italic pt-1">та ще {data.products.length - 3}...</div>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Backup & Manage */}
+                {isAdmin && (
+                  <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex items-center justify-between flex-wrap gap-4">
+                    <div>
+                      <h3 className="text-lg font-extrabold text-slate-800 mb-1">Резервне копіювання та Керування даними</h3>
+                      <p className="text-sm text-slate-500">Збережіть базу даних у JSON для перенесення на інший пристрій.</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <button onClick={exportDataJSON} className="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl font-bold transition-all flex items-center gap-2 shadow-sm text-sm">
+                        <Download className="w-4 h-4"/> Експорт JSON
+                      </button>
+                      <label className="px-4 py-2 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 text-emerald-700 rounded-xl font-bold transition-all flex items-center gap-2 shadow-sm cursor-pointer text-sm">
+                        <Upload className="w-4 h-4"/> Імпорт JSON
+                        <input type="file" className="hidden" onChange={importDataJSON}/>
+                      </label>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
           </div>
         </main>
       </div>
+
+      {/* DETAILED PRODUCT MODAL */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setSelectedProduct(null)}></div>
+          <div className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            
+            <div className="p-6 border-b border-slate-100 flex items-start justify-between bg-slate-50">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 bg-indigo-100 text-indigo-700 font-bold font-mono text-sm rounded-lg">{selectedProduct.sku}</span>
+                  <span className="px-3 py-1 bg-slate-200 text-slate-600 font-bold font-mono text-sm rounded-lg flex items-center gap-1.5"><Box className="w-4 h-4"/> Коробка #{selectedProduct.boxNumber}</span>
+                </div>
+                <h2 className="text-2xl font-extrabold text-slate-800">{selectedProduct.name}</h2>
+              </div>
+              <button onClick={() => setSelectedProduct(null)} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-200 rounded-full transition-colors">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto p-6 flex-1 flex flex-col gap-6">
+              
+              {/* Big Stats */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
+                  <div className="text-sm font-bold text-emerald-600 mb-1">Всього Отримано</div>
+                  <div className="text-3xl font-extrabold text-emerald-600">+{selectedProduct.receivedQty} <span className="text-base font-medium">шт</span></div>
+                </div>
+                <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
+                  <div className="text-sm font-bold text-amber-600 mb-1">Всього Відправлено</div>
+                  <div className="text-3xl font-extrabold text-amber-500">-{selectedProduct.sentQty} <span className="text-base font-medium">шт</span></div>
+                </div>
+                <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-5 shadow-sm">
+                  <div className="text-sm font-bold text-indigo-700 mb-1">Поточний Залишок</div>
+                  <div className="text-3xl font-extrabold text-indigo-700">{selectedProduct.receivedQty - selectedProduct.sentQty} <span className="text-base font-medium">шт</span></div>
+                </div>
+              </div>
+
+              {/* Quick Operation Form */}
+              {isAdmin && (
+                <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-extrabold text-slate-800 flex items-center gap-2">
+                      <Truck className="w-5 h-5 text-indigo-500"/> Швидке проведення відправки / приходу
+                    </h3>
+                    <div className="flex bg-slate-100 p-1 rounded-lg">
+                      <button onClick={() => setModalOpType('OUT')} className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${modalOpType==='OUT' ? 'bg-white shadow-sm text-amber-600' : 'text-slate-500'}`}>- Відправка</button>
+                      <button onClick={() => setModalOpType('IN')} className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${modalOpType==='IN' ? 'bg-white shadow-sm text-emerald-600' : 'text-slate-500'}`}>+ Прихід</button>
+                    </div>
+                  </div>
+                  
+                  <form onSubmit={handleModalOperation}>
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                      
+                      <div className="md:col-span-4">
+                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Кількість (шт)</label>
+                        <div className="flex gap-2">
+                          <input type="number" required min="1" value={modalOpQty} onChange={e=>setModalOpQty(e.target.value)} className="w-24 bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-3 font-extrabold text-lg text-center outline-none" />
+                          <div className="flex gap-1">
+                            {[1,2,5,10].map(n => (
+                              <button type="button" key={n} onClick={() => setModalOpQty(String((parseInt(modalOpQty)||0) + n))} className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm border border-slate-200 transition-colors">+{n}</button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="md:col-span-3">
+                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">№ ТТН / Замовлення</label>
+                        <input type="text" placeholder="напр. ТТН-2041" value={modalOpOrderRef} onChange={e=>setModalOpOrderRef(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-3 outline-none text-sm font-medium" />
+                      </div>
+
+                      <div className="md:col-span-5">
+                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Примітка</label>
+                        <input type="text" placeholder="Коментар" value={modalOpNote} onChange={e=>setModalOpNote(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-3 outline-none text-sm font-medium" />
+                      </div>
+                    </div>
+                    
+                    <button type="submit" className={`w-full mt-5 py-4 rounded-xl font-bold text-white shadow-md transition-all flex items-center justify-center gap-2 ${modalOpType==='OUT' ? 'bg-amber-500 hover:bg-amber-600 shadow-amber-500/20' : 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20'}`}>
+                      {modalOpType === 'OUT' ? <ArrowUpRight className="w-5 h-5"/> : <ArrowDownLeft className="w-5 h-5"/>}
+                      {modalOpType === 'OUT' ? 'Підтвердити відправку' : 'Підтвердити прихід'}
+                    </button>
+                  </form>
+                </div>
+              )}
+
+              {/* History for this product */}
+              <div className="mt-2">
+                <h3 className="font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                  <History className="w-5 h-5 text-indigo-500"/> Історія змін та відправок для {selectedProduct.sku} ({logs.filter(l => l.sku === selectedProduct.sku).length})
+                </h3>
+                <div className="space-y-3">
+                  {logs.filter(l => l.sku === selectedProduct.sku).map(log => (
+                    <div key={log.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:bg-white hover:shadow-sm transition-all gap-4">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${log.type==='OUT' ? 'bg-amber-100 text-amber-600' : 'bg-emerald-100 text-emerald-600'}`}>
+                          {log.type === 'OUT' ? <ArrowUpRight className="w-5 h-5"/> : <ArrowDownLeft className="w-5 h-5"/>}
+                        </div>
+                        <div>
+                          <div className="font-bold text-slate-800 flex items-center gap-2">
+                            {log.type === 'OUT' ? 'Відправка товару' : 'Оприбуткування'}
+                            {log.orderId && <span className="text-indigo-600 text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">[{log.orderId}]</span>}
+                          </div>
+                          <div className="text-xs text-slate-500 mt-1 flex flex-wrap gap-x-3 gap-y-1">
+                            <span>{new Date(log.timestamp).toLocaleString('uk-UA')}</span>
+                            <span className="hidden sm:inline">•</span>
+                            <span>{log.note || 'Без примітки'}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right flex sm:flex-col justify-between items-center sm:items-end">
+                        <div className={`text-lg font-extrabold ${log.type==='OUT' ? 'text-amber-500' : 'text-emerald-500'}`}>
+                          {log.type === 'OUT' ? '-' : '+'}{log.changeQty} <span className="text-sm">шт</span>
+                        </div>
+                        <div className="text-xs text-slate-400 font-medium">Залишок: {log.newBalance} шт</div>
+                      </div>
+                    </div>
+                  ))}
+                  {logs.filter(l => l.sku === selectedProduct.sku).length === 0 && (
+                     <div className="p-8 text-center text-slate-400 font-medium border-2 border-dashed border-slate-200 rounded-2xl">Історія операцій порожня</div>
+                  )}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
