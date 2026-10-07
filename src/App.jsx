@@ -705,46 +705,61 @@ export default function App() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
-                        {filteredProducts.map(p => {
-                          const bal = p.receivedQty - p.sentQty;
-                          return (
-                            <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
-                              <td className="p-4 pl-6 font-mono font-bold text-indigo-600">{p.sku}</td>
-                              <td className="p-4 font-medium text-slate-800 whitespace-normal break-words" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
-                                <div className="flex flex-col gap-1">
-                                  <span>{p.name}</span>
-                                  <div className="flex flex-wrap gap-2 items-center mt-1">
-                                    {p.category && <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-600 border border-indigo-100">{p.category}</span>}
-                                    {bal <= 0 && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-rose-100 text-rose-700 border border-rose-200">Немає в наявності</span>}
-                                    {bal > 0 && bal <= p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-100 text-amber-700 border border-amber-200">Закінчується ({bal} шт)</span>}
-                                    {bal > p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">В наявності</span>}
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="p-4 text-center font-bold text-emerald-600">+{p.receivedQty}</td>
-                              <td className="p-4 text-center font-bold text-amber-500">-{p.sentQty}</td>
-                              <td className="p-4 text-center">
-                                <span className={`text-lg font-extrabold ${bal <= 0 ? 'text-rose-500' : 'text-slate-800'}`}>{bal}</span>
-                                <span className="text-xs text-slate-400 ml-1">шт.</span>
-                              </td>
-                              <td className="p-4 text-center">
-                                <button onClick={() => openProductModal(p)} className="px-3 py-1.5 border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1.5">
-                                  <Info className="w-4 h-4"/> Картка & Історія
-                                </button>
-                              </td>
-                              <td className="p-4 text-center">
-                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold text-emerald-700 border border-emerald-200 bg-emerald-50">
-                                  <CheckCircle className="w-3.5 h-3.5" /> 100% Точно
-                                </span>
-                              </td>
-                              <td className="p-4 pr-6 text-center">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 rounded-lg text-slate-700 font-mono text-xs border border-slate-200 font-bold">
-                                  <Box className="w-3.5 h-3.5 text-slate-400"/> #{p.boxNumber}
-                                </span>
+                        {Object.entries(
+                          filteredProducts.reduce((acc, p) => {
+                            const cat = p.category || 'Інше';
+                            if (!acc[cat]) acc[cat] = [];
+                            acc[cat].push(p);
+                            return acc;
+                          }, {})
+                        ).map(([cat, prods]) => (
+                          <React.Fragment key={cat}>
+                            <tr className="bg-indigo-50/70 border-y border-indigo-100/70">
+                              <td colSpan="8" className="p-3 pl-6 font-extrabold text-indigo-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] text-sm">
+                                📁 {cat} <span className="ml-2 text-xs font-bold text-indigo-600 bg-white px-2 py-0.5 rounded-full border border-indigo-200">{prods.length} позицій</span>
                               </td>
                             </tr>
-                          );
-                        })}
+                            {prods.map(p => {
+                              const bal = p.receivedQty - p.sentQty;
+                              return (
+                                <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
+                                  <td className="p-4 pl-6 font-mono font-bold text-indigo-600">{p.sku}</td>
+                                  <td className="p-4 font-medium text-slate-800 whitespace-normal break-words" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
+                                    <div className="flex flex-col gap-1">
+                                      <span>{p.name}</span>
+                                      <div className="flex flex-wrap gap-2 items-center mt-1">
+                                        {bal <= 0 && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-rose-100 text-rose-700 border border-rose-200">Немає в наявності</span>}
+                                        {bal > 0 && bal <= p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-100 text-amber-700 border border-amber-200">Закінчується ({bal} шт)</span>}
+                                        {bal > p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">В наявності</span>}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="p-4 text-center font-bold text-emerald-600">+{p.receivedQty}</td>
+                                  <td className="p-4 text-center font-bold text-amber-500">-{p.sentQty}</td>
+                                  <td className="p-4 text-center">
+                                    <span className={`text-lg font-extrabold ${bal <= 0 ? 'text-rose-500' : 'text-slate-800'}`}>{bal}</span>
+                                    <span className="text-xs text-slate-400 ml-1">шт.</span>
+                                  </td>
+                                  <td className="p-4 text-center">
+                                    <button onClick={() => openProductModal(p)} className="px-3 py-1.5 border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1.5">
+                                      <Info className="w-4 h-4"/> Картка & Історія
+                                    </button>
+                                  </td>
+                                  <td className="p-4 text-center">
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold text-emerald-700 border border-emerald-200 bg-emerald-50">
+                                      <CheckCircle className="w-3.5 h-3.5" /> 100% Точно
+                                    </span>
+                                  </td>
+                                  <td className="p-4 pr-6 text-center">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 rounded-lg text-slate-700 font-mono text-xs border border-slate-200 font-bold">
+                                      <Box className="w-3.5 h-3.5 text-slate-400"/> #{p.boxNumber}
+                                    </span>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </React.Fragment>
+                        ))}
                         {filteredProducts.length === 0 && (
                           <tr><td colSpan="8" className="p-8 text-center text-slate-400 font-medium">Нічого не знайдено</td></tr>
                         )}
