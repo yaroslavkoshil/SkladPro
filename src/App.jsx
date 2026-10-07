@@ -982,7 +982,11 @@ export default function App() {
                                 {log.newBalance} <span className="text-xs text-slate-400 font-normal">шт.</span>
                               </td>
                               <td className="p-4 pr-6 text-slate-600 text-sm">
-                                {log.orderId && <span className="font-bold text-slate-700 mr-2">[{log.orderId}]</span>}
+                                {log.orderId && (
+                                  /^\d{12,14}$/.test(log.orderId.trim())
+                                    ? <a href={`https://novaposhta.ua/tracking/?cargo_number=${log.orderId.trim()}`} target="_blank" rel="noopener noreferrer" className="font-bold text-indigo-600 hover:text-indigo-800 hover:underline mr-2 transition-colors" title="Відстежити ТТН на Новій Пошті">[{log.orderId}] 🔗</a>
+                                    : <span className="font-bold text-slate-700 mr-2">[{log.orderId}]</span>
+                                )}
                                 {log.note}
                               </td>
                               {isAdmin && (
@@ -1225,7 +1229,11 @@ export default function App() {
                           <div>
                             <div className="font-bold text-slate-800 flex items-center gap-2">
                               {log.type === 'OUT' ? 'Відправка товару' : 'Оприбуткування'}
-                              {log.orderId && <span className="text-indigo-600 text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">[{log.orderId}]</span>}
+                              {log.orderId && (
+                                /^\d{12,14}$/.test(log.orderId.trim())
+                                  ? <a href={`https://novaposhta.ua/tracking/?cargo_number=${log.orderId.trim()}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 hover:underline text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100 transition-colors" title="Відстежити ТТН">[{log.orderId}] 🔗</a>
+                                  : <span className="text-indigo-600 text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">[{log.orderId}]</span>
+                              )}
                             </div>
                             <div className="text-xs text-slate-500 mt-1 flex flex-wrap gap-x-3 gap-y-1">
                               <span>{new Date(log.timestamp).toLocaleString('uk-UA')}</span>
