@@ -110,6 +110,12 @@ export default function App() {
   const [notification, setNotification] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // Editing State
+  const [editingLogId, setEditingLogId] = useState(null);
+  const [editLogData, setEditLogData] = useState({});
+  const [isEditingProduct, setIsEditingProduct] = useState(false);
+  const [editProductData, setEditProductData] = useState({});
+
   // Operation Form State (for generic New Operation tab)
   const [opSku, setOpSku] = useState('');
   const [opQty, setOpQty] = useState('');
@@ -405,6 +411,69 @@ export default function App() {
     if (success) {
       setModalOpQty('1'); setModalOpNote(''); setModalOpOrderRef('');
     }
+  };
+
+  const updateProductFromLogs = (targetSku, currentLogs, currentProducts) => {
+    const clonedLogs = currentLogs.map(l => ({...l})); 
+    let newReceived = 0; let newSent = 0;
+    
+    const prodLogs = clonedLogs.filter(l => l.sku === targetSku).sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
+    
+    let runningBalance = 0;
+    prodLogs.forEach(pl => {
+       if (pl.type === 'IN') { runningBalance += Number(pl.changeQty); newReceived += Number(pl.changeQty); } 
+       else { runningBalance -= Number(pl.changeQty); newSent += Number(pl.changeQty); }
+       pl.newBalance = runningBalance; 
+    });
+
+    clonedLogs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    const newProducts = currentProducts.map(p => p.sku === targetSku ? { ...p, receivedQty: newReceived, sentQty: newSent } : p);
+    return { newProducts, newLogs: clonedLogs };
+  };
+
+  const startEditingProduct = () => { setIsEditingProduct(true); setEditProductData({ ...selectedProduct }); };
+
+  const startEditingLog = (log) => { setEditingLogId(log.id); setEditLogData({...log}); };
+
+  const getLocalDatetimeLocal = (isoStr) => {
+     try {
+       const d = new Date(isoStr);
+       const pad = (n) => n.toString().padStart(2, '0');
+       return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+     } catch (e) { return ''; }
+  };
+
+  const handleSaveProductEdit = () => {
+    if (!editProductData.sku || !editProductData.name) return showNotice('Артикул та Назва обов\'язкові', 'error');
+    const newProducts = products.map(p => p.id === selectedProduct.id ? { ...p, ...editProductData } : p);
+    let newLogs = [...logs];
+    if (editProductData.sku !== selectedProduct.sku || editProductData.name !== selectedProduct.name) {
+       newLogs = logs.map(l => l.sku === selectedProduct.sku ? { ...l, sku: editProductData.sku, productName: editProductData.name } : l);
+    }
+    setProducts(newProducts); setLogs(newLogs); pushToGithub(newProducts, newLogs);
+    setSelectedProduct(newProducts.find(p => p.id === selectedProduct.id));
+    setIsEditingProduct(false); showNotice('Товар оновлено');
+  };
+
+  const handleDeleteLog = (logId) => {
+    if (!window.confirm('Ви впевнені, що хочете видалити цей запис історії? Це змінить залишки товару.')) return;
+    const { newProducts, newLogs } = updateProductFromLogs(selectedProduct.sku, logs.filter(l => l.id !== logId), products);
+    setLogs(newLogs); setProducts(newProducts); pushToGithub(newProducts, newLogs);
+    setSelectedProduct(newProducts.find(p => p.sku === selectedProduct.sku)); showNotice('Запис видалено');
+  };
+
+  const handleSaveLogEdit = (logId) => {
+    const qty = parseInt(editLogData.changeQty, 10);
+    if (isNaN(qty) || qty <= 0) return showNotice('Кількість повинна бути більше 0', 'error');
+    let updatedDate = new Date(editLogData.timestamp);
+    if (isNaN(updatedDate.getTime())) return showNotice('Невірний формат дати', 'error');
+    const updatedLogs = logs.map(l => l.id === logId ? { 
+      ...l, changeQty: qty, note: editLogData.note, orderId: editLogData.orderId, timestamp: updatedDate.toISOString()
+    } : l);
+    const { newProducts, newLogs } = updateProductFromLogs(selectedProduct.sku, updatedLogs, products);
+    setLogs(newLogs); setProducts(newProducts); pushToGithub(newProducts, newLogs);
+    setSelectedProduct(newProducts.find(p => p.sku === selectedProduct.sku));
+    setEditingLogId(null); showNotice('Запис оновлено');
   };
 
   const exportDataJSON = () => {
@@ -967,14 +1036,29 @@ export default function App() {
           <div className="relative w-full max-w-5xl bg-white rounded-3xl shadow-2xl flex flex-col max-h-[95vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             
             <div className="p-6 border-b border-slate-100 flex items-start justify-between bg-slate-50">
-              <div>
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-700 font-bold font-mono text-sm rounded-lg">{selectedProduct.sku}</span>
-                  <span className="px-3 py-1 bg-slate-200 text-slate-600 font-bold font-mono text-sm rounded-lg flex items-center gap-1.5"><Box className="w-4 h-4"/> Коробка #{selectedProduct.boxNumber}</span>
+              {isEditingProduct ? (
+                <div className="flex-1 mr-4 space-y-3">
+                  <div className="flex gap-3">
+                     <input className="px-3 py-1 border border-slate-300 rounded-lg text-sm w-32" value={editProductData.sku} onChange={e=>setEditProductData({...editProductData, sku: e.target.value})} placeholder="Артикул" />
+                     <input className="px-3 py-1 border border-slate-300 rounded-lg text-sm w-32" value={editProductData.boxNumber} onChange={e=>setEditProductData({...editProductData, boxNumber: e.target.value})} placeholder="Коробка" />
+                  </div>
+                  <input className="w-full px-3 py-2 border border-slate-300 rounded-lg text-lg font-bold" value={editProductData.name} onChange={e=>setEditProductData({...editProductData, name: e.target.value})} placeholder="Назва" />
+                  <div className="flex gap-3">
+                    <button onClick={handleSaveProductEdit} className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-bold text-sm">Зберегти</button>
+                    <button onClick={() => setIsEditingProduct(false)} className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-sm">Скасувати</button>
+                  </div>
                 </div>
-                <h2 className="text-2xl font-extrabold text-slate-800">{selectedProduct.name}</h2>
-              </div>
-              <button onClick={() => setSelectedProduct(null)} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-200 rounded-full transition-colors">
+              ) : (
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="px-3 py-1 bg-indigo-100 text-indigo-700 font-bold font-mono text-sm rounded-lg">{selectedProduct.sku}</span>
+                    <span className="px-3 py-1 bg-slate-200 text-slate-600 font-bold font-mono text-sm rounded-lg flex items-center gap-1.5"><Box className="w-4 h-4"/> Коробка #{selectedProduct.boxNumber}</span>
+                    {isAdmin && <button onClick={startEditingProduct} className="text-xs text-indigo-600 hover:text-indigo-800 underline font-bold px-2">✎ Редагувати</button>}
+                  </div>
+                  <h2 className="text-2xl font-extrabold text-slate-800">{selectedProduct.name}</h2>
+                </div>
+              )}
+              <button onClick={() => setSelectedProduct(null)} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-200 rounded-full transition-colors mt-1">
                 <X className="w-6 h-6" />
               </button>
             </div>
@@ -1051,30 +1135,64 @@ export default function App() {
                 </h3>
                 <div className="space-y-3">
                   {logs.filter(l => l.sku === selectedProduct.sku).map(log => (
-                    <div key={log.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:bg-white hover:shadow-sm transition-all gap-4">
-                      <div className="flex items-center gap-4">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${log.type==='OUT' ? 'bg-amber-100 text-amber-600' : 'bg-emerald-100 text-emerald-600'}`}>
-                          {log.type === 'OUT' ? <ArrowUpRight className="w-5 h-5"/> : <ArrowDownLeft className="w-5 h-5"/>}
+                    editingLogId === log.id ? (
+                      <div key={log.id} className="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl flex flex-col gap-3 shadow-inner">
+                        <div className="font-bold text-indigo-800 text-sm mb-1">Редагування операції ({log.type === 'OUT' ? 'Відправка' : 'Прихід'})</div>
+                        <div className="flex flex-wrap gap-3">
+                          <div className="flex flex-col gap-1 w-24">
+                            <label className="text-xs font-bold text-slate-500 uppercase">Кіл-ть</label>
+                            <input type="number" className="p-2.5 rounded-lg border border-slate-300 font-bold" value={editLogData.changeQty} onChange={e=>setEditLogData({...editLogData, changeQty: e.target.value})} />
+                          </div>
+                          <div className="flex flex-col gap-1 flex-1 min-w-[120px]">
+                            <label className="text-xs font-bold text-slate-500 uppercase">ТТН</label>
+                            <input type="text" className="p-2.5 rounded-lg border border-slate-300 text-sm font-medium" value={editLogData.orderId || ''} onChange={e=>setEditLogData({...editLogData, orderId: e.target.value})} />
+                          </div>
+                          <div className="flex flex-col gap-1 flex-1 min-w-[150px]">
+                            <label className="text-xs font-bold text-slate-500 uppercase">Примітка</label>
+                            <input type="text" className="p-2.5 rounded-lg border border-slate-300 text-sm font-medium" value={editLogData.note || ''} onChange={e=>setEditLogData({...editLogData, note: e.target.value})} />
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <label className="text-xs font-bold text-slate-500 uppercase">Час операції</label>
+                            <input type="datetime-local" className="p-2.5 rounded-lg border border-slate-300 text-sm font-medium" value={getLocalDatetimeLocal(editLogData.timestamp)} onChange={e => { const local = new Date(e.target.value); if(!isNaN(local.getTime())) setEditLogData({...editLogData, timestamp: local.toISOString()}) }} />
+                          </div>
                         </div>
-                        <div>
-                          <div className="font-bold text-slate-800 flex items-center gap-2">
-                            {log.type === 'OUT' ? 'Відправка товару' : 'Оприбуткування'}
-                            {log.orderId && <span className="text-indigo-600 text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">[{log.orderId}]</span>}
-                          </div>
-                          <div className="text-xs text-slate-500 mt-1 flex flex-wrap gap-x-3 gap-y-1">
-                            <span>{new Date(log.timestamp).toLocaleString('uk-UA')}</span>
-                            <span className="hidden sm:inline">•</span>
-                            <span>{log.note || 'Без примітки'}</span>
-                          </div>
+                        <div className="flex gap-2 mt-2">
+                           <button onClick={() => handleSaveLogEdit(log.id)} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-sm shadow-sm transition-colors">Зберегти зміни</button>
+                           <button onClick={() => setEditingLogId(null)} className="px-5 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold text-sm shadow-sm transition-colors">Скасувати</button>
                         </div>
                       </div>
-                      <div className="text-right flex sm:flex-col justify-between items-center sm:items-end">
-                        <div className={`text-lg font-extrabold ${log.type==='OUT' ? 'text-amber-500' : 'text-emerald-500'}`}>
-                          {log.type === 'OUT' ? '-' : '+'}{log.changeQty} <span className="text-sm">шт</span>
+                    ) : (
+                      <div key={log.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:bg-white hover:shadow-sm transition-all gap-4">
+                        <div className="flex items-center gap-4">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${log.type==='OUT' ? 'bg-amber-100 text-amber-600' : 'bg-emerald-100 text-emerald-600'}`}>
+                            {log.type === 'OUT' ? <ArrowUpRight className="w-5 h-5"/> : <ArrowDownLeft className="w-5 h-5"/>}
+                          </div>
+                          <div>
+                            <div className="font-bold text-slate-800 flex items-center gap-2">
+                              {log.type === 'OUT' ? 'Відправка товару' : 'Оприбуткування'}
+                              {log.orderId && <span className="text-indigo-600 text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">[{log.orderId}]</span>}
+                            </div>
+                            <div className="text-xs text-slate-500 mt-1 flex flex-wrap gap-x-3 gap-y-1">
+                              <span>{new Date(log.timestamp).toLocaleString('uk-UA')}</span>
+                              <span className="hidden sm:inline">•</span>
+                              <span>{log.note || 'Без примітки'}</span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-xs text-slate-400 font-medium">Залишок: {log.newBalance} шт</div>
+                        <div className="text-right flex sm:flex-col justify-between items-center sm:items-end gap-2 sm:gap-0">
+                          <div className={`text-lg font-extrabold ${log.type==='OUT' ? 'text-amber-500' : 'text-emerald-500'}`}>
+                            {log.type === 'OUT' ? '-' : '+'}{log.changeQty} <span className="text-sm">шт</span>
+                          </div>
+                          <div className="text-xs text-slate-400 font-medium">Залишок: {log.newBalance} шт</div>
+                          {isAdmin && (
+                            <div className="flex gap-3 mt-1.5 opacity-50 hover:opacity-100 transition-opacity">
+                               <button onClick={() => startEditingLog(log)} className="text-[11px] text-indigo-600 hover:text-indigo-800 uppercase font-extrabold flex items-center gap-1">✎ Редаг.</button>
+                               <button onClick={() => handleDeleteLog(log.id)} className="text-[11px] text-rose-500 hover:text-rose-700 uppercase font-extrabold flex items-center gap-1">× Видал.</button>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    )
                   ))}
                   {logs.filter(l => l.sku === selectedProduct.sku).length === 0 && (
                      <div className="p-8 text-center text-slate-400 font-medium border-2 border-dashed border-slate-200 rounded-2xl">Історія операцій порожня</div>
