@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import {
   Package, Truck, History, CheckCircle2, AlertTriangle, XCircle, Search, 
   PlusCircle, MinusCircle, Box, Download, Upload, RefreshCw, BarChart3, 
-  Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle, ScanLine,
+  Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle,
   Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X
 } from 'lucide-react';
 
@@ -115,7 +115,7 @@ export default function App() {
   const [editLogData, setEditLogData] = useState({});
   const [isEditingProduct, setIsEditingProduct] = useState(false);
   const [editProductData, setEditProductData] = useState({});
-  const [isScanning, setIsScanning] = useState(false);
+
 
   // Operation Form State (for generic New Operation tab)
   const [opSku, setOpSku] = useState('');
@@ -160,61 +160,6 @@ export default function App() {
   useEffect(() => { localStorage.setItem('wh_github_config', JSON.stringify(githubConfig)); }, [githubConfig]);
   useEffect(() => { sessionStorage.setItem('wh_is_admin', isAdmin); }, [isAdmin]);
 
-  // Scanner Effect using native BarcodeDetector API (Chrome built-in)
-  useEffect(() => {
-    let stream = null;
-    let animationId = null;
-    let active = true;
-
-    if (isScanning) {
-      (async () => {
-        try {
-          stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } });
-          const video = document.getElementById('video-element');
-          if (!video || !active) return;
-          video.srcObject = stream;
-          await video.play();
-
-          if (!('BarcodeDetector' in window)) {
-            showNotice('Ваш браузер не підтримує BarcodeDetector. Спробуйте Chrome.', 'error');
-            return;
-          }
-          const detector = new window.BarcodeDetector({ formats: ['code_128', 'code_39', 'ean_13', 'ean_8', 'upc_a', 'upc_e'] });
-
-          const tick = async () => {
-            if (!active) return;
-            try {
-              const barcodes = await detector.detect(video);
-              if (barcodes.length > 0) {
-                const decodedText = barcodes[0].rawValue;
-                const foundProduct = products.find(p => p.sku === decodedText || p.sku.toLowerCase() === decodedText.toLowerCase());
-                if (foundProduct) {
-                  active = false;
-                  setIsScanning(false);
-                  setSearchQuery(decodedText);
-                  openProductModal(foundProduct);
-                  showNotice(`Товар знайдено: ${foundProduct.sku}`, 'success');
-                  return;
-                }
-              }
-            } catch(e) { /* ignore frame errors */ }
-            animationId = requestAnimationFrame(tick);
-          };
-          animationId = requestAnimationFrame(tick);
-        } catch (e) {
-          showNotice('Немає доступу до камери: ' + e.message, 'error');
-        }
-      })();
-    }
-
-    return () => {
-      active = false;
-      if (animationId) cancelAnimationFrame(animationId);
-      if (stream) stream.getTracks().forEach(t => t.stop());
-      const video = document.getElementById('video-element');
-      if (video) { video.srcObject = null; }
-    };
-  }, [isScanning, products]);
 
   const showNotice = (msg, type = 'success') => {
     setNotification({ msg, type });
@@ -672,31 +617,6 @@ export default function App() {
           </div>
         )}
 
-        {/* Scanner Modal */}
-        {isScanning && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm" onClick={() => setIsScanning(false)}></div>
-            <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-              <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-                <h3 className="font-extrabold text-slate-800 flex items-center gap-2"><ScanLine className="w-5 h-5 text-indigo-600"/> Сканування</h3>
-                <button onClick={() => setIsScanning(false)} className="p-2 text-slate-400 hover:text-slate-600 bg-slate-200 rounded-full transition-colors">
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-              <div className="p-0 bg-black relative flex justify-center items-center overflow-hidden h-64 sm:h-80">
-                <video id="video-element" className="w-full h-full object-cover"></video>
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                   <div className="w-[85%] h-16 border-2 border-red-500 rounded-lg shadow-[0_0_0_4000px_rgba(0,0,0,0.6)]"></div>
-                   <div className="absolute w-[85%] h-0.5 bg-red-500 opacity-50 animate-pulse shadow-[0_0_8px_rgba(239,68,68,1)]"></div>
-                </div>
-              </div>
-              <div className="p-4 bg-slate-50 text-center text-sm font-medium text-slate-500">
-                <p>Наведіть камеру на штрих-код або QR-код.</p>
-                <p className="text-xs text-slate-400 mt-1">Тримайте код горизонтально всередині рамки (10-15 см від камери).</p>
-              </div>
-            </div>
-          </div>
-        )}
 
         <main className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="w-full mx-auto space-y-6">
@@ -834,10 +754,7 @@ export default function App() {
                 <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                   <div className="relative flex-1 min-w-[250px] max-w-lg">
                     <Search className="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input type="text" placeholder="Пошук за артикулом, назвою чи коробкою..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 pl-11 pr-12 py-3 rounded-xl text-sm outline-none transition-all" />
-                    <button onClick={() => setIsScanning(true)} className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-indigo-100 hover:bg-indigo-200 text-indigo-600 rounded-lg transition-colors" title="Сканувати камерою">
-                       <ScanLine className="w-5 h-5" />
-                    </button>
+                    <input type="text" placeholder="Пошук за артикулом, назвою чи коробкою..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 pl-11 pr-4 py-3 rounded-xl text-sm outline-none transition-all" />
                   </div>
                   
                   <div className="flex flex-wrap items-center gap-3">
