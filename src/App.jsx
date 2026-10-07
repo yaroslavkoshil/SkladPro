@@ -984,7 +984,7 @@ export default function App() {
                               <td className="p-4 pr-6 text-slate-600 text-sm">
                                 {log.orderId && (
                                   /^\d{12,14}$/.test(log.orderId.trim())
-                                    ? <a href={`https://novaposhta.ua/tracking/?cargo_number=${log.orderId.trim()}`} target="_blank" rel="noopener noreferrer" className="font-bold text-indigo-600 hover:text-indigo-800 hover:underline mr-2 transition-colors" title="Відстежити ТТН на Новій Пошті">[{log.orderId}] 🔗</a>
+                                    ? <a href={`https://novaposhta.ua/tracking/${log.orderId.trim()}`} target="_blank" rel="noopener noreferrer" className="font-bold text-indigo-600 hover:text-indigo-800 hover:underline mr-2 transition-colors" title="Відстежити ТТН на Новій Пошті">[{log.orderId}] 🔗</a>
                                     : <span className="font-bold text-slate-700 mr-2">[{log.orderId}]</span>
                                 )}
                                 {log.note}
@@ -1231,7 +1231,7 @@ export default function App() {
                               {log.type === 'OUT' ? 'Відправка товару' : 'Оприбуткування'}
                               {log.orderId && (
                                 /^\d{12,14}$/.test(log.orderId.trim())
-                                  ? <a href={`https://novaposhta.ua/tracking/?cargo_number=${log.orderId.trim()}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 hover:underline text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100 transition-colors" title="Відстежити ТТН">[{log.orderId}] 🔗</a>
+                                  ? <a href={`https://novaposhta.ua/tracking/${log.orderId.trim()}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 hover:underline text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100 transition-colors" title="Відстежити ТТН">[{log.orderId}] 🔗</a>
                                   : <span className="text-indigo-600 text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">[{log.orderId}]</span>
                               )}
                             </div>
