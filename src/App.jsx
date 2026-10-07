@@ -102,6 +102,29 @@ export default function App() {
   const [modalOpNote, setModalOpNote] = useState('');
   const [modalOpOrderRef, setModalOpOrderRef] = useState('');
 
+  // Column Resize State
+  const [nameColWidth, setNameColWidth] = useState(300);
+
+  const handleResizeStart = (e) => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const startWidth = nameColWidth;
+    
+    const onMouseMove = (moveEvent) => {
+      setNameColWidth(Math.max(150, startWidth + moveEvent.clientX - startX));
+    };
+    
+    const onMouseUp = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      document.body.style.cursor = 'default';
+    };
+    
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+    document.body.style.cursor = 'col-resize';
+  };
+
   // Save to LocalStorage
   useEffect(() => { localStorage.setItem('wh_products_v1', JSON.stringify(products)); }, [products]);
   useEffect(() => { localStorage.setItem('wh_logs_v1', JSON.stringify(logs)); }, [logs]);
@@ -649,13 +672,19 @@ export default function App() {
                 <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm whitespace-nowrap">
-                      <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                       <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
                         <tr>
                           <th className="p-4 pl-6">Артикул (SKU)</th>
-                          <th className="p-0">
-                            <div className="resize-x overflow-hidden w-64 min-w-[200px] max-w-[1000px] p-4 relative group" title="Потягніть правий нижній кут, щоб змінити ширину">
+                          <th className="p-0 relative group select-none" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
+                            <div className="p-4 flex items-center justify-between overflow-hidden">
                               Назва товару
                             </div>
+                            {/* Drag Handle */}
+                            <div 
+                              onMouseDown={handleResizeStart}
+                              className="absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-indigo-500 bg-transparent transition-colors z-10"
+                              title="Потягніть, щоб змінити ширину"
+                            />
                           </th>
                           <th className="p-4 text-center">Всього отримано</th>
                           <th className="p-4 text-center">Відправлено</th>
@@ -671,7 +700,7 @@ export default function App() {
                           return (
                             <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
                               <td className="p-4 pl-6 font-mono font-bold text-indigo-600">{p.sku}</td>
-                              <td className="p-4 font-medium text-slate-800 whitespace-normal break-words">
+                              <td className="p-4 font-medium text-slate-800 whitespace-normal break-words" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
                                 <div className="flex flex-col gap-1">
                                   <span>{p.name}</span>
                                   <div>
