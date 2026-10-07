@@ -1599,19 +1599,6 @@
   ],
   "logs": [
     {
-      "id": "log-1791393907250",
-      "timestamp": "2026-10-07T17:25:07.250Z",
-      "type": "OUT",
-      "sku": "SCIFP12100",
-      "productName": "Літієва батарея SmartPower SCIFP12100 12V100Ah",
-      "boxNumber": "Б/Н",
-      "changeQty": 1,
-      "prevBalance": 4,
-      "newBalance": 3,
-      "orderId": "20451555124416 ",
-      "note": "Друляк "
-    },
-    {
       "id": "log-prod-1791377188476-64-hist-0",
       "timestamp": "2026-10-07T12:00:00.000Z",
       "type": "OUT",
