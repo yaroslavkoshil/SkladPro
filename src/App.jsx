@@ -725,14 +725,7 @@ export default function App() {
                                 <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
                                   <td className="p-4 pl-6 font-mono font-bold text-indigo-600">{p.sku}</td>
                                   <td className="p-4 font-medium text-slate-800 whitespace-normal break-words" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
-                                    <div className="flex flex-col gap-1">
-                                      <span>{p.name}</span>
-                                      <div className="flex flex-wrap gap-2 items-center mt-1">
-                                        {bal <= 0 && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-rose-100 text-rose-700 border border-rose-200">Немає в наявності</span>}
-                                        {bal > 0 && bal <= p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-100 text-amber-700 border border-amber-200">Закінчується ({bal} шт)</span>}
-                                        {bal > p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">В наявності</span>}
-                                      </div>
-                                    </div>
+                                    {p.name}
                                   </td>
                                   <td className="p-4 text-center font-bold text-emerald-600">+{p.receivedQty}</td>
                                   <td className="p-4 text-center font-bold text-amber-500">-{p.sentQty}</td>
