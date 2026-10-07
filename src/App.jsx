@@ -4,8 +4,9 @@ import {
   PlusCircle, MinusCircle, Box, Download, Upload, RefreshCw, BarChart3, 
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle, ScanLine,
   Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X
-} from 'lucide-react';
 import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from 'html5-qrcode';
+import { BrowserMultiFormatReader } from '@zxing/browser';
+import { BarcodeFormat, DecodeHintType } from '@zxing/library';
 
 const OFFICIAL_CATEGORY_ORDER = [
   'Інвертори',
@@ -163,44 +164,37 @@ export default function App() {
 
   // Scanner Effect
   useEffect(() => {
+    let codeReader = null;
     if (isScanning) {
-      const formatsToSupport = [
-        Html5QrcodeSupportedFormats.CODE_128,
-        Html5QrcodeSupportedFormats.CODE_39,
-        Html5QrcodeSupportedFormats.EAN_13,
-        Html5QrcodeSupportedFormats.EAN_8,
-        Html5QrcodeSupportedFormats.UPC_A,
-        Html5QrcodeSupportedFormats.UPC_E
-      ];
-      const scanner = new Html5QrcodeScanner(
-        "qr-reader",
-        { 
-          fps: 15, 
-          qrbox: { width: 250, height: 80 },
-          formatsToSupport: formatsToSupport,
-          aspectRatio: 1.0,
-          rememberLastUsedCamera: true
-        },
-        false
-      );
-      scanner.render(
-        (decodedText) => {
+      const hints = new Map();
+      hints.set(DecodeHintType.POSSIBLE_FORMATS, [
+         BarcodeFormat.CODE_128, 
+         BarcodeFormat.CODE_39, 
+         BarcodeFormat.EAN_13, 
+         BarcodeFormat.EAN_8
+      ]);
+
+      codeReader = new BrowserMultiFormatReader(hints, 500);
+      
+      codeReader.decodeFromVideoDevice(undefined, 'video-element', (result, err) => {
+        if (result) {
+           const decodedText = result.getText();
            const foundProduct = products.find(p => p.sku === decodedText || p.sku.toLowerCase() === decodedText.toLowerCase());
            if (foundProduct) {
-             scanner.clear();
+             if(codeReader) codeReader.reset();
              setIsScanning(false);
              setSearchQuery(decodedText);
              openProductModal(foundProduct);
              showNotice(`Товар знайдено: ${foundProduct.sku}`, 'success');
            }
-           // if not found, we just do nothing silently. The scanner keeps running until it hits the correct one.
-        },
-        (error) => { /* ignore */ }
-      );
-      return () => {
-        scanner.clear().catch(error => console.error("Failed to clear scanner. ", error));
-      };
+        }
+      });
     }
+    return () => {
+      if (codeReader) {
+        codeReader.reset();
+      }
+    };
   }, [isScanning, products]);
 
   const showNotice = (msg, type = 'success') => {
@@ -670,8 +664,12 @@ export default function App() {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <div className="p-4 bg-black">
-                <div id="qr-reader" className="w-full"></div>
+              <div className="p-0 bg-black relative flex justify-center items-center overflow-hidden h-64 sm:h-80">
+                <video id="video-element" className="w-full h-full object-cover"></video>
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                   <div className="w-[85%] h-16 border-2 border-red-500 rounded-lg shadow-[0_0_0_4000px_rgba(0,0,0,0.6)]"></div>
+                   <div className="absolute w-[85%] h-0.5 bg-red-500 opacity-50 animate-pulse shadow-[0_0_8px_rgba(239,68,68,1)]"></div>
+                </div>
               </div>
               <div className="p-4 bg-slate-50 text-center text-sm font-medium text-slate-500">
                 <p>Наведіть камеру на штрих-код або QR-код.</p>
