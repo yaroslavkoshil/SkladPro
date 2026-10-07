@@ -82,7 +82,21 @@ export default function App() {
     return saved ? JSON.parse(saved) : INITIAL_LOGS;
   });
 
-  // GitHub Sync State
+  const [categoryOrder, setCategoryOrder] = useState(() => {
+    const saved = localStorage.getItem('wh_category_order_v1');
+    return saved ? JSON.parse(saved) : OFFICIAL_CATEGORY_ORDER;
+  });
+  
+  // Drag and Drop State
+  const [draggedProduct, setDraggedProduct] = useState(null);
+  const [draggedCategory, setDraggedCategory] = useState(null);
+
+  // Sync state to local storage
+  useEffect(() => {
+    localStorage.setItem('wh_products_v1', JSON.stringify(products));
+    localStorage.setItem('wh_logs_v1', JSON.stringify(logs));
+    localStorage.setItem('wh_category_order_v1', JSON.stringify(categoryOrder));
+  }, [products, logs, categoryOrder]);
   const [githubConfig, setGithubConfig] = useState(() => {
     const saved = localStorage.getItem('wh_github_config');
     return saved ? JSON.parse(saved) : { token: '', owner: 'yaroslavkoshil', repo: 'SkladPro', path: 'database.json' };
@@ -240,6 +254,7 @@ export default function App() {
 
       if (parsed && parsed.products) setProducts(parsed.products);
       if (parsed && parsed.logs) setLogs(parsed.logs);
+      if (parsed && parsed.categories) setCategoryOrder(parsed.categories);
       setSyncStatus('success');
       showNotice('Дані успішно оновлено!');
     } catch (err) {
@@ -249,11 +264,11 @@ export default function App() {
     }
   };
 
-  const pushToGithub = async (newProducts, newLogs) => {
+  const pushToGithub = async (newProducts, newLogs, newCategories = categoryOrder) => {
     if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) return;
     setSyncStatus('syncing');
     try {
-      const content = b64EncodeUnicode(JSON.stringify({ products: newProducts, logs: newLogs }, null, 2));
+      const content = b64EncodeUnicode(JSON.stringify({ products: newProducts, logs: newLogs, categories: newCategories }, null, 2));
       const body = { message: `SkladControl update: ${new Date().toLocaleString('uk-UA')}`, content: content };
       try {
         const getRes = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
@@ -290,14 +305,14 @@ export default function App() {
   const allBoxes = useMemo(() => Array.from(new Set(products.map(p => p.boxNumber.trim().toUpperCase()))).sort(), [products]);
   const allCategories = useMemo(() => {
     return Array.from(new Set(products.map(p => p.category).filter(Boolean))).sort((a, b) => {
-      let idxA = OFFICIAL_CATEGORY_ORDER.indexOf(a);
-      let idxB = OFFICIAL_CATEGORY_ORDER.indexOf(b);
+      let idxA = categoryOrder.indexOf(a);
+      let idxB = categoryOrder.indexOf(b);
       if (idxA === -1) idxA = 999;
       if (idxB === -1) idxB = 999;
       if (idxA !== idxB) return idxA - idxB;
       return a.localeCompare(b);
     });
-  }, [products]);
+  }, [products, categoryOrder]);
 
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
@@ -351,7 +366,7 @@ export default function App() {
       const finalBox = box.trim().toUpperCase() || 'Б/Н';
       updatedProducts = [{
         id: `prod-${Date.now()}`, sku: trimmedSku, name: newName.trim(), boxNumber: finalBox, category: newCategory,
-        receivedQty: qty, sentQty: 0, minQty: newMin, updatedAt: new Date().toISOString()
+        receivedQty: qty, sentQty: 0, minQty: newMin, sortIndex: 999999, updatedAt: new Date().toISOString()
       }, ...products];
 
       newLogs = [{
@@ -418,6 +433,82 @@ export default function App() {
       setNewProductName(''); 
       setOpCategory('');
     }
+  };
+
+  const handleExecuteOperation = async (e) => {
+    e.preventDefault();
+    const qty = parseInt(opQty, 10);
+    if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
+    
+    const existing = products.find(p => p.sku.toUpperCase() === opSku.trim().toUpperCase());
+    const type = existing ? 'IN' : 'NEW';
+    
+    const success = await executeOperationCore(type, opSku, qty, opBox, opNote, opOrderRef, newProductName, 10, opCategory || 'Інше');
+    if (success) {
+      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef(''); setOpBox(''); setOpCategory('');
+    }
+  };
+
+  // -----------------------------------------------------
+  // Drag and Drop Logic
+  // -----------------------------------------------------
+  const handleCategoryDragStart = (e, cat) => {
+    setDraggedCategory(cat);
+    e.dataTransfer.effectAllowed = 'move';
+    e.target.style.opacity = '0.5';
+  };
+  const handleCategoryDragEnd = (e) => {
+    e.target.style.opacity = '1';
+    setDraggedCategory(null);
+  };
+  const handleCategoryDragOver = (e, targetCat) => {
+    e.preventDefault();
+    if (!draggedCategory || draggedCategory === targetCat) return;
+    const newOrder = [...categoryOrder];
+    const draggedIdx = newOrder.indexOf(draggedCategory);
+    const targetIdx = newOrder.indexOf(targetCat);
+    newOrder.splice(draggedIdx, 1);
+    newOrder.splice(targetIdx, 0, draggedCategory);
+    setCategoryOrder(newOrder);
+  };
+  
+  const handleProductDragStart = (e, p) => {
+    setDraggedProduct(p);
+    e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => { e.target.style.opacity = '0.4'; }, 0);
+  };
+  const handleProductDragEnd = (e) => {
+    e.target.style.opacity = '1';
+    setDraggedProduct(null);
+  };
+  const handleProductDragOver = (e, targetP) => {
+    e.preventDefault();
+    if (!draggedProduct || draggedProduct.id === targetP.id) return;
+    
+    const updatedProducts = [...products];
+    const draggedIdx = updatedProducts.findIndex(x => x.id === draggedProduct.id);
+    const targetIdx = updatedProducts.findIndex(x => x.id === targetP.id);
+    
+    // Update category visually while dragging
+    updatedProducts[draggedIdx].category = targetP.category;
+    
+    const [removed] = updatedProducts.splice(draggedIdx, 1);
+    updatedProducts.splice(targetIdx, 0, removed);
+    
+    // Re-assign sort indices for both categories if changed
+    updatedProducts.forEach((p, idx) => {
+      p.sortIndex = idx;
+    });
+    
+    setProducts(updatedProducts);
+  };
+  const handleProductDrop = async (e) => {
+    e.preventDefault();
+    if (githubConfig.token) await pushToGithub(products, logs);
+  };
+  const handleCategoryDrop = async (e) => {
+    e.preventDefault();
+    if (githubConfig.token) await pushToGithub(products, logs, categoryOrder);
   };
 
   const handleExecuteOperation = async (e) => {
@@ -871,26 +962,47 @@ export default function App() {
                           }, {})
                         )
                         .sort(([catA], [catB]) => {
-                           let idxA = OFFICIAL_CATEGORY_ORDER.indexOf(catA);
-                           let idxB = OFFICIAL_CATEGORY_ORDER.indexOf(catB);
+                           let idxA = categoryOrder.indexOf(catA);
+                           let idxB = categoryOrder.indexOf(catB);
                            if (idxA === -1) idxA = 999;
                            if (idxB === -1) idxB = 999;
                            if (idxA !== idxB) return idxA - idxB;
                            return catA.localeCompare(catB);
                         })
                         .map(([cat, prods]) => {
-                          const sortedProds = [...prods].sort((a, b) => a.sku.localeCompare(b.sku));
+                          const sortedProds = [...prods].sort((a, b) => {
+                             if (a.sortIndex !== undefined && b.sortIndex !== undefined) return a.sortIndex - b.sortIndex;
+                             return a.sku.localeCompare(b.sku);
+                          });
                           return (
                           <React.Fragment key={cat}>
-                            <tr className="bg-indigo-50/70 border-y border-indigo-100/70">
+                            <tr 
+                              className="bg-indigo-50/70 border-y border-indigo-100/70"
+                              draggable={isAdmin}
+                              onDragStart={(e) => handleCategoryDragStart(e, cat)}
+                              onDragOver={(e) => handleCategoryDragOver(e, cat)}
+                              onDragEnd={handleCategoryDragEnd}
+                              onDrop={handleCategoryDrop}
+                              style={{ cursor: isAdmin ? 'grab' : 'default', opacity: draggedCategory === cat ? 0.5 : 1 }}
+                            >
                               <td colSpan="8" className="py-2 px-3 pl-6 font-extrabold text-indigo-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] text-sm">
                                 📁 {cat} <span className="ml-2 text-[10px] font-bold text-indigo-600 bg-white px-2 py-0.5 rounded-full border border-indigo-200">{prods.length} поз.</span>
+                                {isAdmin && <span className="ml-2 text-[10px] font-medium text-indigo-400 font-mono">(перетягніть мишкою)</span>}
                               </td>
                             </tr>
                             {sortedProds.map(p => {
                               const bal = p.receivedQty - p.sentQty;
                               return (
-                                <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
+                                <tr 
+                                  key={p.id} 
+                                  className="hover:bg-slate-50/80 transition-colors"
+                                  draggable={isAdmin}
+                                  onDragStart={(e) => handleProductDragStart(e, p)}
+                                  onDragOver={(e) => handleProductDragOver(e, p)}
+                                  onDragEnd={handleProductDragEnd}
+                                  onDrop={handleProductDrop}
+                                  style={{ cursor: isAdmin ? 'grab' : 'default', opacity: draggedProduct?.id === p.id ? 0.4 : 1 }}
+                                >
                                   <td className="px-3 py-1 pl-6 font-mono font-bold text-indigo-600 text-xs">{p.sku}</td>
                                   <td className="px-3 py-1 font-medium text-slate-800 whitespace-normal break-words text-xs" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
                                     {p.name}
