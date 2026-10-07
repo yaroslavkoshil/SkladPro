@@ -739,38 +739,52 @@ export default function App() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
-                      {logs.map(log => (
-                        <tr key={log.id} className="hover:bg-slate-50/80 transition-colors">
-                          <td className="p-4 pl-6 text-xs font-medium text-slate-500">{new Date(log.timestamp).toLocaleString('uk-UA')}</td>
-                          <td className="p-4">
-                            {log.type === 'OUT' ? (
-                              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded bg-amber-50 text-amber-700 border border-amber-200">
-                                <ArrowUpRight className="w-3.5 h-3.5"/> Відправка
-                              </span>
-                            ) : (
-                              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                <ArrowDownLeft className="w-3.5 h-3.5"/> Прихід
-                              </span>
-                            )}
-                          </td>
-                          <td className="p-4">
-                            <span className="font-mono font-bold text-indigo-600 mr-2">{log.sku}</span>
-                            <span className="text-slate-800 font-medium text-sm">{log.productName}</span>
-                          </td>
-                          <td className="p-4 text-center">
-                             <span className="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">#{log.boxNumber}</span>
-                          </td>
-                          <td className={`p-4 text-center font-extrabold text-base ${log.type==='OUT'?'text-amber-500':'text-emerald-500'}`}>
-                            {log.type === 'OUT' ? '-' : '+'}{log.changeQty}
-                          </td>
-                          <td className="p-4 text-center font-bold text-slate-800">
-                            {log.newBalance} <span className="text-xs text-slate-400 font-normal">шт.</span>
-                          </td>
-                          <td className="p-4 pr-6 text-slate-600 text-sm">
-                            {log.orderId && <span className="font-bold text-slate-700 mr-2">[{log.orderId}]</span>}
-                            {log.note}
-                          </td>
-                        </tr>
+                      {Object.entries(logs.reduce((acc, log) => {
+                        const dateStr = new Date(log.timestamp).toLocaleDateString('uk-UA', { day: '2-digit', month: 'long', year: 'numeric' });
+                        if (!acc[dateStr]) acc[dateStr] = [];
+                        acc[dateStr].push(log);
+                        return acc;
+                      }, {})).map(([date, dayLogs]) => (
+                        <React.Fragment key={date}>
+                          <tr className="bg-slate-100 border-y border-slate-200">
+                            <td colSpan="7" className="p-3 pl-6 font-extrabold text-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
+                              📅 ОПЕРАЦІЇ ЗА {date.toUpperCase()} <span className="ml-2 text-xs font-medium text-slate-500 bg-white px-2 py-0.5 rounded-full border border-slate-200">{dayLogs.length} записів</span>
+                            </td>
+                          </tr>
+                          {dayLogs.map(log => (
+                            <tr key={log.id} className="hover:bg-slate-50/80 transition-colors">
+                              <td className="p-4 pl-6 text-xs font-medium text-slate-500">{new Date(log.timestamp).toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' })}</td>
+                              <td className="p-4">
+                                {log.type === 'OUT' ? (
+                                  <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded bg-amber-50 text-amber-700 border border-amber-200">
+                                    <ArrowUpRight className="w-3.5 h-3.5"/> Відправка
+                                  </span>
+                                ) : (
+                                  <span className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    <ArrowDownLeft className="w-3.5 h-3.5"/> Прихід
+                                  </span>
+                                )}
+                              </td>
+                              <td className="p-4">
+                                <span className="font-mono font-bold text-indigo-600 mr-2">{log.sku}</span>
+                                <span className="text-slate-800 font-medium text-sm">{log.productName}</span>
+                              </td>
+                              <td className="p-4 text-center">
+                                 <span className="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">#{log.boxNumber}</span>
+                              </td>
+                              <td className={`p-4 text-center font-extrabold text-base ${log.type==='OUT'?'text-amber-500':'text-emerald-500'}`}>
+                                {log.type === 'OUT' ? '-' : '+'}{log.changeQty}
+                              </td>
+                              <td className="p-4 text-center font-bold text-slate-800">
+                                {log.newBalance} <span className="text-xs text-slate-400 font-normal">шт.</span>
+                              </td>
+                              <td className="p-4 pr-6 text-slate-600 text-sm">
+                                {log.orderId && <span className="font-bold text-slate-700 mr-2">[{log.orderId}]</span>}
+                                {log.note}
+                              </td>
+                            </tr>
+                          ))}
+                        </React.Fragment>
                       ))}
                     </tbody>
                   </table>
