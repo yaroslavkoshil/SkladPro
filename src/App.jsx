@@ -511,19 +511,6 @@ export default function App() {
     if (githubConfig.token) await pushToGithub(products, logs, categoryOrder);
   };
 
-  const handleExecuteOperation = async (e) => {
-    e.preventDefault();
-    const qty = parseInt(opQty, 10);
-    if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
-    
-    const existing = products.find(p => p.sku.toUpperCase() === opSku.trim().toUpperCase());
-    const type = existing ? 'IN' : 'NEW';
-    
-    const success = await executeOperationCore(type, opSku, qty, opBox, opNote, opOrderRef, newProductName, 10, opCategory || 'Інше');
-    if (success) {
-      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef(''); setOpBox(''); setOpCategory('');
-    }
-  };
 
   const handleModalOperation = async (e) => {
     e.preventDefault();
