@@ -1,1339 +1,1339 @@
 {
   "products": [
     {
-      "id": "prod-1791376137223-0",
+      "id": "prod-1791376303250-0",
       "sku": "PIN121801200",
       "name": "Phoenix 12/800 VE.Direct Schuko",
       "boxNumber": "10",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.223Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137223-1",
+      "id": "prod-1791376303250-1",
       "sku": "PIN241801200",
       "name": "Phoenix 24/800 VE.Direct Schuko",
       "boxNumber": "10",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.223Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137223-2",
+      "id": "prod-1791376303250-2",
       "sku": "PIN241371200",
       "name": "Phoenix 24/375 VE.Direct Schuko",
       "boxNumber": "10",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.223Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137223-3",
+      "id": "prod-1791376303250-3",
       "sku": "PMP482306000",
       "name": "MultiPlus-II 48/3000/35-32 GX",
       "boxNumber": "Б/Н",
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.223Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-4",
+      "id": "prod-1791376303250-4",
       "sku": "PMP482505012",
       "name": "MultiPlus-II 48/5000/70-50",
       "boxNumber": "Б/Н",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-5",
+      "id": "prod-1791376303250-5",
       "sku": "PMP482605012",
       "name": "MultiPlus-II 48/6k5/100-50",
       "boxNumber": "Б/Н",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-6",
+      "id": "prod-1791376303250-6",
       "sku": "PMP482606000",
       "name": "MultiPlus-II 48/6k5/100-50 GX",
       "boxNumber": "Б/Н",
       "receivedQty": 4,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-7",
+      "id": "prod-1791376303250-7",
       "sku": "PMP482506000",
       "name": "MultiPlus-II 48/5000/70-50-GX",
       "boxNumber": "Б/Н",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-8",
+      "id": "prod-1791376303250-8",
       "sku": "PMP121500000",
       "name": "MultiPlus 12/500/20-16",
       "boxNumber": "10",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-9",
+      "id": "prod-1791376303250-9",
       "sku": "PMP121800000",
       "name": "MultiPlus 12/800/35-16",
       "boxNumber": "10",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-10",
+      "id": "prod-1791376303250-10",
       "sku": "BPP900455070",
       "name": "GX Touch 70",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-11",
+      "id": "prod-1791376303250-11",
       "sku": "ASS030140030",
       "name": "Interface MK3-USB-C (VE.Bus to USB-C)",
       "boxNumber": "16",
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-12",
+      "id": "prod-1791376303250-12",
       "sku": "ASS030140000",
       "name": "MK3-USB (VE.Bus to USB)",
       "boxNumber": "Б/Н",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.250Z"
     },
     {
-      "id": "prod-1791376137224-13",
+      "id": "prod-1791376303251-13",
       "sku": "BPP900451110",
       "name": "Cerbo GX Mk2",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-14",
+      "id": "prod-1791376303251-14",
       "sku": "SHU065150050",
       "name": "Smartshunt 500A/50mV IP65",
       "boxNumber": "16",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-15",
+      "id": "prod-1791376303251-15",
       "sku": "SHU050150050",
       "name": "Smartshunt 500A/50mV",
       "boxNumber": "16",
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-16",
+      "id": "prod-1791376303251-16",
       "sku": "BAM010700000 (R)",
       "name": "Battery Monitor BMV-700",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-17",
+      "id": "prod-1791376303251-17",
       "sku": "BAM030712000",
       "name": "Battery Monitor BMV-712 Smart",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-18",
+      "id": "prod-1791376303251-18",
       "sku": "BAM010702000R",
       "name": "BMV-702",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-19",
+      "id": "prod-1791376303251-19",
       "sku": "SBS050150200",
       "name": "Smart Battery Sense long range (up to 10m)",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-20",
+      "id": "prod-1791376303251-20",
       "sku": "ASS000100000",
       "name": "Temperature sensor for BMV-702/712",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-21",
+      "id": "prod-1791376303251-21",
       "sku": "BPC240513006",
       "name": "Blue Smart IP67 Charger 24/5 (1)",
       "boxNumber": "2",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-22",
+      "id": "prod-1791376303251-22",
       "sku": "BPC120731064R",
       "name": "Blue Smart IP65 Charger 12/7",
       "boxNumber": "3",
       "receivedQty": 5,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-23",
+      "id": "prod-1791376303251-23",
       "sku": "BPC121531064R",
       "name": "Blue Smart IP65 Charger 12/15 + DC connector",
       "boxNumber": "1",
       "receivedQty": 7,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-24",
+      "id": "prod-1791376303251-24",
       "sku": "BPC123047002",
       "name": "Blue Smart IP22 Charger 12/30 (1)",
       "boxNumber": "2",
       "receivedQty": 7,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-25",
+      "id": "prod-1791376303251-25",
       "sku": "BPC121542002",
       "name": "Blue Smart IP22 Charger 12/15 (1)",
       "boxNumber": "2",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-26",
+      "id": "prod-1791376303251-26",
       "sku": "BPC121713006",
       "name": "Blue Smart IP67 Charger 12/17 (1)",
       "boxNumber": "7",
       "receivedQty": 12,
       "sentQty": 8,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-27",
+      "id": "prod-1791376303251-27",
       "sku": "BPC120533064R",
       "name": "Blue Smart IP65s Charger 12/5",
       "boxNumber": "1",
       "receivedQty": 6,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-28",
+      "id": "prod-1791376303251-28",
       "sku": "BPC121031064R",
       "name": "Blue Smart IP65 Charger 12/10 + DC connector",
       "boxNumber": "1",
       "receivedQty": 10,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-29",
+      "id": "prod-1791376303251-29",
       "sku": "BPC241648002",
       "name": "Blue Smart IP22 Charger 24/16 (3)",
       "boxNumber": "3",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-30",
+      "id": "prod-1791376303251-30",
       "sku": "BPC240531064R",
       "name": "Blue Smart IP65 Charger 24/5 + DC connector",
       "boxNumber": "3",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-31",
+      "id": "prod-1791376303251-31",
       "sku": "BPC122531064",
       "name": "Blue Smart IP65 Charger 12/25",
       "boxNumber": "9",
       "receivedQty": 8,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-32",
+      "id": "prod-1791376303251-32",
       "sku": "BPC240831064R",
       "name": "Blue Smart IP65 Charger 24/8 + DC connector",
       "boxNumber": "Б/Н",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-33",
+      "id": "prod-1791376303251-33",
       "sku": "BPC122547006",
       "name": "Blue Smart IP67 Charger 12/25 (1)",
       "boxNumber": "5",
       "receivedQty": 13,
       "sentQty": 8,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-34",
+      "id": "prod-1791376303251-34",
       "sku": "BPC241242002",
       "name": "Blue Smart IP22 Charger 24/12 (1)",
       "boxNumber": "4",
       "receivedQty": 16,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-35",
+      "id": "prod-1791376303251-35",
       "sku": "BPC241647002",
       "name": "Blue Smart IP22 Charger 24/16 (1)",
       "boxNumber": "3",
       "receivedQty": 6,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-36",
+      "id": "prod-1791376303251-36",
       "sku": "BPC121313006",
       "name": "Blue Smart IP67 Charger 12/13 (1)",
       "boxNumber": "15",
       "receivedQty": 4,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-37",
+      "id": "prod-1791376303251-37",
       "sku": "BPC123048002",
       "name": "Blue Smart IP22 Charger 12/30 (3)",
       "boxNumber": "2",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-38",
+      "id": "prod-1791376303251-38",
       "sku": "BPC241247006",
       "name": "Blue Smart IP67 Charger 24/12 (1)",
       "boxNumber": "6",
       "receivedQty": 13,
       "sentQty": 5,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-39",
+      "id": "prod-1791376303251-39",
       "sku": "BPC120713006",
       "name": "Blue Smart IP67 Charger 12/7 (1)",
       "boxNumber": "8",
       "receivedQty": 10,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-40",
+      "id": "prod-1791376303251-40",
       "sku": "BPC241331064",
       "name": "Blue Smart IP65 Charger 24/13 + DC connector",
       "boxNumber": "9",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-41",
+      "id": "prod-1791376303251-41",
       "sku": "BPC900110114",
       "name": "Battery Indicator Panel (M8 eyelet / 30A ATO fuse)",
       "boxNumber": "17",
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-42",
+      "id": "prod-1791376303251-42",
       "sku": "BPC920100210",
       "name": "Wall Mount for IP65 Charger 12/25, 24/13",
       "boxNumber": "9",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-43",
+      "id": "prod-1791376303251-43",
       "sku": "BPC900110014",
       "name": "M8 eyelet connector (with 30A ATO fuse)",
       "boxNumber": "17",
       "receivedQty": 6,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-44",
+      "id": "prod-1791376303251-44",
       "sku": "BPC900100014",
       "name": "M6 eyelet connector (with 30A ATO fuse)",
       "boxNumber": "17",
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-45",
+      "id": "prod-1791376303251-45",
       "sku": "BPC900400014",
       "name": "Clamp connector (with 30A ATO fuse)",
       "boxNumber": "17",
       "receivedQty": 6,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-46",
+      "id": "prod-1791376303251-46",
       "sku": "BPC920100110",
       "name": "Rubber bumper for IP65 Charger 12/25, 24/13",
       "boxNumber": "9",
       "receivedQty": 6,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-47",
+      "id": "prod-1791376303251-47",
       "sku": "BPC940100200",
       "name": "Carry case for Blue Smart IP65 Ch. & accessories /Чохол для Blue Smart IP65 Ch. & аксесуари",
       "boxNumber": "11",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-48",
+      "id": "prod-1791376303251-48",
       "sku": "BPC900120114",
       "name": "Battery Indicator Eyelet (M8 eyelet / 30A ATO fuse)",
       "boxNumber": "17",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-49",
+      "id": "prod-1791376303251-49",
       "sku": "BPC900300014",
       "name": "12 Volt plug (cigarette plug with 16A fuse)",
       "boxNumber": "17",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-50",
+      "id": "prod-1791376303251-50",
       "sku": "BPC940100100",
       "name": "Carry case for Blue Smart IP65 Ch. & accessorie",
       "boxNumber": "11",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-51",
+      "id": "prod-1791376303251-51",
       "sku": "BPC900200014",
       "name": "2 meter extension cable",
       "boxNumber": "17",
       "receivedQty": 4,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-52",
+      "id": "prod-1791376303251-52",
       "sku": "BPR000220400",
       "name": "BatteryProtect 12/24V-220A",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-53",
+      "id": "prod-1791376303251-53",
       "sku": "BPR110048000",
       "name": "Smart BatteryProtect 48V-100A",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-54",
+      "id": "prod-1791376303251-54",
       "sku": "BPR000065400",
       "name": "BatteryProtect 12/24V 65A",
       "boxNumber": "14",
       "receivedQty": 22,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-55",
+      "id": "prod-1791376303251-55",
       "sku": "BPR110022000",
       "name": "Smart BatteryProtect 12/24V-100A",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-56",
+      "id": "prod-1791376303251-56",
       "sku": "BPR122022000",
       "name": "Smart BatteryProtect 12/24V-220A",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-57",
+      "id": "prod-1791376303251-57",
       "sku": "ORI241205260",
       "name": "Orion IP67 24/12-5 (60W)",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-58",
+      "id": "prod-1791376303251-58",
       "sku": "ORI122410020",
       "name": "Orion 12/24-10",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-59",
+      "id": "prod-1791376303251-59",
       "sku": "ORI122436140",
       "name": "Orion-Tr Smart 12/24-15A Non-isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-60",
+      "id": "prod-1791376303251-60",
       "sku": "ORI241220260",
       "name": "Orion IP67 24/12-20 (240W)",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-61",
+      "id": "prod-1791376303251-61",
       "sku": "ORI241240021",
       "name": "Orion 24/12-40",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-62",
+      "id": "prod-1791376303251-62",
       "sku": "ORI241215200(R)",
       "name": "Orion-Tr 24/12-15 (180W)",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-63",
+      "id": "prod-1791376303251-63",
       "sku": "ORI121236120",
       "name": "Orion-Tr Smart 12/12-30A Isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-64",
+      "id": "prod-1791376303251-64",
       "sku": "ORI241210260",
       "name": "Orion IP67 24/12-10 (120W)",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-65",
+      "id": "prod-1791376303251-65",
       "sku": "ORI242417040",
       "name": "Orion XS 1400 DC-DC battery charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-66",
+      "id": "prod-1791376303251-66",
       "sku": "ORI242428120",
       "name": "Orion-Tr Smart 24/24-12A Isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-67",
+      "id": "prod-1791376303251-67",
       "sku": "ORI241236140",
       "name": "Orion-Tr Smart 24/12-30A Non-isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-68",
+      "id": "prod-1791376303251-68",
       "sku": "ORI241224120",
       "name": "Orion-Tr Smart 24/12-20A Isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-69",
+      "id": "prod-1791376303251-69",
       "sku": "ORI241236120",
       "name": "Orion-Tr Smart 24/12-30A Isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-70",
+      "id": "prod-1791376303251-70",
       "sku": "ORI241280020",
       "name": "Orion 24/12-80",
       "boxNumber": "13",
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.251Z"
     },
     {
-      "id": "prod-1791376137224-71",
+      "id": "prod-1791376303253-71",
       "sku": "ORI122436120",
       "name": "Orion-Tr Smart 12/24-15A Isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-72",
+      "id": "prod-1791376303253-72",
       "sku": "ORI122408020",
       "name": "Orion 12/24-8",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-73",
+      "id": "prod-1791376303253-73",
       "sku": "ORI121217050",
       "name": "Orion XS 12/12-50A DC/DC Batery Charger",
       "boxNumber": "13",
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-74",
+      "id": "prod-1791376303253-74",
       "sku": "ORI122420020",
       "name": "Orion 12/24-20",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-75",
+      "id": "prod-1791376303253-75",
       "sku": "ORI241210110(R)",
       "name": "Orion-Tr 24/12-9A (110W)",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-76",
+      "id": "prod-1791376303253-76",
       "sku": "ORI241224110",
       "name": "Orion-Tr 24/12-20A (240W)",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-77",
+      "id": "prod-1791376303253-77",
       "sku": "ORI481210110",
       "name": "Orion-Tr 48/12-9A (110W)",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-78",
+      "id": "prod-1791376303253-78",
       "sku": "ORI122424120",
       "name": "Orion-Tr Smart 12/24-10A Isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-79",
+      "id": "prod-1791376303253-79",
       "sku": "ORI121236140",
       "name": "Orion-Tr Smart 12/12-30A Non-isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-80",
+      "id": "prod-1791376303253-80",
       "sku": "ORI242440120",
       "name": "Orion-Tr Smart 24/24-17A Isolated DC-DC charger",
       "boxNumber": "13",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-81",
+      "id": "prod-1791376303253-81",
       "sku": "SCC010005000",
       "name": "BlueSolar PWM-Light 12/24V-5A",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-82",
+      "id": "prod-1791376303253-82",
       "sku": "SCC110050210",
       "name": "SmartSolar MPPT 100/50",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-83",
+      "id": "prod-1791376303253-83",
       "sku": "SCC075010060R",
       "name": "SmartSolar MPPT 75/10",
       "boxNumber": "14",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-84",
+      "id": "prod-1791376303253-84",
       "sku": "SCC075015060R",
       "name": "SmartSolar MPPT 75/15",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-85",
+      "id": "prod-1791376303253-85",
       "sku": "SCC110020160R",
       "name": "SmartSolar MPPT 100/20 (up to 48V)",
       "boxNumber": "14",
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-86",
+      "id": "prod-1791376303253-86",
       "sku": "SCC110030210",
       "name": "SmartSolar MPPT 100/30",
       "boxNumber": "14",
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-87",
+      "id": "prod-1791376303253-87",
       "sku": "LYN020102010",
       "name": "Lynx Power In (M10)",
       "boxNumber": "12",
       "receivedQty": 8,
       "sentQty": 7,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-88",
+      "id": "prod-1791376303253-88",
       "sku": "CTR110000550",
       "name": "Current Transformer 100A:50mA for MultiPlus-II (5m)",
       "boxNumber": "17",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-89",
+      "id": "prod-1791376303253-89",
       "sku": "ARG120201020R",
       "name": "Argodiode 120-2AC 2 batteries 120A",
       "boxNumber": "16",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-90",
+      "id": "prod-1791376303253-90",
       "sku": "VBS127010010",
       "name": "Battery Switch ON/OFF 275A",
       "boxNumber": "17",
       "receivedQty": 9,
       "sentQty": 8,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-91",
+      "id": "prod-1791376303253-91",
       "sku": "ASS030065510",
       "name": "RJ45-splitter 1xRJ45 male/15cm cable/2xRJ45 female",
       "boxNumber": "17",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-92",
+      "id": "prod-1791376303253-92",
       "sku": "ASS030550500",
       "name": "VE.Direct TX digital output cable",
       "boxNumber": "17",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-93",
+      "id": "prod-1791376303253-93",
       "sku": "ASS030537010",
       "name": "VE.Bus Smart dongle",
       "boxNumber": "17",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-94",
+      "id": "prod-1791376303253-94",
       "sku": "ASS030530310",
       "name": "VE.Direct Cable 10m",
       "boxNumber": "17",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-95",
+      "id": "prod-1791376303253-95",
       "sku": "ASS030530250",
       "name": "VE.Direct Cable 5m",
       "boxNumber": "17",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-96",
+      "id": "prod-1791376303253-96",
       "sku": "ASS030530230",
       "name": "VE.Direct Cable 3m",
       "boxNumber": "17",
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-97",
+      "id": "prod-1791376303253-97",
       "sku": "ASS030530218",
       "name": "VE.Direct Cable 1,8m",
       "boxNumber": "17",
       "receivedQty": 9,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-98",
+      "id": "prod-1791376303253-98",
       "sku": "ASS030531218",
       "name": "VE.Direct Cable 1,8m (one side Right Angle conn)",
       "boxNumber": "17",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-99",
+      "id": "prod-1791376303253-99",
       "sku": "ASS030530209",
       "name": "VE.Direct Cable 0,9m",
       "boxNumber": "17",
       "receivedQty": 3,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-100",
+      "id": "prod-1791376303253-100",
       "sku": "ASS030710118",
       "name": "VE.Can to CAN-bus BMS type A Cable 1.8m",
       "boxNumber": "17",
       "receivedQty": 6,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-101",
+      "id": "prod-1791376303253-101",
       "sku": "ASS030530010",
       "name": "VE.Direct to USB interface",
       "boxNumber": "17",
       "receivedQty": 3,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137224-102",
+      "id": "prod-1791376303253-102",
       "sku": "CIP000100001",
       "name": "Fuse holder for MEGA-fuse",
       "boxNumber": "18",
       "receivedQty": 14,
       "sentQty": 12,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.224Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-103",
+      "id": "prod-1791376303253-103",
       "sku": "CIP000050001",
       "name": "Fuse holder for Midi-fuse",
       "boxNumber": "18",
       "receivedQty": 15,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-104",
+      "id": "prod-1791376303253-104",
       "sku": "VBB115022020",
       "name": "Busbar 150A 2P with 20 screws +cover",
       "boxNumber": "18",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-105",
+      "id": "prod-1791376303253-105",
       "sku": "CIP136060010",
       "name": "MEGA-fuse 60A/32V",
       "boxNumber": "18",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-106",
+      "id": "prod-1791376303253-106",
       "sku": "CIP132080010",
       "name": "MIDI-fuse 80A/32V",
       "boxNumber": "18",
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-107",
+      "id": "prod-1791376303253-107",
       "sku": "CIP132100010",
       "name": "MIDI-fuse 100A/32V",
       "boxNumber": "18",
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-108",
+      "id": "prod-1791376303253-108",
       "sku": "CIP132125010",
       "name": "MIDI-fuse 125A/32V",
       "boxNumber": "18",
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-109",
+      "id": "prod-1791376303253-109",
       "sku": "CIP132200010",
       "name": "MIDI-fuse 200A/32V",
       "boxNumber": "18",
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-110",
+      "id": "prod-1791376303253-110",
       "sku": "CIP134100020",
       "name": "MIDI-fuse 100A/58V-M6",
       "boxNumber": "18",
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-111",
+      "id": "prod-1791376303253-111",
       "sku": "CIP136400010",
       "name": "MEGA-fuse 400A/32V",
       "boxNumber": "18",
       "receivedQty": 4,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-112",
+      "id": "prod-1791376303253-112",
       "sku": "CIP138040020",
       "name": "MEGA-fuse 40A/80V",
       "boxNumber": "18",
       "receivedQty": 24,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-113",
+      "id": "prod-1791376303253-113",
       "sku": "CIP138060020",
       "name": "MEGA-fuse 60A/80V",
       "boxNumber": "18",
       "receivedQty": 5,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-114",
+      "id": "prod-1791376303253-114",
       "sku": "CIP138080020",
       "name": "MEGA-fuse 80A/80V",
       "boxNumber": "18",
       "receivedQty": 16,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-115",
+      "id": "prod-1791376303253-115",
       "sku": "CIP138100020",
       "name": "MEGA-fuse 100A/80V (package of 5 pcs)",
       "boxNumber": "18",
       "receivedQty": 29,
       "sentQty": 21,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-116",
+      "id": "prod-1791376303253-116",
       "sku": "CIP138125020",
       "name": "MEGA-fuse 125A/80V (package of 5 pcs)",
       "boxNumber": "18",
       "receivedQty": 30,
       "sentQty": 19,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-117",
+      "id": "prod-1791376303253-117",
       "sku": "CIP138150020",
       "name": "MEGA-fuse 150A/80V (package of 5 pcs",
       "boxNumber": "18",
       "receivedQty": 26,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-118",
+      "id": "prod-1791376303253-118",
       "sku": "CIP138175020",
       "name": "MEGA-fuse 175A/80V",
       "boxNumber": "18",
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-119",
+      "id": "prod-1791376303253-119",
       "sku": "CIP138225020",
       "name": "MEGA-fuse 225A/80V (package of 5 pcs)",
       "boxNumber": "18",
       "receivedQty": 24,
       "sentQty": 7,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-120",
+      "id": "prod-1791376303253-120",
       "sku": "CIP138200020",
       "name": "MEGA-fuse 200A/80V (package of 5 pcs)",
       "boxNumber": "18",
       "receivedQty": 32,
       "sentQty": 18,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-121",
+      "id": "prod-1791376303253-121",
       "sku": "CIP138250020",
       "name": "MEGA-fuse 250A/80V (package of 5 pcs)",
       "boxNumber": "18",
       "receivedQty": 27,
       "sentQty": 10,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-122",
+      "id": "prod-1791376303253-122",
       "sku": "CIP138300020",
       "name": "MEGA-fuse 300A/80V",
       "boxNumber": "18",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-123",
+      "id": "prod-1791376303253-123",
       "sku": "CIP138500020",
       "name": "MEGA-fuse 500A/80V",
       "boxNumber": "18",
       "receivedQty": 11,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-124",
+      "id": "prod-1791376303253-124",
       "sku": "CIP138400020",
       "name": "MEGA-fuse 400A/80V (package of 5 pcs)",
       "boxNumber": "18",
       "receivedQty": 5,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-125",
+      "id": "prod-1791376303253-125",
       "sku": "SCIFP1225",
       "name": "Літієва батарея SmartPower SCIFP1225 12V 25Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-126",
+      "id": "prod-1791376303253-126",
       "sku": "SCIFP1250",
       "name": "Літієва батарея SmartPower SCIFP1250 12V50Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-127",
+      "id": "prod-1791376303253-127",
       "sku": "SCIFP12100",
       "name": "Літієва батарея SmartPower SCIFP12100 12V100Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 10,
       "sentQty": 6,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-128",
+      "id": "prod-1791376303253-128",
       "sku": "SCIFP12200",
       "name": "Літієва батарея SmartPower SCIFP12200 12V200Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-129",
+      "id": "prod-1791376303253-129",
       "sku": "SCIFP24100",
       "name": "Літієва батарея SmartPower SCIFP24100 24V100Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 4,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-130",
+      "id": "prod-1791376303253-130",
       "sku": "SCIFP24200",
       "name": "Літієва батарея SmartPower SCIFP24200 24V 200Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 3,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-131",
+      "id": "prod-1791376303253-131",
       "sku": "SLSIFP51100A",
       "name": "Літієва батарея SmartPower SLSIFP51100A 51,2V100Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     },
     {
-      "id": "prod-1791376137225-132",
+      "id": "prod-1791376303253-132",
       "sku": "SLSIFP51100A",
       "name": "Літієва батарея SmartPower SLSIFP51100AH 51,2V 100Ah",
       "boxNumber": "Б/Н",
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:28:57.225Z"
+      "updatedAt": "2026-10-07T12:31:43.253Z"
     }
   ],
   "logs": [
     {
-      "id": "log-prod-1791376137224-64-hist-0",
+      "id": "log-prod-1791376303251-64-hist-0",
       "timestamp": "2026-10-07T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI241210260",
@@ -1346,7 +1346,7 @@
       "note": "Шандра"
     },
     {
-      "id": "log-prod-1791376137224-90-hist-5",
+      "id": "log-prod-1791376303253-90-hist-5",
       "timestamp": "2026-10-07T12:00:00.000Z",
       "type": "OUT",
       "sku": "VBS127010010",
@@ -1359,7 +1359,7 @@
       "note": "Висторопський, Агро КМР"
     },
     {
-      "id": "log-prod-1791376137224-24-hist-5",
+      "id": "log-prod-1791376303251-24-hist-5",
       "timestamp": "2026-10-06T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC123047002",
@@ -1372,7 +1372,7 @@
       "note": "Курбатов"
     },
     {
-      "id": "log-prod-1791376137224-99-hist-0",
+      "id": "log-prod-1791376303253-99-hist-0",
       "timestamp": "2026-10-06T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030530209",
@@ -1385,7 +1385,7 @@
       "note": "Павленко"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-6",
+      "id": "log-prod-1791376303253-102-hist-6",
       "timestamp": "2026-10-06T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -1398,7 +1398,7 @@
       "note": "Крутько"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-7",
+      "id": "log-prod-1791376303253-102-hist-7",
       "timestamp": "2026-10-06T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -1411,7 +1411,7 @@
       "note": "Стьопічев"
     },
     {
-      "id": "log-prod-1791376137225-120-hist-6",
+      "id": "log-prod-1791376303253-120-hist-6",
       "timestamp": "2026-10-06T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138200020",
@@ -1424,7 +1424,7 @@
       "note": "Стьопічев"
     },
     {
-      "id": "log-prod-1791376137225-127-hist-4",
+      "id": "log-prod-1791376303253-127-hist-4",
       "timestamp": "2026-10-06T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCIFP12100",
@@ -1437,7 +1437,7 @@
       "note": "Коркішко"
     },
     {
-      "id": "log-prod-1791376137223-3-hist-0",
+      "id": "log-prod-1791376303250-3-hist-0",
       "timestamp": "2026-10-04T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482306000",
@@ -1450,7 +1450,7 @@
       "note": "Кравченко"
     },
     {
-      "id": "log-prod-1791376137224-23-hist-2",
+      "id": "log-prod-1791376303251-23-hist-2",
       "timestamp": "2026-10-04T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121531064R",
@@ -1463,7 +1463,7 @@
       "note": "Лях"
     },
     {
-      "id": "log-prod-1791376137224-24-hist-4",
+      "id": "log-prod-1791376303251-24-hist-4",
       "timestamp": "2026-10-04T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC123047002",
@@ -1476,7 +1476,7 @@
       "note": "Бойчук"
     },
     {
-      "id": "log-prod-1791376137224-28-hist-2",
+      "id": "log-prod-1791376303251-28-hist-2",
       "timestamp": "2026-10-04T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121031064R",
@@ -1489,7 +1489,7 @@
       "note": "Сахно"
     },
     {
-      "id": "log-prod-1791376137224-28-hist-3",
+      "id": "log-prod-1791376303251-28-hist-3",
       "timestamp": "2026-10-04T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121031064R",
@@ -1502,7 +1502,7 @@
       "note": "Олійник"
     },
     {
-      "id": "log-prod-1791376137224-5-hist-0",
+      "id": "log-prod-1791376303250-5-hist-0",
       "timestamp": "2026-10-03T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482605012",
@@ -1515,7 +1515,7 @@
       "note": "Вінник"
     },
     {
-      "id": "log-prod-1791376137224-11-hist-0",
+      "id": "log-prod-1791376303250-11-hist-0",
       "timestamp": "2026-10-03T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030140030",
@@ -1528,7 +1528,7 @@
       "note": "Вінник"
     },
     {
-      "id": "log-prod-1791376137224-12-hist-0",
+      "id": "log-prod-1791376303250-12-hist-0",
       "timestamp": "2026-10-03T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030140000",
@@ -1541,7 +1541,7 @@
       "note": "Кравченко"
     },
     {
-      "id": "log-prod-1791376137224-100-hist-0",
+      "id": "log-prod-1791376303253-100-hist-0",
       "timestamp": "2026-10-03T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030710118",
@@ -1554,7 +1554,7 @@
       "note": "Кравченко"
     },
     {
-      "id": "log-prod-1791376137225-120-hist-5",
+      "id": "log-prod-1791376303253-120-hist-5",
       "timestamp": "2026-10-03T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138200020",
@@ -1567,7 +1567,7 @@
       "note": "Шанюк"
     },
     {
-      "id": "log-prod-1791376137225-127-hist-3",
+      "id": "log-prod-1791376303253-127-hist-3",
       "timestamp": "2026-10-03T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCIFP12100",
@@ -1580,7 +1580,7 @@
       "note": "Нагоринський"
     },
     {
-      "id": "log-prod-1791376137224-15-hist-1",
+      "id": "log-prod-1791376303251-15-hist-1",
       "timestamp": "2026-10-02T12:00:00.000Z",
       "type": "OUT",
       "sku": "SHU050150050",
@@ -1593,7 +1593,7 @@
       "note": "Сенченко"
     },
     {
-      "id": "log-prod-1791376137224-87-hist-4",
+      "id": "log-prod-1791376303253-87-hist-4",
       "timestamp": "2026-10-02T12:00:00.000Z",
       "type": "OUT",
       "sku": "LYN020102010",
@@ -1606,7 +1606,7 @@
       "note": "Матвієнко"
     },
     {
-      "id": "log-prod-1791376137224-87-hist-5",
+      "id": "log-prod-1791376303253-87-hist-5",
       "timestamp": "2026-10-02T12:00:00.000Z",
       "type": "OUT",
       "sku": "LYN020102010",
@@ -1619,7 +1619,7 @@
       "note": "Сенченко"
     },
     {
-      "id": "log-prod-1791376137224-90-hist-4",
+      "id": "log-prod-1791376303253-90-hist-4",
       "timestamp": "2026-10-02T12:00:00.000Z",
       "type": "OUT",
       "sku": "VBS127010010",
@@ -1632,7 +1632,7 @@
       "note": "Матвієнко"
     },
     {
-      "id": "log-prod-1791376137224-97-hist-1",
+      "id": "log-prod-1791376303253-97-hist-1",
       "timestamp": "2026-10-02T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030530218",
@@ -1645,7 +1645,7 @@
       "note": "Сенченко"
     },
     {
-      "id": "log-prod-1791376137225-116-hist-4",
+      "id": "log-prod-1791376303253-116-hist-4",
       "timestamp": "2026-10-02T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138125020",
@@ -1658,7 +1658,7 @@
       "note": "Сенченко"
     },
     {
-      "id": "log-prod-1791376137225-120-hist-4",
+      "id": "log-prod-1791376303253-120-hist-4",
       "timestamp": "2026-10-02T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138200020",
@@ -1671,7 +1671,7 @@
       "note": "Сенченко"
     },
     {
-      "id": "log-prod-1791376137224-8-hist-0",
+      "id": "log-prod-1791376303250-8-hist-0",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP121500000",
@@ -1684,7 +1684,7 @@
       "note": "Павутина, Яригін"
     },
     {
-      "id": "log-prod-1791376137224-22-hist-2",
+      "id": "log-prod-1791376303251-22-hist-2",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC120731064R",
@@ -1697,7 +1697,7 @@
       "note": "Снєжин"
     },
     {
-      "id": "log-prod-1791376137224-33-hist-3",
+      "id": "log-prod-1791376303251-33-hist-3",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC122547006",
@@ -1710,7 +1710,7 @@
       "note": "Бортніченко"
     },
     {
-      "id": "log-prod-1791376137224-36-hist-1",
+      "id": "log-prod-1791376303251-36-hist-1",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121313006",
@@ -1723,7 +1723,7 @@
       "note": "Бортніченко"
     },
     {
-      "id": "log-prod-1791376137224-38-hist-1",
+      "id": "log-prod-1791376303251-38-hist-1",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC241247006",
@@ -1736,7 +1736,7 @@
       "note": "Бортніченко"
     },
     {
-      "id": "log-prod-1791376137224-39-hist-0",
+      "id": "log-prod-1791376303251-39-hist-0",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC120713006",
@@ -1749,7 +1749,7 @@
       "note": "Бортніченко"
     },
     {
-      "id": "log-prod-1791376137224-59-hist-0",
+      "id": "log-prod-1791376303251-59-hist-0",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI122436140",
@@ -1762,7 +1762,7 @@
       "note": "Родін, Юав-Тех"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-4",
+      "id": "log-prod-1791376303253-102-hist-4",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -1775,7 +1775,7 @@
       "note": "Шинкарчук"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-5",
+      "id": "log-prod-1791376303253-102-hist-5",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -1788,7 +1788,7 @@
       "note": "Фрейм Фаундейшн"
     },
     {
-      "id": "log-prod-1791376137225-116-hist-2",
+      "id": "log-prod-1791376303253-116-hist-2",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138125020",
@@ -1801,7 +1801,7 @@
       "note": "Фрейм Фаундейшн"
     },
     {
-      "id": "log-prod-1791376137225-116-hist-3",
+      "id": "log-prod-1791376303253-116-hist-3",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138125020",
@@ -1814,7 +1814,7 @@
       "note": "Драченко"
     },
     {
-      "id": "log-prod-1791376137225-120-hist-3",
+      "id": "log-prod-1791376303253-120-hist-3",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138200020",
@@ -1827,7 +1827,7 @@
       "note": "Шинкарчук"
     },
     {
-      "id": "log-prod-1791376137225-121-hist-1",
+      "id": "log-prod-1791376303253-121-hist-1",
       "timestamp": "2026-10-01T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138250020",
@@ -1840,7 +1840,7 @@
       "note": "Лопоша"
     },
     {
-      "id": "log-prod-1791376137224-33-hist-2",
+      "id": "log-prod-1791376303251-33-hist-2",
       "timestamp": "2026-09-30T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC122547006",
@@ -1853,7 +1853,7 @@
       "note": "ТТН 20 4515 4855 1458 - Прохоренко"
     },
     {
-      "id": "log-prod-1791376137224-71-hist-1",
+      "id": "log-prod-1791376303253-71-hist-1",
       "timestamp": "2026-09-30T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI122436120",
@@ -1866,7 +1866,7 @@
       "note": "Казимір"
     },
     {
-      "id": "log-prod-1791376137224-77-hist-0",
+      "id": "log-prod-1791376303253-77-hist-0",
       "timestamp": "2026-09-29T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI481210110",
@@ -1879,7 +1879,7 @@
       "note": "Сидорук"
     },
     {
-      "id": "log-prod-1791376137224-101-hist-2",
+      "id": "log-prod-1791376303253-101-hist-2",
       "timestamp": "2026-09-29T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030530010",
@@ -1892,7 +1892,7 @@
       "note": "Буянкін"
     },
     {
-      "id": "log-prod-1791376137225-127-hist-2",
+      "id": "log-prod-1791376303253-127-hist-2",
       "timestamp": "2026-09-29T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCIFP12100",
@@ -1905,7 +1905,7 @@
       "note": "Коноваленко"
     },
     {
-      "id": "log-prod-1791376137224-84-hist-0",
+      "id": "log-prod-1791376303253-84-hist-0",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCC075015060R",
@@ -1918,7 +1918,7 @@
       "note": "Кришталь"
     },
     {
-      "id": "log-prod-1791376137224-87-hist-2",
+      "id": "log-prod-1791376303253-87-hist-2",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "LYN020102010",
@@ -1931,7 +1931,7 @@
       "note": "Баличев"
     },
     {
-      "id": "log-prod-1791376137224-87-hist-3",
+      "id": "log-prod-1791376303253-87-hist-3",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "LYN020102010",
@@ -1944,7 +1944,7 @@
       "note": "Спасіченко"
     },
     {
-      "id": "log-prod-1791376137224-90-hist-2",
+      "id": "log-prod-1791376303253-90-hist-2",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "VBS127010010",
@@ -1957,7 +1957,7 @@
       "note": "Баличев"
     },
     {
-      "id": "log-prod-1791376137224-90-hist-3",
+      "id": "log-prod-1791376303253-90-hist-3",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "VBS127010010",
@@ -1970,7 +1970,7 @@
       "note": "Спасіченко"
     },
     {
-      "id": "log-prod-1791376137224-96-hist-0",
+      "id": "log-prod-1791376303253-96-hist-0",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030530230",
@@ -1983,7 +1983,7 @@
       "note": "Меркулова"
     },
     {
-      "id": "log-prod-1791376137224-100-hist-1",
+      "id": "log-prod-1791376303253-100-hist-1",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030710118",
@@ -1996,7 +1996,7 @@
       "note": "Баличев"
     },
     {
-      "id": "log-prod-1791376137225-115-hist-2",
+      "id": "log-prod-1791376303253-115-hist-2",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138100020",
@@ -2009,7 +2009,7 @@
       "note": "Баличев"
     },
     {
-      "id": "log-prod-1791376137225-115-hist-3",
+      "id": "log-prod-1791376303253-115-hist-3",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138100020",
@@ -2022,7 +2022,7 @@
       "note": "Спасіченко"
     },
     {
-      "id": "log-prod-1791376137225-120-hist-2",
+      "id": "log-prod-1791376303253-120-hist-2",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138200020",
@@ -2035,7 +2035,7 @@
       "note": "Спасіченко"
     },
     {
-      "id": "log-prod-1791376137225-127-hist-1",
+      "id": "log-prod-1791376303253-127-hist-1",
       "timestamp": "2026-09-28T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCIFP12100",
@@ -2048,7 +2048,7 @@
       "note": "Гнєзділова"
     },
     {
-      "id": "log-prod-1791376137223-3-hist-1",
+      "id": "log-prod-1791376303250-3-hist-1",
       "timestamp": "2026-09-26T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482306000",
@@ -2061,7 +2061,7 @@
       "note": "Землякова"
     },
     {
-      "id": "log-prod-1791376137224-7-hist-0",
+      "id": "log-prod-1791376303250-7-hist-0",
       "timestamp": "2026-09-26T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482506000",
@@ -2074,7 +2074,7 @@
       "note": "Дарий"
     },
     {
-      "id": "log-prod-1791376137224-24-hist-3",
+      "id": "log-prod-1791376303251-24-hist-3",
       "timestamp": "2026-09-26T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC123047002",
@@ -2087,7 +2087,7 @@
       "note": "Шеляг"
     },
     {
-      "id": "log-prod-1791376137224-27-hist-0",
+      "id": "log-prod-1791376303251-27-hist-0",
       "timestamp": "2026-09-26T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC120533064R",
@@ -2100,7 +2100,7 @@
       "note": "Гонор"
     },
     {
-      "id": "log-prod-1791376137224-31-hist-1",
+      "id": "log-prod-1791376303251-31-hist-1",
       "timestamp": "2026-09-26T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC122531064",
@@ -2113,7 +2113,7 @@
       "note": "Сілаєв"
     },
     {
-      "id": "log-prod-1791376137224-70-hist-1",
+      "id": "log-prod-1791376303251-70-hist-1",
       "timestamp": "2026-09-26T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI241280020",
@@ -2126,7 +2126,7 @@
       "note": "Федосов"
     },
     {
-      "id": "log-prod-1791376137225-128-hist-1",
+      "id": "log-prod-1791376303253-128-hist-1",
       "timestamp": "2026-09-26T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCIFP12200",
@@ -2139,7 +2139,7 @@
       "note": "Левченко"
     },
     {
-      "id": "log-prod-1791376137224-6-hist-3",
+      "id": "log-prod-1791376303250-6-hist-3",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482606000",
@@ -2152,7 +2152,7 @@
       "note": "Панухнік"
     },
     {
-      "id": "log-prod-1791376137224-10-hist-0",
+      "id": "log-prod-1791376303250-10-hist-0",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPP900455070",
@@ -2165,7 +2165,7 @@
       "note": "Осика, Хотлайн"
     },
     {
-      "id": "log-prod-1791376137224-22-hist-1",
+      "id": "log-prod-1791376303251-22-hist-1",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC120731064R",
@@ -2178,7 +2178,7 @@
       "note": "Клименко"
     },
     {
-      "id": "log-prod-1791376137224-38-hist-0",
+      "id": "log-prod-1791376303251-38-hist-0",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC241247006",
@@ -2191,7 +2191,7 @@
       "note": "Нападайло"
     },
     {
-      "id": "log-prod-1791376137224-86-hist-0",
+      "id": "log-prod-1791376303253-86-hist-0",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCC110030210",
@@ -2204,7 +2204,7 @@
       "note": "Жеребкін"
     },
     {
-      "id": "log-prod-1791376137224-87-hist-1",
+      "id": "log-prod-1791376303253-87-hist-1",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "LYN020102010",
@@ -2217,7 +2217,7 @@
       "note": "Осика, Хотлайн"
     },
     {
-      "id": "log-prod-1791376137224-90-hist-1",
+      "id": "log-prod-1791376303253-90-hist-1",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "VBS127010010",
@@ -2230,7 +2230,7 @@
       "note": "Осика, Хотлайн"
     },
     {
-      "id": "log-prod-1791376137225-115-hist-1",
+      "id": "log-prod-1791376303253-115-hist-1",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138100020",
@@ -2243,7 +2243,7 @@
       "note": "Осика, Хотлайн"
     },
     {
-      "id": "log-prod-1791376137225-119-hist-5",
+      "id": "log-prod-1791376303253-119-hist-5",
       "timestamp": "2026-09-25T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138225020",
@@ -2256,7 +2256,7 @@
       "note": "Осика, Хотлайн"
     },
     {
-      "id": "log-prod-1791376137224-26-hist-5",
+      "id": "log-prod-1791376303251-26-hist-5",
       "timestamp": "2026-09-24T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121713006",
@@ -2269,7 +2269,7 @@
       "note": "Про солюшнс"
     },
     {
-      "id": "log-prod-1791376137224-34-hist-0",
+      "id": "log-prod-1791376303251-34-hist-0",
       "timestamp": "2026-09-24T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC241242002",
@@ -2282,7 +2282,7 @@
       "note": "Про солюшнс"
     },
     {
-      "id": "log-prod-1791376137224-90-hist-0",
+      "id": "log-prod-1791376303253-90-hist-0",
       "timestamp": "2026-09-24T12:00:00.000Z",
       "type": "OUT",
       "sku": "VBS127010010",
@@ -2295,7 +2295,7 @@
       "note": "Шелег"
     },
     {
-      "id": "log-prod-1791376137224-97-hist-0",
+      "id": "log-prod-1791376303253-97-hist-0",
       "timestamp": "2026-09-24T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030530218",
@@ -2308,7 +2308,7 @@
       "note": "Ударов"
     },
     {
-      "id": "log-prod-1791376137224-101-hist-1",
+      "id": "log-prod-1791376303253-101-hist-1",
       "timestamp": "2026-09-24T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030530010",
@@ -2321,7 +2321,7 @@
       "note": "Ударов"
     },
     {
-      "id": "log-prod-1791376137225-120-hist-1",
+      "id": "log-prod-1791376303253-120-hist-1",
       "timestamp": "2026-09-24T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138200020",
@@ -2334,7 +2334,7 @@
       "note": "Ударов"
     },
     {
-      "id": "log-prod-1791376137225-121-hist-0",
+      "id": "log-prod-1791376303253-121-hist-0",
       "timestamp": "2026-09-24T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138250020",
@@ -2347,7 +2347,7 @@
       "note": "Лопоша"
     },
     {
-      "id": "log-prod-1791376137224-36-hist-0",
+      "id": "log-prod-1791376303251-36-hist-0",
       "timestamp": "2026-09-23T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121313006",
@@ -2360,7 +2360,7 @@
       "note": ", Нападайло"
     },
     {
-      "id": "log-prod-1791376137224-70-hist-0",
+      "id": "log-prod-1791376303251-70-hist-0",
       "timestamp": "2026-09-23T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI241280020",
@@ -2373,7 +2373,7 @@
       "note": "Погрібний"
     },
     {
-      "id": "log-prod-1791376137224-101-hist-0",
+      "id": "log-prod-1791376303253-101-hist-0",
       "timestamp": "2026-09-23T12:00:00.000Z",
       "type": "OUT",
       "sku": "ASS030530010",
@@ -2386,7 +2386,7 @@
       "note": "Матвєєв"
     },
     {
-      "id": "log-prod-1791376137225-115-hist-0",
+      "id": "log-prod-1791376303253-115-hist-0",
       "timestamp": "2026-09-23T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138100020",
@@ -2399,7 +2399,7 @@
       "note": "Леонтьєв"
     },
     {
-      "id": "log-prod-1791376137224-6-hist-1",
+      "id": "log-prod-1791376303250-6-hist-1",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482606000",
@@ -2412,7 +2412,7 @@
       "note": "Котляр"
     },
     {
-      "id": "log-prod-1791376137224-6-hist-2",
+      "id": "log-prod-1791376303250-6-hist-2",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482606000",
@@ -2425,7 +2425,7 @@
       "note": "Топіха, Телекомпанія Бровари"
     },
     {
-      "id": "log-prod-1791376137224-15-hist-0",
+      "id": "log-prod-1791376303251-15-hist-0",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "SHU050150050",
@@ -2438,7 +2438,7 @@
       "note": "Топіха, Телекомпанія Бровари"
     },
     {
-      "id": "log-prod-1791376137224-19-hist-0",
+      "id": "log-prod-1791376303251-19-hist-0",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "SBS050150200",
@@ -2451,7 +2451,7 @@
       "note": "Омельченко"
     },
     {
-      "id": "log-prod-1791376137224-26-hist-4",
+      "id": "log-prod-1791376303251-26-hist-4",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121713006",
@@ -2464,7 +2464,7 @@
       "note": "Мариношенко"
     },
     {
-      "id": "log-prod-1791376137224-87-hist-0",
+      "id": "log-prod-1791376303253-87-hist-0",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "LYN020102010",
@@ -2477,7 +2477,7 @@
       "note": "Топіха, Телекомпанія Бровари"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-2",
+      "id": "log-prod-1791376303253-102-hist-2",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -2490,7 +2490,7 @@
       "note": "Силантьєв"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-3",
+      "id": "log-prod-1791376303253-102-hist-3",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -2503,7 +2503,7 @@
       "note": "Котляр"
     },
     {
-      "id": "log-prod-1791376137225-119-hist-2",
+      "id": "log-prod-1791376303253-119-hist-2",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138225020",
@@ -2516,7 +2516,7 @@
       "note": "Силантьєв"
     },
     {
-      "id": "log-prod-1791376137225-119-hist-3",
+      "id": "log-prod-1791376303253-119-hist-3",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138225020",
@@ -2529,7 +2529,7 @@
       "note": "Котляр"
     },
     {
-      "id": "log-prod-1791376137225-119-hist-4",
+      "id": "log-prod-1791376303253-119-hist-4",
       "timestamp": "2026-09-22T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138225020",
@@ -2542,7 +2542,7 @@
       "note": "Топіха, Телекомпанія Бровари"
     },
     {
-      "id": "log-prod-1791376137224-6-hist-0",
+      "id": "log-prod-1791376303250-6-hist-0",
       "timestamp": "2026-09-21T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP482606000",
@@ -2555,7 +2555,7 @@
       "note": "Силантьєв"
     },
     {
-      "id": "log-prod-1791376137224-24-hist-2",
+      "id": "log-prod-1791376303251-24-hist-2",
       "timestamp": "2026-09-21T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC123047002",
@@ -2568,7 +2568,7 @@
       "note": "ТОВ Спаринг Віст, Сметана"
     },
     {
-      "id": "log-prod-1791376137224-26-hist-3",
+      "id": "log-prod-1791376303251-26-hist-3",
       "timestamp": "2026-09-21T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121713006",
@@ -2581,7 +2581,7 @@
       "note": "Мариношенко"
     },
     {
-      "id": "log-prod-1791376137224-28-hist-1",
+      "id": "log-prod-1791376303251-28-hist-1",
       "timestamp": "2026-09-21T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121031064R",
@@ -2594,7 +2594,7 @@
       "note": "Іванов"
     },
     {
-      "id": "log-prod-1791376137224-54-hist-0",
+      "id": "log-prod-1791376303251-54-hist-0",
       "timestamp": "2026-09-21T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPR000065400",
@@ -2607,7 +2607,7 @@
       "note": "ТОВ Спаринг Віст, Сметана"
     },
     {
-      "id": "log-prod-1791376137224-66-hist-0",
+      "id": "log-prod-1791376303251-66-hist-0",
       "timestamp": "2026-09-21T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI242428120",
@@ -2620,7 +2620,7 @@
       "note": "ПП ТАД, Згут"
     },
     {
-      "id": "log-prod-1791376137225-119-hist-1",
+      "id": "log-prod-1791376303253-119-hist-1",
       "timestamp": "2026-09-21T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138225020",
@@ -2633,7 +2633,7 @@
       "note": "Корупей"
     },
     {
-      "id": "log-prod-1791376137224-23-hist-1",
+      "id": "log-prod-1791376303251-23-hist-1",
       "timestamp": "2026-09-19T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121531064R",
@@ -2646,7 +2646,7 @@
       "note": "Семирожкін"
     },
     {
-      "id": "log-prod-1791376137225-128-hist-0",
+      "id": "log-prod-1791376303253-128-hist-0",
       "timestamp": "2026-09-19T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCIFP12200",
@@ -2659,7 +2659,7 @@
       "note": "Корець"
     },
     {
-      "id": "log-prod-1791376137224-9-hist-0",
+      "id": "log-prod-1791376303250-9-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "PMP121800000",
@@ -2672,7 +2672,7 @@
       "note": "Петлюк"
     },
     {
-      "id": "log-prod-1791376137224-26-hist-2",
+      "id": "log-prod-1791376303251-26-hist-2",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121713006",
@@ -2685,7 +2685,7 @@
       "note": "Гунченко"
     },
     {
-      "id": "log-prod-1791376137224-82-hist-0",
+      "id": "log-prod-1791376303253-82-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCC110050210",
@@ -2698,7 +2698,7 @@
       "note": "Гречин"
     },
     {
-      "id": "log-prod-1791376137224-85-hist-0",
+      "id": "log-prod-1791376303253-85-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCC110020160R",
@@ -2711,7 +2711,7 @@
       "note": "Карпатнафтогазсервіс"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-0",
+      "id": "log-prod-1791376303253-102-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -2724,7 +2724,7 @@
       "note": "Бульба"
     },
     {
-      "id": "log-prod-1791376137224-102-hist-1",
+      "id": "log-prod-1791376303253-102-hist-1",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP000100001",
@@ -2737,7 +2737,7 @@
       "note": ", Шевчук"
     },
     {
-      "id": "log-prod-1791376137225-116-hist-0",
+      "id": "log-prod-1791376303253-116-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138125020",
@@ -2750,7 +2750,7 @@
       "note": "Бульба"
     },
     {
-      "id": "log-prod-1791376137225-116-hist-1",
+      "id": "log-prod-1791376303253-116-hist-1",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138125020",
@@ -2763,7 +2763,7 @@
       "note": "Цигикало"
     },
     {
-      "id": "log-prod-1791376137225-119-hist-0",
+      "id": "log-prod-1791376303253-119-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138225020",
@@ -2776,7 +2776,7 @@
       "note": ", Шевчук"
     },
     {
-      "id": "log-prod-1791376137225-120-hist-0",
+      "id": "log-prod-1791376303253-120-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "CIP138200020",
@@ -2789,7 +2789,7 @@
       "note": "Цигикало"
     },
     {
-      "id": "log-prod-1791376137225-127-hist-0",
+      "id": "log-prod-1791376303253-127-hist-0",
       "timestamp": "2026-09-18T12:00:00.000Z",
       "type": "OUT",
       "sku": "SCIFP12100",
@@ -2802,7 +2802,7 @@
       "note": "Фролова"
     },
     {
-      "id": "log-prod-1791376137224-22-hist-0",
+      "id": "log-prod-1791376303251-22-hist-0",
       "timestamp": "2026-09-17T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC120731064R",
@@ -2815,7 +2815,7 @@
       "note": "Тижненко"
     },
     {
-      "id": "log-prod-1791376137224-24-hist-1",
+      "id": "log-prod-1791376303251-24-hist-1",
       "timestamp": "2026-09-16T12:00:00.000Z",
       "type": "IN",
       "sku": "BPC123047002",
@@ -2828,7 +2828,7 @@
       "note": "16.09.26 Козюпа повернуто"
     },
     {
-      "id": "log-prod-1791376137224-31-hist-0",
+      "id": "log-prod-1791376303251-31-hist-0",
       "timestamp": "2026-09-16T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC122531064",
@@ -2841,7 +2841,7 @@
       "note": "Бокало"
     },
     {
-      "id": "log-prod-1791376137224-73-hist-0",
+      "id": "log-prod-1791376303253-73-hist-0",
       "timestamp": "2026-09-16T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI121217050",
@@ -2854,7 +2854,7 @@
       "note": "Бобер"
     },
     {
-      "id": "log-prod-1791376137224-32-hist-0",
+      "id": "log-prod-1791376303251-32-hist-0",
       "timestamp": "2026-09-14T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC240831064R",
@@ -2867,7 +2867,7 @@
       "note": "Носач"
     },
     {
-      "id": "log-prod-1791376137224-41-hist-0",
+      "id": "log-prod-1791376303251-41-hist-0",
       "timestamp": "2026-09-14T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC900110114",
@@ -2880,7 +2880,7 @@
       "note": "Данилов"
     },
     {
-      "id": "log-prod-1791376137224-26-hist-1",
+      "id": "log-prod-1791376303251-26-hist-1",
       "timestamp": "2026-09-11T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121713006",
@@ -2893,7 +2893,7 @@
       "note": "Нападайло"
     },
     {
-      "id": "log-prod-1791376137224-24-hist-0",
+      "id": "log-prod-1791376303251-24-hist-0",
       "timestamp": "2026-09-10T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC123047002",
@@ -2906,7 +2906,7 @@
       "note": "Козюпа"
     },
     {
-      "id": "log-prod-1791376137224-33-hist-1",
+      "id": "log-prod-1791376303251-33-hist-1",
       "timestamp": "2026-09-10T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC122547006",
@@ -2919,7 +2919,7 @@
       "note": "Калінін"
     },
     {
-      "id": "log-prod-1791376137224-71-hist-0",
+      "id": "log-prod-1791376303253-71-hist-0",
       "timestamp": "2026-09-10T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI122436120",
@@ -2932,7 +2932,7 @@
       "note": "Калита"
     },
     {
-      "id": "log-prod-1791376137224-23-hist-0",
+      "id": "log-prod-1791376303251-23-hist-0",
       "timestamp": "2026-09-09T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121531064R",
@@ -2945,7 +2945,7 @@
       "note": "Відправка"
     },
     {
-      "id": "log-prod-1791376137224-65-hist-0",
+      "id": "log-prod-1791376303251-65-hist-0",
       "timestamp": "2026-09-09T12:00:00.000Z",
       "type": "OUT",
       "sku": "ORI242417040",
@@ -2958,7 +2958,7 @@
       "note": "Відправка"
     },
     {
-      "id": "log-prod-1791376137224-28-hist-0",
+      "id": "log-prod-1791376303251-28-hist-0",
       "timestamp": "2026-09-08T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121031064R",
@@ -2971,7 +2971,7 @@
       "note": "Балік"
     },
     {
-      "id": "log-prod-1791376137224-35-hist-0",
+      "id": "log-prod-1791376303251-35-hist-0",
       "timestamp": "2026-09-08T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC241647002",
@@ -2984,7 +2984,7 @@
       "note": "Енерджілайн"
     },
     {
-      "id": "log-prod-1791376137224-18-hist-0",
+      "id": "log-prod-1791376303251-18-hist-0",
       "timestamp": "2026-09-07T12:00:00.000Z",
       "type": "OUT",
       "sku": "BAM010702000R",
@@ -2997,7 +2997,7 @@
       "note": "Гедулян"
     },
     {
-      "id": "log-prod-1791376137224-26-hist-0",
+      "id": "log-prod-1791376303251-26-hist-0",
       "timestamp": "2026-09-07T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC121713006",
@@ -3010,7 +3010,7 @@
       "note": "Макогон"
     },
     {
-      "id": "log-prod-1791376137224-33-hist-0",
+      "id": "log-prod-1791376303251-33-hist-0",
       "timestamp": "2026-09-07T12:00:00.000Z",
       "type": "OUT",
       "sku": "BPC122547006",
@@ -3023,7 +3023,7 @@
       "note": "Макогон"
     },
     {
-      "id": "log-prod-1791376137223-0-init",
+      "id": "log-prod-1791376303250-0-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PIN121801200",
@@ -3036,7 +3036,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137223-1-init",
+      "id": "log-prod-1791376303250-1-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PIN241801200",
@@ -3049,7 +3049,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137223-2-init",
+      "id": "log-prod-1791376303250-2-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PIN241371200",
@@ -3062,7 +3062,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137223-3-init",
+      "id": "log-prod-1791376303250-3-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PMP482306000",
@@ -3075,7 +3075,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-4-init",
+      "id": "log-prod-1791376303250-4-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PMP482505012",
@@ -3088,7 +3088,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-5-init",
+      "id": "log-prod-1791376303250-5-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PMP482605012",
@@ -3101,7 +3101,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-6-init",
+      "id": "log-prod-1791376303250-6-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PMP482606000",
@@ -3114,7 +3114,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-7-init",
+      "id": "log-prod-1791376303250-7-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PMP482506000",
@@ -3127,7 +3127,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-8-init",
+      "id": "log-prod-1791376303250-8-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PMP121500000",
@@ -3140,7 +3140,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-9-init",
+      "id": "log-prod-1791376303250-9-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "PMP121800000",
@@ -3153,7 +3153,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-10-init",
+      "id": "log-prod-1791376303250-10-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPP900455070",
@@ -3166,7 +3166,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-11-init",
+      "id": "log-prod-1791376303250-11-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030140030",
@@ -3179,7 +3179,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-12-init",
+      "id": "log-prod-1791376303250-12-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030140000",
@@ -3192,7 +3192,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-13-init",
+      "id": "log-prod-1791376303251-13-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPP900451110",
@@ -3205,7 +3205,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-14-init",
+      "id": "log-prod-1791376303251-14-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SHU065150050",
@@ -3218,7 +3218,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-15-init",
+      "id": "log-prod-1791376303251-15-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SHU050150050",
@@ -3231,7 +3231,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-16-init",
+      "id": "log-prod-1791376303251-16-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BAM010700000 (R)",
@@ -3244,7 +3244,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-17-init",
+      "id": "log-prod-1791376303251-17-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BAM030712000",
@@ -3257,7 +3257,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-18-init",
+      "id": "log-prod-1791376303251-18-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BAM010702000R",
@@ -3270,7 +3270,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-19-init",
+      "id": "log-prod-1791376303251-19-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SBS050150200",
@@ -3283,7 +3283,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-20-init",
+      "id": "log-prod-1791376303251-20-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS000100000",
@@ -3296,7 +3296,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-21-init",
+      "id": "log-prod-1791376303251-21-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC240513006",
@@ -3309,7 +3309,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-22-init",
+      "id": "log-prod-1791376303251-22-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC120731064R",
@@ -3322,7 +3322,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-23-init",
+      "id": "log-prod-1791376303251-23-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC121531064R",
@@ -3335,7 +3335,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-24-init",
+      "id": "log-prod-1791376303251-24-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC123047002",
@@ -3348,7 +3348,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-25-init",
+      "id": "log-prod-1791376303251-25-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC121542002",
@@ -3361,7 +3361,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-26-init",
+      "id": "log-prod-1791376303251-26-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC121713006",
@@ -3374,7 +3374,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-27-init",
+      "id": "log-prod-1791376303251-27-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC120533064R",
@@ -3387,7 +3387,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-28-init",
+      "id": "log-prod-1791376303251-28-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC121031064R",
@@ -3400,7 +3400,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-29-init",
+      "id": "log-prod-1791376303251-29-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC241648002",
@@ -3413,7 +3413,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-30-init",
+      "id": "log-prod-1791376303251-30-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC240531064R",
@@ -3426,7 +3426,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-31-init",
+      "id": "log-prod-1791376303251-31-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC122531064",
@@ -3439,7 +3439,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-32-init",
+      "id": "log-prod-1791376303251-32-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC240831064R",
@@ -3452,7 +3452,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-33-init",
+      "id": "log-prod-1791376303251-33-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC122547006",
@@ -3465,7 +3465,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-34-init",
+      "id": "log-prod-1791376303251-34-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC241242002",
@@ -3478,7 +3478,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-35-init",
+      "id": "log-prod-1791376303251-35-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC241647002",
@@ -3491,7 +3491,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-36-init",
+      "id": "log-prod-1791376303251-36-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC121313006",
@@ -3504,7 +3504,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-37-init",
+      "id": "log-prod-1791376303251-37-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC123048002",
@@ -3517,7 +3517,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-38-init",
+      "id": "log-prod-1791376303251-38-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC241247006",
@@ -3530,7 +3530,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-39-init",
+      "id": "log-prod-1791376303251-39-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC120713006",
@@ -3543,7 +3543,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-40-init",
+      "id": "log-prod-1791376303251-40-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC241331064",
@@ -3556,7 +3556,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-41-init",
+      "id": "log-prod-1791376303251-41-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC900110114",
@@ -3569,7 +3569,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-42-init",
+      "id": "log-prod-1791376303251-42-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC920100210",
@@ -3582,7 +3582,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-43-init",
+      "id": "log-prod-1791376303251-43-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC900110014",
@@ -3595,7 +3595,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-44-init",
+      "id": "log-prod-1791376303251-44-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC900100014",
@@ -3608,7 +3608,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-45-init",
+      "id": "log-prod-1791376303251-45-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC900400014",
@@ -3621,7 +3621,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-46-init",
+      "id": "log-prod-1791376303251-46-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC920100110",
@@ -3634,7 +3634,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-47-init",
+      "id": "log-prod-1791376303251-47-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC940100200",
@@ -3647,7 +3647,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-48-init",
+      "id": "log-prod-1791376303251-48-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC900120114",
@@ -3660,7 +3660,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-49-init",
+      "id": "log-prod-1791376303251-49-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC900300014",
@@ -3673,7 +3673,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-50-init",
+      "id": "log-prod-1791376303251-50-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC940100100",
@@ -3686,7 +3686,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-51-init",
+      "id": "log-prod-1791376303251-51-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPC900200014",
@@ -3699,7 +3699,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-52-init",
+      "id": "log-prod-1791376303251-52-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPR000220400",
@@ -3712,7 +3712,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-53-init",
+      "id": "log-prod-1791376303251-53-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPR110048000",
@@ -3725,7 +3725,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-54-init",
+      "id": "log-prod-1791376303251-54-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPR000065400",
@@ -3738,7 +3738,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-55-init",
+      "id": "log-prod-1791376303251-55-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPR110022000",
@@ -3751,7 +3751,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-56-init",
+      "id": "log-prod-1791376303251-56-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "BPR122022000",
@@ -3764,7 +3764,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-57-init",
+      "id": "log-prod-1791376303251-57-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241205260",
@@ -3777,7 +3777,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-58-init",
+      "id": "log-prod-1791376303251-58-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI122410020",
@@ -3790,7 +3790,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-59-init",
+      "id": "log-prod-1791376303251-59-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI122436140",
@@ -3803,7 +3803,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-60-init",
+      "id": "log-prod-1791376303251-60-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241220260",
@@ -3816,7 +3816,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-61-init",
+      "id": "log-prod-1791376303251-61-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241240021",
@@ -3829,7 +3829,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-62-init",
+      "id": "log-prod-1791376303251-62-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241215200(R)",
@@ -3842,7 +3842,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-63-init",
+      "id": "log-prod-1791376303251-63-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI121236120",
@@ -3855,7 +3855,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-64-init",
+      "id": "log-prod-1791376303251-64-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241210260",
@@ -3868,7 +3868,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-65-init",
+      "id": "log-prod-1791376303251-65-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI242417040",
@@ -3881,7 +3881,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-66-init",
+      "id": "log-prod-1791376303251-66-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI242428120",
@@ -3894,7 +3894,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-67-init",
+      "id": "log-prod-1791376303251-67-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241236140",
@@ -3907,7 +3907,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-68-init",
+      "id": "log-prod-1791376303251-68-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241224120",
@@ -3920,7 +3920,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-69-init",
+      "id": "log-prod-1791376303251-69-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241236120",
@@ -3933,7 +3933,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-70-init",
+      "id": "log-prod-1791376303251-70-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241280020",
@@ -3946,7 +3946,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-71-init",
+      "id": "log-prod-1791376303253-71-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI122436120",
@@ -3959,7 +3959,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-72-init",
+      "id": "log-prod-1791376303253-72-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI122408020",
@@ -3972,7 +3972,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-73-init",
+      "id": "log-prod-1791376303253-73-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI121217050",
@@ -3985,7 +3985,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-74-init",
+      "id": "log-prod-1791376303253-74-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI122420020",
@@ -3998,7 +3998,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-75-init",
+      "id": "log-prod-1791376303253-75-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241210110(R)",
@@ -4011,7 +4011,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-76-init",
+      "id": "log-prod-1791376303253-76-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI241224110",
@@ -4024,7 +4024,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-77-init",
+      "id": "log-prod-1791376303253-77-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI481210110",
@@ -4037,7 +4037,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-78-init",
+      "id": "log-prod-1791376303253-78-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI122424120",
@@ -4050,7 +4050,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-79-init",
+      "id": "log-prod-1791376303253-79-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI121236140",
@@ -4063,7 +4063,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-80-init",
+      "id": "log-prod-1791376303253-80-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ORI242440120",
@@ -4076,7 +4076,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-81-init",
+      "id": "log-prod-1791376303253-81-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCC010005000",
@@ -4089,7 +4089,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-82-init",
+      "id": "log-prod-1791376303253-82-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCC110050210",
@@ -4102,7 +4102,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-83-init",
+      "id": "log-prod-1791376303253-83-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCC075010060R",
@@ -4115,7 +4115,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-84-init",
+      "id": "log-prod-1791376303253-84-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCC075015060R",
@@ -4128,7 +4128,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-85-init",
+      "id": "log-prod-1791376303253-85-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCC110020160R",
@@ -4141,7 +4141,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-86-init",
+      "id": "log-prod-1791376303253-86-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCC110030210",
@@ -4154,7 +4154,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-87-init",
+      "id": "log-prod-1791376303253-87-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "LYN020102010",
@@ -4167,7 +4167,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-88-init",
+      "id": "log-prod-1791376303253-88-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CTR110000550",
@@ -4180,7 +4180,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-89-init",
+      "id": "log-prod-1791376303253-89-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ARG120201020R",
@@ -4193,7 +4193,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-90-init",
+      "id": "log-prod-1791376303253-90-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "VBS127010010",
@@ -4206,7 +4206,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-91-init",
+      "id": "log-prod-1791376303253-91-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030065510",
@@ -4219,7 +4219,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-92-init",
+      "id": "log-prod-1791376303253-92-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030550500",
@@ -4232,7 +4232,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-93-init",
+      "id": "log-prod-1791376303253-93-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030537010",
@@ -4245,7 +4245,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-94-init",
+      "id": "log-prod-1791376303253-94-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030530310",
@@ -4258,7 +4258,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-95-init",
+      "id": "log-prod-1791376303253-95-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030530250",
@@ -4271,7 +4271,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-96-init",
+      "id": "log-prod-1791376303253-96-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030530230",
@@ -4284,7 +4284,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-97-init",
+      "id": "log-prod-1791376303253-97-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030530218",
@@ -4297,7 +4297,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-98-init",
+      "id": "log-prod-1791376303253-98-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030531218",
@@ -4310,7 +4310,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-99-init",
+      "id": "log-prod-1791376303253-99-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030530209",
@@ -4323,7 +4323,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-100-init",
+      "id": "log-prod-1791376303253-100-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030710118",
@@ -4336,7 +4336,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-101-init",
+      "id": "log-prod-1791376303253-101-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "ASS030530010",
@@ -4349,7 +4349,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137224-102-init",
+      "id": "log-prod-1791376303253-102-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP000100001",
@@ -4362,7 +4362,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-103-init",
+      "id": "log-prod-1791376303253-103-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP000050001",
@@ -4375,7 +4375,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-104-init",
+      "id": "log-prod-1791376303253-104-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "VBB115022020",
@@ -4388,7 +4388,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-105-init",
+      "id": "log-prod-1791376303253-105-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP136060010",
@@ -4401,7 +4401,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-106-init",
+      "id": "log-prod-1791376303253-106-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP132080010",
@@ -4414,7 +4414,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-107-init",
+      "id": "log-prod-1791376303253-107-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP132100010",
@@ -4427,7 +4427,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-108-init",
+      "id": "log-prod-1791376303253-108-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP132125010",
@@ -4440,7 +4440,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-109-init",
+      "id": "log-prod-1791376303253-109-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP132200010",
@@ -4453,7 +4453,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-110-init",
+      "id": "log-prod-1791376303253-110-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP134100020",
@@ -4466,7 +4466,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-111-init",
+      "id": "log-prod-1791376303253-111-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP136400010",
@@ -4479,7 +4479,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-112-init",
+      "id": "log-prod-1791376303253-112-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138040020",
@@ -4492,7 +4492,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-113-init",
+      "id": "log-prod-1791376303253-113-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138060020",
@@ -4505,7 +4505,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-114-init",
+      "id": "log-prod-1791376303253-114-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138080020",
@@ -4518,7 +4518,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-115-init",
+      "id": "log-prod-1791376303253-115-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138100020",
@@ -4531,7 +4531,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-116-init",
+      "id": "log-prod-1791376303253-116-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138125020",
@@ -4544,7 +4544,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-117-init",
+      "id": "log-prod-1791376303253-117-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138150020",
@@ -4557,7 +4557,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-118-init",
+      "id": "log-prod-1791376303253-118-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138175020",
@@ -4570,7 +4570,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-119-init",
+      "id": "log-prod-1791376303253-119-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138225020",
@@ -4583,7 +4583,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-120-init",
+      "id": "log-prod-1791376303253-120-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138200020",
@@ -4596,7 +4596,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-121-init",
+      "id": "log-prod-1791376303253-121-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138250020",
@@ -4609,7 +4609,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-122-init",
+      "id": "log-prod-1791376303253-122-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138300020",
@@ -4622,7 +4622,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-123-init",
+      "id": "log-prod-1791376303253-123-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138500020",
@@ -4635,7 +4635,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-124-init",
+      "id": "log-prod-1791376303253-124-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "CIP138400020",
@@ -4648,7 +4648,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-125-init",
+      "id": "log-prod-1791376303253-125-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCIFP1225",
@@ -4661,7 +4661,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-126-init",
+      "id": "log-prod-1791376303253-126-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCIFP1250",
@@ -4674,7 +4674,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-127-init",
+      "id": "log-prod-1791376303253-127-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCIFP12100",
@@ -4687,7 +4687,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-128-init",
+      "id": "log-prod-1791376303253-128-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCIFP12200",
@@ -4700,7 +4700,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-129-init",
+      "id": "log-prod-1791376303253-129-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCIFP24100",
@@ -4713,7 +4713,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-130-init",
+      "id": "log-prod-1791376303253-130-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SCIFP24200",
@@ -4726,7 +4726,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-131-init",
+      "id": "log-prod-1791376303253-131-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SLSIFP51100A",
@@ -4739,7 +4739,7 @@
       "note": "Початкове завантаження залишків"
     },
     {
-      "id": "log-prod-1791376137225-132-init",
+      "id": "log-prod-1791376303253-132-init",
       "timestamp": "2026-09-01T10:00:00.000Z",
       "type": "IN",
       "sku": "SLSIFP51100A",
