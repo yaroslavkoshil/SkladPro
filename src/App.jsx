@@ -3,7 +3,7 @@ import {
   Package, Truck, History, CheckCircle2, AlertTriangle, XCircle, Search, 
   PlusCircle, MinusCircle, Box, Download, Upload, RefreshCw, BarChart3, 
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle,
-  Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X
+  Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X, Trash2, RotateCcw
 } from 'lucide-react';
 
 const OFFICIAL_CATEGORY_ORDER = [
@@ -87,16 +87,32 @@ export default function App() {
     return saved ? JSON.parse(saved) : OFFICIAL_CATEGORY_ORDER;
   });
   
+  const [trash, setTrash] = useState(() => {
+    const saved = localStorage.getItem('wh_trash_v1');
+    return saved ? JSON.parse(saved) : [];
+  });
+
   // Drag and Drop State
   const [draggedProduct, setDraggedProduct] = useState(null);
   const [draggedCategory, setDraggedCategory] = useState(null);
 
-  // Sync state to local storage
+  // Auto-cleanup trash (older than 30 days) and sync state to local storage
   useEffect(() => {
+    const now = new Date();
+    const filteredTrash = trash.filter(t => {
+      const daysOld = (now - new Date(t.deletedAt)) / (1000 * 60 * 60 * 24);
+      return daysOld <= 30;
+    });
+    
+    if (filteredTrash.length !== trash.length) {
+      setTrash(filteredTrash);
+    }
+    
     localStorage.setItem('wh_products_v1', JSON.stringify(products));
     localStorage.setItem('wh_logs_v1', JSON.stringify(logs));
     localStorage.setItem('wh_category_order_v1', JSON.stringify(categoryOrder));
-  }, [products, logs, categoryOrder]);
+    localStorage.setItem('wh_trash_v1', JSON.stringify(filteredTrash));
+  }, [products, logs, categoryOrder, trash]);
   const [githubConfig, setGithubConfig] = useState(() => {
     const saved = localStorage.getItem('wh_github_config');
     return saved ? JSON.parse(saved) : { token: '', owner: 'yaroslavkoshil', repo: 'SkladPro', path: 'database.json' };
@@ -255,6 +271,7 @@ export default function App() {
       if (parsed && parsed.products) setProducts(parsed.products);
       if (parsed && parsed.logs) setLogs(parsed.logs);
       if (parsed && parsed.categories) setCategoryOrder(parsed.categories);
+      if (parsed && parsed.trash) setTrash(parsed.trash);
       setSyncStatus('success');
       showNotice('Дані успішно оновлено!');
     } catch (err) {
@@ -264,11 +281,11 @@ export default function App() {
     }
   };
 
-  const pushToGithub = async (newProducts, newLogs, newCategories = categoryOrder) => {
+  const pushToGithub = async (newProducts, newLogs, newCategories = categoryOrder, newTrash = trash) => {
     if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) return;
     setSyncStatus('syncing');
     try {
-      const content = b64EncodeUnicode(JSON.stringify({ products: newProducts, logs: newLogs, categories: newCategories }, null, 2));
+      const content = b64EncodeUnicode(JSON.stringify({ products: newProducts, logs: newLogs, categories: newCategories, trash: newTrash }, null, 2));
       const body = { message: `SkladControl update: ${new Date().toLocaleString('uk-UA')}`, content: content };
       try {
         const getRes = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
@@ -567,20 +584,75 @@ export default function App() {
   };
 
   const handleDeleteProduct = () => {
-    if (!window.confirm('УВАГА! Ви дійсно хочете видалити цей товар? УСЯ його історія операцій також буде назавжди видалена!')) return;
+    if (!window.confirm('Ви дійсно хочете перемістити цей товар у кошик?')) return;
     const newProducts = products.filter(p => p.id !== selectedProduct.id);
+    const productLogs = logs.filter(l => l.sku === selectedProduct.sku);
     const newLogs = logs.filter(l => l.sku !== selectedProduct.sku);
-    setProducts(newProducts); setLogs(newLogs); pushToGithub(newProducts, newLogs);
-    setSelectedProduct(null); showNotice('Товар та його історію видалено');
+    
+    const newTrashItem = {
+      type: 'PRODUCT',
+      data: selectedProduct,
+      logs: productLogs,
+      deletedAt: new Date().toISOString(),
+      id: `trash-${Date.now()}`
+    };
+    const newTrash = [newTrashItem, ...trash];
+
+    setProducts(newProducts); setLogs(newLogs); setTrash(newTrash);
+    pushToGithub(newProducts, newLogs, categoryOrder, newTrash);
+    setSelectedProduct(null); showNotice('Товар переміщено у кошик');
   };
 
   const handleDeleteLog = (logId, sku) => {
-    if (!window.confirm('Ви впевнені, що хочете видалити цей запис історії? Це змінить залишки товару.')) return;
+    if (!window.confirm('Перемістити цей запис у кошик? Це змінить залишки товару.')) return;
+    const logToDelete = logs.find(l => l.id === logId);
     const { newProducts, newLogs } = updateProductFromLogs(sku, logs.filter(l => l.id !== logId), products);
-    setLogs(newLogs); setProducts(newProducts); pushToGithub(newProducts, newLogs);
+    
+    const newTrashItem = {
+      type: 'LOG',
+      data: logToDelete,
+      deletedAt: new Date().toISOString(),
+      id: `trash-${Date.now()}`
+    };
+    const newTrash = [newTrashItem, ...trash];
+
+    setLogs(newLogs); setProducts(newProducts); setTrash(newTrash);
+    pushToGithub(newProducts, newLogs, categoryOrder, newTrash);
     if (selectedProduct && selectedProduct.sku === sku) setSelectedProduct(newProducts.find(p => p.sku === sku)); 
-    showNotice('Запис видалено');
+    showNotice('Запис переміщено у кошик');
   };
+
+  const handleRestoreFromTrash = (trashItem) => {
+    let newProducts = [...products];
+    let newLogs = [...logs];
+    
+    if (trashItem.type === 'PRODUCT') {
+       if (products.some(p => p.sku.toUpperCase() === trashItem.data.sku.toUpperCase())) {
+          return showNotice('Товар з таким артикулом вже існує!', 'error');
+       }
+       newProducts.push(trashItem.data);
+       newLogs = [...newLogs, ...(trashItem.logs || [])];
+    } else if (trashItem.type === 'LOG') {
+       newLogs.push(trashItem.data);
+       const { newProducts: np, newLogs: nl } = updateProductFromLogs(trashItem.data.sku, newLogs, newProducts);
+       newProducts = np;
+       newLogs = nl;
+    }
+    
+    const newTrash = trash.filter(t => t.id !== trashItem.id);
+    setProducts(newProducts); setLogs(newLogs); setTrash(newTrash);
+    pushToGithub(newProducts, newLogs, categoryOrder, newTrash);
+    showNotice('Відновлено з кошика!');
+  };
+
+  const handleDeletePermanent = (trashItem) => {
+    if (!window.confirm('Видалити назавжди? Цю дію неможливо скасувати!')) return;
+    const newTrash = trash.filter(t => t.id !== trashItem.id);
+    setTrash(newTrash);
+    pushToGithub(products, logs, categoryOrder, newTrash);
+    showNotice('Видалено назавжди');
+  };
+
 
   const handleSaveLogEdit = (logId, sku) => {
     const qty = parseInt(editLogData.changeQty, 10);
@@ -635,6 +707,7 @@ export default function App() {
     { id: 'operations', label: 'Реєстрація операції', icon: Truck, adminOnly: true },
     { id: 'reconciliation', label: 'Звірка та Аналітика', icon: BarChart3, adminOnly: false }, // Made public for manager to see analytics
     { id: 'settings', label: 'Налаштування хмари', icon: Settings, adminOnly: true },
+    { id: 'trash', label: 'Кошик', icon: Trash2, adminOnly: true },
   ];
 
   return (
@@ -1154,6 +1227,60 @@ export default function App() {
             )}
 
             {/* RECONCILIATION TAB */}
+            {activeTab === 'trash' && isAdmin && (
+              <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h2 className="text-2xl font-extrabold text-slate-800 flex items-center gap-3">
+                      <Trash2 className="w-7 h-7 text-rose-500" /> Кошик видалених елементів
+                    </h2>
+                    <p className="text-sm text-slate-500 mt-2">Видалені товари та історія зберігаються тут протягом 30 днів. Після цього вони видаляються назавжди автоматично.</p>
+                  </div>
+                </div>
+
+                {trash.length === 0 ? (
+                  <div className="text-center py-12">
+                     <Trash2 className="w-16 h-16 text-slate-200 mx-auto mb-4" />
+                     <p className="text-slate-500 font-bold">Кошик порожній</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {trash.map(t => {
+                      const daysLeft = 30 - Math.floor((new Date() - new Date(t.deletedAt)) / (1000 * 60 * 60 * 24));
+                      return (
+                        <div key={t.id} className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+                          <div className="flex items-start gap-4">
+                            <div className={`p-3 rounded-xl ${t.type === 'PRODUCT' ? 'bg-indigo-100 text-indigo-600' : 'bg-amber-100 text-amber-600'}`}>
+                               {t.type === 'PRODUCT' ? <Package className="w-6 h-6"/> : <History className="w-6 h-6"/>}
+                            </div>
+                            <div>
+                               <div className="flex items-center gap-2">
+                                 <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 uppercase tracking-wider">{t.type === 'PRODUCT' ? 'Товар' : 'Запис'}</span>
+                                 <span className="text-xs font-bold text-rose-500">Залишилося: {daysLeft} днів</span>
+                               </div>
+                               <h3 className="font-bold text-slate-800 text-lg mt-1">
+                                 {t.type === 'PRODUCT' ? `[${t.data.sku}] ${t.data.name}` : `[${t.data.sku}] ${t.data.productName}`}
+                               </h3>
+                               <p className="text-sm text-slate-500">Видалено: {new Date(t.deletedAt).toLocaleString('uk-UA')}</p>
+                            </div>
+                          </div>
+                          
+                          <div className="flex gap-2 w-full md:w-auto">
+                            <button onClick={() => handleRestoreFromTrash(t)} className="flex-1 md:flex-none px-4 py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors">
+                              <RotateCcw className="w-4 h-4"/> Відновити
+                            </button>
+                            <button onClick={() => handleDeletePermanent(t)} className="flex-1 md:flex-none px-4 py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors">
+                              <X className="w-4 h-4"/> Видалити
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+            
             {activeTab === 'reconciliation' && (
               <div className="space-y-6">
                 
