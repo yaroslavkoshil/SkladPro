@@ -256,7 +256,8 @@ export default function App() {
       const body = { message: `SkladControl update: ${new Date().toLocaleString('uk-UA')}`, content: content };
       try {
         const getRes = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
-            headers: { 'Authorization': `token ${githubConfig.token}` }
+            headers: { 'Authorization': `token ${githubConfig.token}` },
+            cache: 'no-store'
         });
         if (getRes.ok) { const data = await getRes.json(); body.sha = data.sha; }
       } catch(e) { }
