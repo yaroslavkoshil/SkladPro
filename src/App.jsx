@@ -3,7 +3,7 @@ import {
   Package, Truck, History, CheckCircle2, AlertTriangle, XCircle, Search, 
   PlusCircle, MinusCircle, Box, Download, Upload, RefreshCw, BarChart3, 
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle,
-  Cloud, CloudOff, Settings, Save, Server, RefreshCcw
+  Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu
 } from 'lucide-react';
 
 const INITIAL_PRODUCTS = [
@@ -53,6 +53,7 @@ export default function App() {
 
   // Navigation
   const [activeTab, setActiveTab] = useState('inventory');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBoxFilter, setSelectedBoxFilter] = useState('ALL');
   const [statusFilter, setStatusFilter] = useState('ALL');
@@ -119,7 +120,6 @@ export default function App() {
         message: `SkladControl update: ${new Date().toLocaleString('uk-UA')}`,
         content: content,
       };
-      // Fetch latest SHA right before pushing to avoid conflicts
       try {
         const getRes = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
             headers: { 'Authorization': `token ${githubConfig.token}` }
@@ -128,7 +128,7 @@ export default function App() {
             const data = await getRes.json();
             body.sha = data.sha;
         }
-      } catch(e) { /* might be new file */ }
+      } catch(e) { }
 
       const res = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
         method: 'PUT',
@@ -148,11 +148,8 @@ export default function App() {
     }
   };
 
-  // Load from Github on startup if configured
   useEffect(() => {
-    if (hasGithubSetup && !fileSha) {
-      fetchFromGithub();
-    }
+    if (hasGithubSetup && !fileSha) fetchFromGithub();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -243,14 +240,10 @@ export default function App() {
 
     setProducts(updatedProducts);
     setLogs(newLogs);
-
-    // Sync to github immediately after update
-    if (hasGithubSetup) {
-      await pushToGithub(updatedProducts, newLogs);
-    }
+    if (hasGithubSetup) await pushToGithub(updatedProducts, newLogs);
   };
 
-  const exportDataJSON = () => { /* keeping export function */
+  const exportDataJSON = () => {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ products, logs }, null, 2));
     const a = document.createElement('a'); a.href = dataStr; a.download = `sklad_${new Date().toISOString().slice(0,10)}.json`;
     document.body.appendChild(a); a.click(); a.remove();
@@ -274,195 +267,345 @@ export default function App() {
     }
   };
 
+  const TABS = [
+    { id: 'inventory', label: 'Товари та Залишки', icon: Layers },
+    { id: 'operations', label: 'Провести операцію', icon: Truck },
+    { id: 'history', label: 'Історія змін', icon: History },
+    { id: 'reconciliation', label: 'Звірка та Експорт', icon: BarChart3 },
+    { id: 'settings', label: 'Налаштування хмари', icon: Settings },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans">
-      <header className="bg-slate-800 border-b border-slate-700 sticky top-0 z-30 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between py-3 gap-4">
+    <div className="flex h-screen bg-slate-50 text-slate-900 font-sans overflow-hidden">
+      
+      {/* SIDEBAR */}
+      <aside className={`w-64 bg-white border-r border-slate-200 flex flex-col flex-shrink-0 transition-all duration-300 ${isMobileMenuOpen ? 'absolute z-50 h-full shadow-2xl' : 'hidden md:flex'}`}>
+        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-blue-600 rounded-xl shadow-lg shadow-blue-500/30 text-white">
+            <div className="p-2 bg-indigo-600 rounded-xl shadow-md text-white">
               <Package className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                СкладКонтроль Cloud
-                {hasGithubSetup && syncStatus === 'success' && <Cloud className="w-5 h-5 text-emerald-400" title="Синхронізовано з GitHub" />}
-                {hasGithubSetup && syncStatus === 'syncing' && <RefreshCcw className="w-5 h-5 text-blue-400 animate-spin" />}
-                {hasGithubSetup && syncStatus === 'error' && <CloudOff className="w-5 h-5 text-rose-400" title="Помилка синхронізації" />}
-              </h1>
-              <p className="text-xs text-slate-400">Автономний облік залишків</p>
+              <h1 className="text-lg font-bold text-slate-800 leading-tight">СкладКонтроль</h1>
+              <p className="text-[10px] uppercase font-bold text-indigo-500 tracking-wider">Pro Edition</p>
             </div>
           </div>
+          {/* Mobile close button */}
+          <button onClick={() => setIsMobileMenuOpen(false)} className="md:hidden text-slate-400 hover:text-slate-600">
+            <XCircle className="w-5 h-5" />
+          </button>
+        </div>
 
-          <nav className="flex items-center bg-slate-900/80 p-1.5 rounded-xl border border-slate-700/80 text-sm font-medium w-full sm:w-auto overflow-x-auto">
-            {['inventory', 'operations', 'history', 'reconciliation', 'settings'].map(tab => (
+        <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
+          {TABS.map(tab => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
               <button
-                key={tab} onClick={() => setActiveTab(tab)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-lg transition-all whitespace-nowrap ${activeTab === tab ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-slate-200'}`}
+                key={tab.id}
+                onClick={() => { setActiveTab(tab.id); setIsMobileMenuOpen(false); }}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                  isActive 
+                    ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' 
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                }`}
               >
-                {tab === 'inventory' && <Layers className="w-4 h-4" />}
-                {tab === 'operations' && <Truck className="w-4 h-4" />}
-                {tab === 'history' && <History className="w-4 h-4" />}
-                {tab === 'reconciliation' && <BarChart3 className="w-4 h-4" />}
-                {tab === 'settings' && <Settings className="w-4 h-4" />}
-                {tab === 'inventory' ? 'Товари' : tab === 'operations' ? 'Операції' : tab === 'history' ? 'Історія' : tab === 'reconciliation' ? 'Звірка' : 'Налаштування'}
+                <Icon className={`w-5 h-5 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`} />
+                {tab.label}
               </button>
-            ))}
-          </nav>
-        </div>
-      </header>
+            );
+          })}
+        </nav>
 
-      {notification && (
-        <div className="fixed bottom-5 right-5 z-50 animate-bounce">
-          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-2xl border text-sm font-medium ${notification.type === 'error' ? 'bg-rose-900 border-rose-500 text-rose-100' : 'bg-emerald-900 border-emerald-500 text-emerald-100'}`}>
-            {notification.type === 'error' ? <XCircle className="w-5 h-5" /> : <CheckCircle2 className="w-5 h-5" />}
-            <span>{notification.msg}</span>
+        <div className="p-4 border-t border-slate-100 bg-slate-50/50">
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-1">
+            <Server className="w-4 h-4 text-slate-400" />
+            Статус хмари
+          </div>
+          <div className="flex items-center gap-2 mt-2">
+            {!hasGithubSetup && <span className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-200 text-slate-600 border border-slate-300">Локально</span>}
+            {hasGithubSetup && syncStatus === 'success' && <span className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200"><Cloud className="w-3.5 h-3.5"/> Синхронізовано</span>}
+            {hasGithubSetup && syncStatus === 'syncing' && <span className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 border border-blue-200"><RefreshCcw className="w-3.5 h-3.5 animate-spin"/> Оновлення</span>}
+            {hasGithubSetup && syncStatus === 'error' && <span className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-rose-100 text-rose-700 border border-rose-200"><CloudOff className="w-3.5 h-3.5"/> Помилка</span>}
           </div>
         </div>
-      )}
+      </aside>
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
+      {/* MAIN CONTENT AREA */}
+      <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
         
-        {/* --- SETTINGS TAB --- */}
-        {activeTab === 'settings' && (
-          <div className="max-w-2xl mx-auto w-full bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl">
-            <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-              <Server className="w-6 h-6 text-slate-300" />
-              Хмарна синхронізація через GitHub
-            </h2>
-            <p className="text-sm text-slate-400 mb-6">
-              Налаштуйте з'єднання з вашим приватним GitHub репозиторієм. Всі зміни залишків будуть автоматично зберігатися як коміти. Це забезпечить 100% збереження даних і можливість працювати з будь-якого пристрою.
-            </p>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">Personal Access Token (classic)</label>
-                <input type="password" placeholder="ghp_xxxxxxxxxxxx" value={githubConfig.token} onChange={e => setGithubConfig({...githubConfig, token: e.target.value})} className="w-full bg-slate-900 border border-slate-700 focus:border-blue-500 rounded-xl p-3 text-slate-100 text-sm outline-none" />
-                <p className="text-xs text-slate-500 mt-1">Токен з правами "repo" (доступу до приватних репозиторіїв).</p>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">GitHub Owner (Ваш логін)</label>
-                  <input type="text" placeholder="Yaroslav" value={githubConfig.owner} onChange={e => setGithubConfig({...githubConfig, owner: e.target.value})} className="w-full bg-slate-900 border border-slate-700 focus:border-blue-500 rounded-xl p-3 text-slate-100 text-sm outline-none" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-400 mb-1">Repository Name</label>
-                  <input type="text" placeholder="sklad-control" value={githubConfig.repo} onChange={e => setGithubConfig({...githubConfig, repo: e.target.value})} className="w-full bg-slate-900 border border-slate-700 focus:border-blue-500 rounded-xl p-3 text-slate-100 text-sm outline-none" />
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">File Path</label>
-                <input type="text" value={githubConfig.path} onChange={e => setGithubConfig({...githubConfig, path: e.target.value})} className="w-full bg-slate-900 border border-slate-700 focus:border-blue-500 rounded-xl p-3 text-slate-100 text-sm outline-none" />
-              </div>
+        {/* Mobile Header */}
+        <div className="md:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-bold text-slate-800">
+            <Package className="w-5 h-5 text-indigo-600" />
+            СкладКонтроль
+          </div>
+          <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 bg-slate-100 rounded-lg text-slate-600">
+            <Menu className="w-5 h-5" />
+          </button>
+        </div>
 
-              <div className="flex gap-4 pt-4">
-                <button onClick={fetchFromGithub} className="flex-1 py-3 bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 rounded-xl font-bold transition-all flex justify-center items-center gap-2">
-                  <Download className="w-5 h-5" /> Завантажити з хмари
-                </button>
-                <button onClick={() => pushToGithub(products, logs)} className="flex-1 py-3 bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-400 border border-emerald-500/50 rounded-xl font-bold transition-all flex justify-center items-center gap-2">
-                  <Upload className="w-5 h-5" /> Примусово зберегти
-                </button>
-              </div>
+        {/* Notifications */}
+        {notification && (
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 z-50 animate-bounce">
+            <div className={`flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl border text-sm font-bold ${notification.type === 'error' ? 'bg-rose-50 border-rose-200 text-rose-700' : 'bg-emerald-50 border-emerald-200 text-emerald-700'}`}>
+              {notification.type === 'error' ? <XCircle className="w-5 h-5 text-rose-500" /> : <CheckCircle2 className="w-5 h-5 text-emerald-500" />}
+              <span>{notification.msg}</span>
             </div>
           </div>
         )}
 
-        {/* Keeping original tabs simple rendering */}
-        {activeTab !== 'settings' && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 shadow-sm"><span className="text-xs font-semibold text-slate-400 uppercase">Позицій</span><div className="mt-2 text-2xl font-bold text-white">{summaryMetrics.totalItemsCount}</div></div>
-            <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 shadow-sm"><span className="text-xs font-semibold text-slate-400 uppercase">Отримано</span><div className="mt-2 text-2xl font-bold text-emerald-400">{summaryMetrics.totalReceived}</div></div>
-            <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 shadow-sm"><span className="text-xs font-semibold text-slate-400 uppercase">Відправлено</span><div className="mt-2 text-2xl font-bold text-amber-400">{summaryMetrics.totalSent}</div></div>
-            <div className="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 shadow-sm"><span className="text-xs font-semibold text-slate-400 uppercase">Залишок</span><div className="mt-2 text-2xl font-bold text-blue-400">{summaryMetrics.totalInStock}</div></div>
+        <main className="flex-1 overflow-y-auto p-4 md:p-8">
+          <div className="max-w-6xl mx-auto space-y-6">
+
+            {/* Global Metrics Header (Rendered on most tabs) */}
+            {activeTab !== 'settings' && activeTab !== 'operations' && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-slate-100 rounded-lg"><Package className="w-4 h-4 text-slate-600" /></div>
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Позицій</span>
+                  </div>
+                  <div className="text-3xl font-extrabold text-slate-800">{summaryMetrics.totalItemsCount}</div>
+                </div>
+                
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-emerald-50 rounded-lg"><ArrowDownLeft className="w-4 h-4 text-emerald-600" /></div>
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Отримано</span>
+                  </div>
+                  <div className="text-3xl font-extrabold text-emerald-600">{summaryMetrics.totalReceived}</div>
+                </div>
+
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-amber-50 rounded-lg"><ArrowUpRight className="w-4 h-4 text-amber-600" /></div>
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Відправлено</span>
+                  </div>
+                  <div className="text-3xl font-extrabold text-amber-500">{summaryMetrics.totalSent}</div>
+                </div>
+
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -z-10 opacity-50"></div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-indigo-50 rounded-lg"><Box className="w-4 h-4 text-indigo-600" /></div>
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Залишок</span>
+                  </div>
+                  <div className="text-3xl font-extrabold text-indigo-600">{summaryMetrics.totalInStock}</div>
+                </div>
+              </div>
+            )}
+
+            {/* SETTINGS TAB */}
+            {activeTab === 'settings' && (
+              <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+                <h2 className="text-2xl font-extrabold text-slate-800 mb-2 flex items-center gap-3">
+                  <Server className="w-7 h-7 text-indigo-600" />
+                  Хмарна синхронізація
+                </h2>
+                <p className="text-sm text-slate-500 mb-8 leading-relaxed">
+                  Налаштуйте з'єднання з вашим приватним GitHub репозиторієм. Всі зміни залишків будуть автоматично зберігатися. Це забезпечить надійне збереження даних і можливість працювати з різних пристроїв.
+                </p>
+                
+                <div className="space-y-5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2">Personal Access Token</label>
+                    <input type="password" placeholder="ghp_xxxxxxxxxxxx" value={githubConfig.token} onChange={e => setGithubConfig({...githubConfig, token: e.target.value})} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl p-3.5 text-slate-800 text-sm outline-none transition-all" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase mb-2">GitHub Owner (Логін)</label>
+                      <input type="text" placeholder="Yaroslav" value={githubConfig.owner} onChange={e => setGithubConfig({...githubConfig, owner: e.target.value})} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl p-3.5 text-slate-800 text-sm outline-none transition-all" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase mb-2">Repository</label>
+                      <input type="text" placeholder="SkladPro" value={githubConfig.repo} onChange={e => setGithubConfig({...githubConfig, repo: e.target.value})} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl p-3.5 text-slate-800 text-sm outline-none transition-all" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2">File Path</label>
+                    <input type="text" value={githubConfig.path} onChange={e => setGithubConfig({...githubConfig, path: e.target.value})} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl p-3.5 text-slate-800 text-sm outline-none transition-all" />
+                  </div>
+
+                  <div className="flex gap-4 pt-6 border-t border-slate-100">
+                    <button onClick={fetchFromGithub} className="flex-1 py-3.5 bg-white hover:bg-slate-50 text-indigo-600 border border-slate-200 shadow-sm rounded-xl font-bold transition-all flex justify-center items-center gap-2">
+                      <Download className="w-5 h-5" /> Завантажити з хмари
+                    </button>
+                    <button onClick={() => pushToGithub(products, logs)} className="flex-1 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 rounded-xl font-bold transition-all flex justify-center items-center gap-2">
+                      <Upload className="w-5 h-5" /> Примусово зберегти
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* OPERATIONS TAB */}
+            {activeTab === 'operations' && (
+              <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+                <h2 className="text-2xl font-extrabold text-slate-800 mb-6 flex items-center gap-3">
+                  <Truck className="w-7 h-7 text-indigo-600" />
+                  Реєстрація операції
+                </h2>
+                <form onSubmit={handleExecuteOperation} className="space-y-5">
+                  <div className="flex p-1 bg-slate-100 rounded-xl mb-6">
+                      <button type="button" onClick={() => setOpType('OUT')} className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all ${opType==='OUT'?'bg-white text-slate-800 shadow-sm':'text-slate-500 hover:text-slate-700'}`}>Відправка</button>
+                      <button type="button" onClick={() => setOpType('IN')} className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all ${opType==='IN'?'bg-white text-slate-800 shadow-sm':'text-slate-500 hover:text-slate-700'}`}>Прихід</button>
+                      <button type="button" onClick={() => setOpType('NEW')} className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all ${opType==='NEW'?'bg-white text-slate-800 shadow-sm':'text-slate-500 hover:text-slate-700'}`}>Новий товар</button>
+                  </div>
+                  
+                  {opType === 'NEW' ? (
+                    <div className="grid gap-4">
+                      <input required placeholder="Артикул (напр. ART-100)" value={opSku} onChange={e=>setOpSku(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 w-full outline-none font-mono" />
+                      <input required placeholder="Назва товару" value={newProductName} onChange={e=>setNewProductName(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 w-full outline-none" />
+                    </div>
+                  ) : (
+                    <input required placeholder="Введіть артикул..." list="sku-list" value={opSku} onChange={e=>{setOpSku(e.target.value.toUpperCase()); const m = products.find(p=>p.sku===e.target.value.toUpperCase()); if(m) setOpBox(m.boxNumber);}} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 w-full outline-none font-mono" />
+                  )}
+                  <datalist id="sku-list">{products.map(p => <option key={p.id} value={p.sku}>{p.name}</option>)}</datalist>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <input required type="number" placeholder="Кількість шт" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none font-bold" />
+                    <input placeholder="Коробка (A1, B2...)" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none font-mono" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <input placeholder="Замовлення/Документ" value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none" />
+                    <input placeholder="Примітка" value={opNote} onChange={e=>setOpNote(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none" />
+                  </div>
+                  
+                  <button type="submit" className={`w-full mt-4 py-4 rounded-xl font-bold text-white shadow-md transition-all ${opType==='OUT'?'bg-amber-500 hover:bg-amber-600 shadow-amber-500/20':opType==='IN'?'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20':'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-600/20'}`}>
+                    Підтвердити операцію
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {/* INVENTORY TAB */}
+            {activeTab === 'inventory' && (
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center gap-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                  <div className="relative flex-1 min-w-[200px]">
+                    <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input type="text" placeholder="Пошук артикулу чи назви..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 pl-10 pr-4 py-2.5 rounded-xl text-sm outline-none transition-all" />
+                  </div>
+                  <div className="flex items-center gap-2 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200">
+                    <Filter className="w-4 h-4 text-slate-400" />
+                    <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-transparent text-sm text-slate-700 font-medium outline-none cursor-pointer">
+                      <option value="ALL">Всі статуси</option>
+                      <option value="IN_STOCK">В наявності</option>
+                      <option value="LOW_STOCK">Закінчується</option>
+                      <option value="OUT_OF_STOCK">Немає в наявності</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm whitespace-nowrap">
+                      <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        <tr><th className="p-4">Артикул</th><th className="p-4 w-full">Назва</th><th className="p-4">Місце</th><th className="p-4 text-right">Залишок</th></tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {filteredProducts.map(p => {
+                          const bal = p.receivedQty - p.sentQty;
+                          return (
+                            <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
+                              <td className="p-4 font-mono font-bold text-indigo-600">{p.sku}</td>
+                              <td className="p-4 font-medium text-slate-800">
+                                {p.name}
+                                {bal <= 0 && <span className="ml-3 px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-rose-100 text-rose-600">Немає</span>}
+                                {bal > 0 && bal <= p.minQty && <span className="ml-3 px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-100 text-amber-600">Закінчується</span>}
+                              </td>
+                              <td className="p-4">
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 rounded-lg text-slate-600 font-mono text-xs border border-slate-200">
+                                  #{p.boxNumber}
+                                </span>
+                              </td>
+                              <td className="p-4 text-right">
+                                <span className={`text-base font-extrabold ${bal <= 0 ? 'text-rose-500' : 'text-slate-800'}`}>{bal}</span>
+                                <span className="text-xs text-slate-400 ml-1">шт</span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                        {filteredProducts.length === 0 && (
+                          <tr><td colSpan="4" className="p-8 text-center text-slate-400 font-medium">Нічого не знайдено</td></tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* HISTORY TAB */}
+            {activeTab === 'history' && (
+              <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                  <h3 className="font-extrabold text-slate-800 flex items-center gap-2">
+                    <History className="w-5 h-5 text-indigo-600" /> Журнал операцій
+                  </h3>
+                  <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+                    {logs.length} записів
+                  </span>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-sm whitespace-nowrap">
+                    <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                      <tr><th className="p-4">Час</th><th className="p-4">Тип</th><th className="p-4">Товар</th><th className="p-4">Зміна</th><th className="p-4 text-right">Залишок</th></tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {logs.map(log => (
+                        <tr key={log.id} className="hover:bg-slate-50/80 transition-colors">
+                          <td className="p-4 text-xs font-medium text-slate-400">{new Date(log.timestamp).toLocaleString('uk-UA')}</td>
+                          <td className="p-4">
+                            {log.type === 'OUT' ? (
+                              <span className="inline-flex items-center gap-1 text-[10px] uppercase font-extrabold px-2 py-1 rounded bg-amber-100 text-amber-700">
+                                Відправка
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1 text-[10px] uppercase font-extrabold px-2 py-1 rounded bg-emerald-100 text-emerald-700">
+                                Прихід
+                              </span>
+                            )}
+                          </td>
+                          <td className="p-4">
+                            <span className="font-mono font-bold text-indigo-600 mr-2">{log.sku}</span>
+                            <span className="text-slate-600 text-xs hidden md:inline">{log.productName}</span>
+                          </td>
+                          <td className={`p-4 font-extrabold text-base ${log.type==='OUT'?'text-amber-500':'text-emerald-500'}`}>
+                            {log.type === 'OUT' ? '-' : '+'}{log.changeQty}
+                          </td>
+                          <td className="p-4 text-right font-bold text-slate-800">{log.newBalance} шт</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* RECONCILIATION TAB */}
+            {activeTab === 'reconciliation' && (
+              <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
+                <h3 className="text-xl font-extrabold text-slate-800 mb-6 flex items-center gap-2">
+                  <BarChart3 className="w-6 h-6 text-indigo-600" />
+                  Резервне копіювання бази
+                </h3>
+                <div className="flex flex-wrap gap-4">
+                  <button onClick={exportDataJSON} className="px-5 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-all flex items-center gap-2 shadow-sm">
+                    <Download className="w-5 h-5"/> Зберегти файл (Експорт)
+                  </button>
+                  <label className="px-5 py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl font-bold transition-all flex items-center gap-2 shadow-sm cursor-pointer">
+                    <Upload className="w-5 h-5 text-indigo-600"/> Завантажити файл (Імпорт)
+                    <input type="file" className="hidden" onChange={importDataJSON}/>
+                  </label>
+                </div>
+              </div>
+            )}
+
           </div>
-        )}
-
-        {/* OPERATIONS TAB (Re-used mostly) */}
-        {activeTab === 'operations' && (
-          <div className="max-w-2xl mx-auto w-full bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl">
-             <h2 className="text-xl font-bold text-white mb-6">Проведення складської операції</h2>
-             <form onSubmit={handleExecuteOperation} className="space-y-4">
-               {/* Controls */}
-               <div className="grid grid-cols-3 gap-2 mb-4 bg-slate-900 p-1.5 rounded-xl">
-                  <button type="button" onClick={() => setOpType('OUT')} className={`py-2 px-3 rounded-lg text-sm ${opType==='OUT'?'bg-amber-600 text-white':'text-slate-400'}`}>Відправка</button>
-                  <button type="button" onClick={() => setOpType('IN')} className={`py-2 px-3 rounded-lg text-sm ${opType==='IN'?'bg-emerald-600 text-white':'text-slate-400'}`}>Прихід</button>
-                  <button type="button" onClick={() => setOpType('NEW')} className={`py-2 px-3 rounded-lg text-sm ${opType==='NEW'?'bg-blue-600 text-white':'text-slate-400'}`}>Новий</button>
-               </div>
-               
-               {opType === 'NEW' ? (
-                 <div className="grid gap-4">
-                   <input required placeholder="Артикул" value={opSku} onChange={e=>setOpSku(e.target.value)} className="bg-slate-900 p-3 rounded-xl border border-slate-700 w-full outline-none" />
-                   <input required placeholder="Назва товару" value={newProductName} onChange={e=>setNewProductName(e.target.value)} className="bg-slate-900 p-3 rounded-xl border border-slate-700 w-full outline-none" />
-                 </div>
-               ) : (
-                 <input required placeholder="Введіть артикул..." list="sku-list" value={opSku} onChange={e=>{setOpSku(e.target.value.toUpperCase()); const m = products.find(p=>p.sku===e.target.value.toUpperCase()); if(m) setOpBox(m.boxNumber);}} className="bg-slate-900 p-3 rounded-xl border border-slate-700 w-full outline-none" />
-               )}
-               <datalist id="sku-list">{products.map(p => <option key={p.id} value={p.sku}>{p.name}</option>)}</datalist>
-
-               <div className="grid grid-cols-2 gap-4">
-                 <input required type="number" placeholder="Кількість шт" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-slate-900 p-3 rounded-xl border border-slate-700 outline-none" />
-                 <input placeholder="Коробка (необов'язково)" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-slate-900 p-3 rounded-xl border border-slate-700 outline-none" />
-               </div>
-               <div className="grid grid-cols-2 gap-4">
-                 <input placeholder="Замовлення/Документ" value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-slate-900 p-3 rounded-xl border border-slate-700 outline-none" />
-                 <input placeholder="Примітка" value={opNote} onChange={e=>setOpNote(e.target.value)} className="bg-slate-900 p-3 rounded-xl border border-slate-700 outline-none" />
-               </div>
-               <button type="submit" className={`w-full py-3.5 rounded-xl font-bold text-white shadow-lg ${opType==='OUT'?'bg-amber-600':opType==='IN'?'bg-emerald-600':'bg-blue-600'}`}>
-                 Підтвердити операцію
-               </button>
-             </form>
-          </div>
-        )}
-
-        {/* QUICK RENDER INVENTORY */}
-        {activeTab === 'inventory' && (
-           <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden shadow-xl">
-             <table className="w-full text-left text-sm">
-               <thead className="bg-slate-900/60 border-b border-slate-700 text-slate-400">
-                 <tr><th className="p-4">Артикул</th><th className="p-4">Назва</th><th className="p-4 text-right">Залишок</th></tr>
-               </thead>
-               <tbody className="divide-y divide-slate-700/60">
-                 {filteredProducts.map(p => (
-                   <tr key={p.id} className="hover:bg-slate-700/30">
-                     <td className="p-4 font-mono text-blue-400">{p.sku}</td>
-                     <td className="p-4">{p.name} <span className="ml-2 text-xs text-slate-500">[{p.boxNumber}]</span></td>
-                     <td className="p-4 text-right font-bold">{p.receivedQty - p.sentQty} шт</td>
-                   </tr>
-                 ))}
-               </tbody>
-             </table>
-           </div>
-        )}
-
-        {/* QUICK RENDER HISTORY */}
-        {activeTab === 'history' && (
-           <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden shadow-xl">
-             <table className="w-full text-left text-sm">
-               <thead className="bg-slate-900/60 border-b border-slate-700 text-slate-400">
-                 <tr><th className="p-4">Час</th><th className="p-4">Тип</th><th className="p-4">Товар</th><th className="p-4">Зміна</th></tr>
-               </thead>
-               <tbody className="divide-y divide-slate-700/60">
-                 {logs.map(log => (
-                   <tr key={log.id}>
-                     <td className="p-4 text-xs text-slate-400">{new Date(log.timestamp).toLocaleString()}</td>
-                     <td className={`p-4 font-bold ${log.type==='OUT'?'text-amber-400':'text-emerald-400'}`}>{log.type}</td>
-                     <td className="p-4">{log.sku}</td>
-                     <td className="p-4">{log.changeQty}</td>
-                   </tr>
-                 ))}
-               </tbody>
-             </table>
-           </div>
-        )}
-
-        {/* QUICK RENDER RECONCILIATION */}
-        {activeTab === 'reconciliation' && (
-           <div className="bg-slate-800 p-6 rounded-2xl shadow-xl flex gap-4">
-             <button onClick={exportDataJSON} className="px-4 py-2 bg-slate-700 text-white rounded flex gap-2"><Download className="w-4 h-4"/> Експорт локально</button>
-             <label className="px-4 py-2 bg-slate-700 text-white rounded flex gap-2 cursor-pointer"><Upload className="w-4 h-4"/> Імпорт локально<input type="file" className="hidden" onChange={importDataJSON}/></label>
-           </div>
-        )}
-
-      </main>
+        </main>
+      </div>
     </div>
   );
 }
