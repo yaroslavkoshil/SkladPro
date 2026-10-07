@@ -1,17 +1,6 @@
 {
   "products": [
     {
-      "id": "prod-1791377188476-0",
-      "sku": "PIN121801200",
-      "name": "Phoenix 12/800 VE.Direct Schuko",
-      "category": "Інвертори",
-      "boxNumber": "10",
-      "receivedQty": 1,
-      "sentQty": 0,
-      "minQty": 10,
-      "updatedAt": "2026-10-07T14:56:36.293Z"
-    },
-    {
       "id": "prod-1791377188476-1",
       "sku": "PIN241801200",
       "name": "Phoenix 24/800 VE.Direct Schuko",
@@ -20,7 +9,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 0
     },
     {
       "id": "prod-1791377188476-2",
@@ -31,7 +21,20 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 1
+    },
+    {
+      "id": "prod-1791377188476-0",
+      "sku": "PIN121801200",
+      "name": "Phoenix 12/800 VE.Direct Schuko",
+      "category": "Інвертори",
+      "boxNumber": "10",
+      "receivedQty": 1,
+      "sentQty": 0,
+      "minQty": 10,
+      "updatedAt": "2026-10-07T14:56:36.293Z",
+      "sortIndex": 2
     },
     {
       "id": "prod-1791377188476-3",
@@ -42,7 +45,8 @@
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 3
     },
     {
       "id": "prod-1791377188476-4",
@@ -53,7 +57,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T13:06:11.229Z"
+      "updatedAt": "2026-10-07T13:06:11.229Z",
+      "sortIndex": 4
     },
     {
       "id": "prod-1791377188476-5",
@@ -64,7 +69,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 5
     },
     {
       "id": "prod-1791377188476-6",
@@ -75,7 +81,8 @@
       "receivedQty": 4,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 6
     },
     {
       "id": "prod-1791377188476-7",
@@ -86,7 +93,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 7
     },
     {
       "id": "prod-1791377188476-8",
@@ -97,7 +105,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 8
     },
     {
       "id": "prod-1791377188476-9",
@@ -108,7 +117,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 9
     },
     {
       "id": "prod-1791377188476-10",
@@ -119,7 +129,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 10
     },
     {
       "id": "prod-1791377188476-11",
@@ -130,7 +141,8 @@
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 11
     },
     {
       "id": "prod-1791377188476-12",
@@ -141,7 +153,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 12
     },
     {
       "id": "prod-1791377188476-13",
@@ -152,7 +165,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 13
     },
     {
       "id": "prod-1791377188476-14",
@@ -163,7 +177,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 14
     },
     {
       "id": "prod-1791377188476-15",
@@ -174,7 +189,8 @@
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 15
     },
     {
       "id": "prod-1791377188476-16",
@@ -185,7 +201,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 16
     },
     {
       "id": "prod-1791377188476-17",
@@ -196,7 +213,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 17
     },
     {
       "id": "prod-1791377188476-18",
@@ -207,7 +225,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 18
     },
     {
       "id": "prod-1791377188476-19",
@@ -218,7 +237,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 19
     },
     {
       "id": "prod-1791377188476-20",
@@ -229,7 +249,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 20
     },
     {
       "id": "prod-1791377188476-21",
@@ -240,7 +261,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 21
     },
     {
       "id": "prod-1791377188476-22",
@@ -251,7 +273,8 @@
       "receivedQty": 5,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 22
     },
     {
       "id": "prod-1791377188476-23",
@@ -262,7 +285,8 @@
       "receivedQty": 7,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T14:59:12.162Z"
+      "updatedAt": "2026-10-07T14:59:12.162Z",
+      "sortIndex": 23
     },
     {
       "id": "prod-1791377188476-24",
@@ -273,7 +297,8 @@
       "receivedQty": 7,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 24
     },
     {
       "id": "prod-1791377188476-25",
@@ -284,7 +309,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 25
     },
     {
       "id": "prod-1791377188476-26",
@@ -295,7 +321,8 @@
       "receivedQty": 12,
       "sentQty": 8,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 26
     },
     {
       "id": "prod-1791377188476-27",
@@ -306,7 +333,8 @@
       "receivedQty": 6,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 27
     },
     {
       "id": "prod-1791377188476-28",
@@ -317,7 +345,8 @@
       "receivedQty": 10,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 28
     },
     {
       "id": "prod-1791377188476-29",
@@ -328,7 +357,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 29
     },
     {
       "id": "prod-1791377188476-30",
@@ -339,7 +369,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 30
     },
     {
       "id": "prod-1791377188476-31",
@@ -350,7 +381,8 @@
       "receivedQty": 8,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 31
     },
     {
       "id": "prod-1791377188476-32",
@@ -361,7 +393,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 32
     },
     {
       "id": "prod-1791377188476-33",
@@ -372,7 +405,8 @@
       "receivedQty": 13,
       "sentQty": 8,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 33
     },
     {
       "id": "prod-1791377188476-34",
@@ -383,7 +417,8 @@
       "receivedQty": 16,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 34
     },
     {
       "id": "prod-1791377188476-35",
@@ -394,7 +429,8 @@
       "receivedQty": 6,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 35
     },
     {
       "id": "prod-1791377188476-36",
@@ -405,7 +441,8 @@
       "receivedQty": 4,
       "sentQty": 4,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 36
     },
     {
       "id": "prod-1791377188476-37",
@@ -416,7 +453,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 37
     },
     {
       "id": "prod-1791377188476-38",
@@ -427,7 +465,8 @@
       "receivedQty": 13,
       "sentQty": 5,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 38
     },
     {
       "id": "prod-1791377188476-39",
@@ -438,7 +477,8 @@
       "receivedQty": 10,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 39
     },
     {
       "id": "prod-1791377188476-40",
@@ -449,7 +489,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 40
     },
     {
       "id": "prod-1791377188476-41",
@@ -460,7 +501,8 @@
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 41
     },
     {
       "id": "prod-1791377188476-42",
@@ -471,7 +513,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 42
     },
     {
       "id": "prod-1791377188476-43",
@@ -482,7 +525,8 @@
       "receivedQty": 6,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 43
     },
     {
       "id": "prod-1791377188476-44",
@@ -493,7 +537,8 @@
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 44
     },
     {
       "id": "prod-1791377188476-45",
@@ -504,7 +549,8 @@
       "receivedQty": 6,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 45
     },
     {
       "id": "prod-1791377188476-46",
@@ -515,7 +561,8 @@
       "receivedQty": 6,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 46
     },
     {
       "id": "prod-1791377188476-47",
@@ -526,7 +573,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 47
     },
     {
       "id": "prod-1791377188476-48",
@@ -537,7 +585,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 48
     },
     {
       "id": "prod-1791377188476-49",
@@ -548,7 +597,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 49
     },
     {
       "id": "prod-1791377188476-50",
@@ -559,7 +609,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 50
     },
     {
       "id": "prod-1791377188476-51",
@@ -570,7 +621,8 @@
       "receivedQty": 4,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 51
     },
     {
       "id": "prod-1791377188476-52",
@@ -581,7 +633,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 52
     },
     {
       "id": "prod-1791377188476-53",
@@ -592,7 +645,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 53
     },
     {
       "id": "prod-1791377188476-54",
@@ -603,7 +657,8 @@
       "receivedQty": 22,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 54
     },
     {
       "id": "prod-1791377188476-55",
@@ -614,7 +669,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 55
     },
     {
       "id": "prod-1791377188476-56",
@@ -625,7 +681,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 56
     },
     {
       "id": "prod-1791377188476-57",
@@ -636,7 +693,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 57
     },
     {
       "id": "prod-1791377188476-58",
@@ -647,7 +705,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 58
     },
     {
       "id": "prod-1791377188476-59",
@@ -658,7 +717,8 @@
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 59
     },
     {
       "id": "prod-1791377188476-60",
@@ -669,7 +729,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 60
     },
     {
       "id": "prod-1791377188476-61",
@@ -680,7 +741,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 61
     },
     {
       "id": "prod-1791377188476-62",
@@ -691,7 +753,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 62
     },
     {
       "id": "prod-1791377188476-63",
@@ -702,7 +765,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 63
     },
     {
       "id": "prod-1791377188476-64",
@@ -713,7 +777,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 64
     },
     {
       "id": "prod-1791377188476-65",
@@ -724,7 +789,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 65
     },
     {
       "id": "prod-1791377188476-66",
@@ -735,7 +801,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 66
     },
     {
       "id": "prod-1791377188476-67",
@@ -746,7 +813,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 67
     },
     {
       "id": "prod-1791377188476-68",
@@ -757,7 +825,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 68
     },
     {
       "id": "prod-1791377188476-69",
@@ -768,7 +837,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 69
     },
     {
       "id": "prod-1791377188476-70",
@@ -779,7 +849,8 @@
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 70
     },
     {
       "id": "prod-1791377188476-71",
@@ -790,7 +861,8 @@
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 71
     },
     {
       "id": "prod-1791377188476-72",
@@ -801,7 +873,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 72
     },
     {
       "id": "prod-1791377188476-73",
@@ -812,7 +885,8 @@
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 73
     },
     {
       "id": "prod-1791377188476-74",
@@ -823,7 +897,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 74
     },
     {
       "id": "prod-1791377188476-75",
@@ -834,7 +909,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 75
     },
     {
       "id": "prod-1791377188476-76",
@@ -845,7 +921,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 76
     },
     {
       "id": "prod-1791377188476-77",
@@ -856,7 +933,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 77
     },
     {
       "id": "prod-1791377188476-78",
@@ -867,7 +945,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 78
     },
     {
       "id": "prod-1791377188476-79",
@@ -878,7 +957,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 79
     },
     {
       "id": "prod-1791377188476-80",
@@ -889,7 +969,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 80
     },
     {
       "id": "prod-1791377188476-81",
@@ -900,7 +981,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T12:46:28.476Z",
+      "sortIndex": 81
     },
     {
       "id": "prod-1791377188477-82",
@@ -911,7 +993,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.477Z"
+      "updatedAt": "2026-10-07T12:46:28.477Z",
+      "sortIndex": 82
     },
     {
       "id": "prod-1791377188477-83",
@@ -922,7 +1005,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.477Z"
+      "updatedAt": "2026-10-07T12:46:28.477Z",
+      "sortIndex": 83
     },
     {
       "id": "prod-1791377188477-84",
@@ -933,7 +1017,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.477Z"
+      "updatedAt": "2026-10-07T12:46:28.477Z",
+      "sortIndex": 84
     },
     {
       "id": "prod-1791377188477-85",
@@ -944,7 +1029,8 @@
       "receivedQty": 1,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.477Z"
+      "updatedAt": "2026-10-07T12:46:28.477Z",
+      "sortIndex": 85
     },
     {
       "id": "prod-1791377188477-86",
@@ -955,7 +1041,8 @@
       "receivedQty": 2,
       "sentQty": 1,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.477Z"
+      "updatedAt": "2026-10-07T12:46:28.477Z",
+      "sortIndex": 86
     },
     {
       "id": "prod-1791377188478-87",
@@ -966,7 +1053,8 @@
       "receivedQty": 8,
       "sentQty": 7,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.478Z"
+      "updatedAt": "2026-10-07T12:46:28.478Z",
+      "sortIndex": 87
     },
     {
       "id": "prod-1791377188479-88",
@@ -977,7 +1065,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 88
     },
     {
       "id": "prod-1791377188479-89",
@@ -988,7 +1077,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 89
     },
     {
       "id": "prod-1791377188479-90",
@@ -999,7 +1089,8 @@
       "receivedQty": 9,
       "sentQty": 8,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 90
     },
     {
       "id": "prod-1791377188479-91",
@@ -1010,7 +1101,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 91
     },
     {
       "id": "prod-1791377188479-92",
@@ -1021,7 +1113,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 92
     },
     {
       "id": "prod-1791377188479-93",
@@ -1032,7 +1125,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 93
     },
     {
       "id": "prod-1791377188479-94",
@@ -1043,7 +1137,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 94
     },
     {
       "id": "prod-1791377188479-95",
@@ -1054,7 +1149,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 95
     },
     {
       "id": "prod-1791377188479-96",
@@ -1065,7 +1161,8 @@
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 96
     },
     {
       "id": "prod-1791377188479-97",
@@ -1076,7 +1173,8 @@
       "receivedQty": 9,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 97
     },
     {
       "id": "prod-1791377188479-98",
@@ -1087,7 +1185,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 98
     },
     {
       "id": "prod-1791377188479-99",
@@ -1098,7 +1197,8 @@
       "receivedQty": 3,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 99
     },
     {
       "id": "prod-1791377188479-100",
@@ -1109,7 +1209,8 @@
       "receivedQty": 6,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 100
     },
     {
       "id": "prod-1791377188479-101",
@@ -1120,7 +1221,8 @@
       "receivedQty": 3,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 101
     },
     {
       "id": "prod-1791377188479-102",
@@ -1131,7 +1233,8 @@
       "receivedQty": 14,
       "sentQty": 12,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 102
     },
     {
       "id": "prod-1791377188479-103",
@@ -1142,7 +1245,8 @@
       "receivedQty": 15,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 103
     },
     {
       "id": "prod-1791377188479-104",
@@ -1153,7 +1257,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 104
     },
     {
       "id": "prod-1791377188479-105",
@@ -1164,7 +1269,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 105
     },
     {
       "id": "prod-1791377188479-106",
@@ -1175,7 +1281,8 @@
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 106
     },
     {
       "id": "prod-1791377188479-107",
@@ -1186,7 +1293,8 @@
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 107
     },
     {
       "id": "prod-1791377188479-108",
@@ -1197,7 +1305,8 @@
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 108
     },
     {
       "id": "prod-1791377188479-109",
@@ -1208,7 +1317,8 @@
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 109
     },
     {
       "id": "prod-1791377188479-110",
@@ -1219,7 +1329,8 @@
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 110
     },
     {
       "id": "prod-1791377188479-111",
@@ -1230,7 +1341,8 @@
       "receivedQty": 4,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 111
     },
     {
       "id": "prod-1791377188479-112",
@@ -1241,7 +1353,8 @@
       "receivedQty": 24,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 112
     },
     {
       "id": "prod-1791377188479-113",
@@ -1252,7 +1365,8 @@
       "receivedQty": 5,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 113
     },
     {
       "id": "prod-1791377188479-114",
@@ -1263,7 +1377,8 @@
       "receivedQty": 16,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 114
     },
     {
       "id": "prod-1791377188479-115",
@@ -1274,7 +1389,8 @@
       "receivedQty": 29,
       "sentQty": 21,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 115
     },
     {
       "id": "prod-1791377188479-116",
@@ -1285,7 +1401,8 @@
       "receivedQty": 30,
       "sentQty": 19,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 116
     },
     {
       "id": "prod-1791377188479-117",
@@ -1296,7 +1413,8 @@
       "receivedQty": 26,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 117
     },
     {
       "id": "prod-1791377188479-118",
@@ -1307,7 +1425,8 @@
       "receivedQty": 10,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 118
     },
     {
       "id": "prod-1791377188479-119",
@@ -1318,7 +1437,8 @@
       "receivedQty": 24,
       "sentQty": 7,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 119
     },
     {
       "id": "prod-1791377188479-120",
@@ -1329,7 +1449,8 @@
       "receivedQty": 32,
       "sentQty": 18,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 120
     },
     {
       "id": "prod-1791377188479-121",
@@ -1340,7 +1461,8 @@
       "receivedQty": 27,
       "sentQty": 10,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 121
     },
     {
       "id": "prod-1791377188479-122",
@@ -1351,7 +1473,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 122
     },
     {
       "id": "prod-1791377188479-123",
@@ -1362,7 +1485,8 @@
       "receivedQty": 11,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 123
     },
     {
       "id": "prod-1791377188479-124",
@@ -1373,7 +1497,8 @@
       "receivedQty": 5,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 124
     },
     {
       "id": "prod-1791377188479-125",
@@ -1384,7 +1509,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 125
     },
     {
       "id": "prod-1791377188479-126",
@@ -1395,7 +1521,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 126
     },
     {
       "id": "prod-1791377188479-127",
@@ -1404,9 +1531,10 @@
       "category": "Інше",
       "boxNumber": "Б/Н",
       "receivedQty": 10,
-      "sentQty": 6,
+      "sentQty": 7,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T17:25:07.250Z",
+      "sortIndex": 127
     },
     {
       "id": "prod-1791377188479-128",
@@ -1417,7 +1545,8 @@
       "receivedQty": 2,
       "sentQty": 2,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.479Z"
+      "updatedAt": "2026-10-07T12:46:28.479Z",
+      "sortIndex": 128
     },
     {
       "id": "prod-1791377188479-129",
@@ -1428,7 +1557,8 @@
       "receivedQty": 4,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.480Z"
+      "updatedAt": "2026-10-07T12:46:28.480Z",
+      "sortIndex": 129
     },
     {
       "id": "prod-1791377188480-130",
@@ -1439,7 +1569,8 @@
       "receivedQty": 3,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.480Z"
+      "updatedAt": "2026-10-07T12:46:28.480Z",
+      "sortIndex": 130
     },
     {
       "id": "prod-1791377188480-131",
@@ -1450,7 +1581,8 @@
       "receivedQty": 2,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.480Z"
+      "updatedAt": "2026-10-07T12:46:28.480Z",
+      "sortIndex": 131
     },
     {
       "id": "prod-1791377188480-132",
@@ -1461,7 +1593,8 @@
       "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.480Z"
+      "updatedAt": "2026-10-07T12:46:28.480Z",
+      "sortIndex": 132
     }
   ],
   "logs": [
@@ -4884,5 +5017,25 @@
       "orderId": "ПОЧАТКОВЕ",
       "note": "Початкове завантаження залишків"
     }
+  ],
+  "categories": [
+    "Інвертори",
+    "Інвертори / Зарядні пристрої",
+    "Зарядні пристрої",
+    "DC-DC перетворювачі",
+    "Сонячні контролери заряду",
+    "Трансформатори та Гальванічні ізолятори",
+    "Автоматичні перемикачі резерву",
+    "Розподіл постійного струму та Запобіжники",
+    "Пристрої GX та Віддалені панелі",
+    "Кабелі передачі даних та Інтерфейси",
+    "Моніторинг батарей",
+    "Батарейні ізолятори та Захист",
+    "Батареї та BMS",
+    "Сонячні панелі",
+    "Станції зарядки EV",
+    "Кабелі берегового живлення",
+    "Сонячні домашні системи (SHS)",
+    "Інше"
   ]
 }
