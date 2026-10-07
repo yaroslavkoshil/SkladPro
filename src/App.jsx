@@ -6,6 +6,26 @@ import {
   Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X
 } from 'lucide-react';
 
+const OFFICIAL_CATEGORY_ORDER = [
+  'Інвертори Phoenix',
+  'Інвертори/зарядні MultiPlus',
+  'Зарядні пристрої Blue Smart',
+  'Аксесуари для зарядних Blue Smart',
+  'DC-DC перетворювачі Orion',
+  'Розподіл живлення / силові компоненти',
+  'Запобіжники MEGA-fuse та тримачі',
+  'GX пристрої',
+  'Кабелі',
+  'Кабель інформаційний АКБ-Victron',
+  'Кабель інформаційний АКБ-SacredSun',
+  'Кабель інформаційний АКБ-Sunlight PowerEss',
+  'Моніторинг батарей (Smartshunt / BMV / Battery Sense)',
+  'BatteryProtect',
+  'Сонячні контролери заряду SmartSolar/BlueSolar',
+  'Літієві батареї SmartPower',
+  'Інше'
+];
+
 const INITIAL_PRODUCTS = [
   {
     id: 'prod-1', sku: 'ART-1001', name: 'Бездротові навушники AirSound Pro', boxNumber: 'A1',
@@ -233,7 +253,16 @@ export default function App() {
   // -----------------------------------------------------
 
   const allBoxes = useMemo(() => Array.from(new Set(products.map(p => p.boxNumber.trim().toUpperCase()))).sort(), [products]);
-  const allCategories = useMemo(() => Array.from(new Set(products.map(p => p.category).filter(Boolean))).sort(), [products]);
+  const allCategories = useMemo(() => {
+    return Array.from(new Set(products.map(p => p.category).filter(Boolean))).sort((a, b) => {
+      let idxA = OFFICIAL_CATEGORY_ORDER.indexOf(a);
+      let idxB = OFFICIAL_CATEGORY_ORDER.indexOf(b);
+      if (idxA === -1) idxA = 999;
+      if (idxB === -1) idxB = 999;
+      if (idxA !== idxB) return idxA - idxB;
+      return a.localeCompare(b);
+    });
+  }, [products]);
 
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
@@ -712,14 +741,25 @@ export default function App() {
                             acc[cat].push(p);
                             return acc;
                           }, {})
-                        ).map(([cat, prods]) => (
+                        )
+                        .sort(([catA], [catB]) => {
+                           let idxA = OFFICIAL_CATEGORY_ORDER.indexOf(catA);
+                           let idxB = OFFICIAL_CATEGORY_ORDER.indexOf(catB);
+                           if (idxA === -1) idxA = 999;
+                           if (idxB === -1) idxB = 999;
+                           if (idxA !== idxB) return idxA - idxB;
+                           return catA.localeCompare(catB);
+                        })
+                        .map(([cat, prods]) => {
+                          const sortedProds = [...prods].sort((a, b) => a.sku.localeCompare(b.sku));
+                          return (
                           <React.Fragment key={cat}>
                             <tr className="bg-indigo-50/70 border-y border-indigo-100/70">
                               <td colSpan="8" className="p-3 pl-6 font-extrabold text-indigo-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] text-sm">
                                 📁 {cat} <span className="ml-2 text-xs font-bold text-indigo-600 bg-white px-2 py-0.5 rounded-full border border-indigo-200">{prods.length} позицій</span>
                               </td>
                             </tr>
-                            {prods.map(p => {
+                            {sortedProds.map(p => {
                               const bal = p.receivedQty - p.sentQty;
                               return (
                                 <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
@@ -752,7 +792,7 @@ export default function App() {
                               );
                             })}
                           </React.Fragment>
-                        ))}
+                        )})}
                         {filteredProducts.length === 0 && (
                           <tr><td colSpan="8" className="p-8 text-center text-slate-400 font-medium">Нічого не знайдено</td></tr>
                         )}
