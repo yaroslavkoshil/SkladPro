@@ -89,7 +89,6 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Operation Form State (for generic New Operation tab)
-  const [opType, setOpType] = useState('OUT');
   const [opSku, setOpSku] = useState('');
   const [opQty, setOpQty] = useState('');
   const [opBox, setOpBox] = useState('');
@@ -319,14 +318,30 @@ export default function App() {
     return true;
   };
 
+  const handleSkuChange = (e) => {
+    const val = e.target.value.toUpperCase();
+    setOpSku(val);
+    const existing = products.find(p => p.sku.toUpperCase() === val);
+    if (existing) {
+      setNewProductName(existing.name);
+      setOpBox(existing.boxNumber);
+    } else {
+      setNewProductName(''); 
+      setOpBox('');
+    }
+  };
+
   const handleExecuteOperation = async (e) => {
     e.preventDefault();
     const qty = parseInt(opQty, 10);
     if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
     
-    const success = await executeOperationCore(opType, opSku, qty, opBox, opNote, opOrderRef, newProductName, parseInt(newMinQty, 10) || 5);
+    const existing = products.find(p => p.sku.toUpperCase() === opSku.trim().toUpperCase());
+    const type = existing ? 'IN' : 'NEW';
+    
+    const success = await executeOperationCore(type, opSku, qty, opBox, opNote, opOrderRef, newProductName, 10);
     if (success) {
-      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef('');
+      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef(''); setOpBox('');
     }
   };
 
@@ -577,37 +592,63 @@ export default function App() {
             {/* OPERATIONS TAB */}
             {activeTab === 'operations' && isAdmin && (
               <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-                <h2 className="text-2xl font-extrabold text-slate-800 mb-6 flex items-center gap-3">
-                  <Truck className="w-7 h-7 text-indigo-600" /> Реєстрація операції
-                </h2>
+                <div className="mb-6">
+                   <h2 className="text-2xl font-extrabold text-slate-800 flex items-center gap-3">
+                     <ArrowDownLeft className="w-7 h-7 text-emerald-600" /> Оприбуткування товару
+                   </h2>
+                   <p className="text-sm text-slate-500 mt-2">Відвантаження товарів зі складу здійснюється через Картку товару в загальній таблиці.</p>
+                </div>
+                
                 <form onSubmit={handleExecuteOperation} className="space-y-5">
-                  <div className="flex p-1 bg-slate-100 rounded-xl mb-6">
-                      <button type="button" onClick={() => setOpType('OUT')} className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all ${opType==='OUT'?'bg-white text-slate-800 shadow-sm':'text-slate-500 hover:text-slate-700'}`}>Відправка</button>
-                      <button type="button" onClick={() => setOpType('IN')} className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all ${opType==='IN'?'bg-white text-slate-800 shadow-sm':'text-slate-500 hover:text-slate-700'}`}>Прихід</button>
-                      <button type="button" onClick={() => setOpType('NEW')} className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all ${opType==='NEW'?'bg-white text-slate-800 shadow-sm':'text-slate-500 hover:text-slate-700'}`}>Новий товар</button>
-                  </div>
-                  
-                  {opType === 'NEW' ? (
-                    <div className="grid gap-4">
-                      <input required placeholder="Артикул (напр. ART-100)" value={opSku} onChange={e=>setOpSku(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 w-full outline-none font-mono" />
-                      <input required placeholder="Назва товару" value={newProductName} onChange={e=>setNewProductName(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 w-full outline-none" />
+                  <div className="grid gap-4">
+                    <div className="relative">
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Артикул (SKU)</label>
+                      <input 
+                         required 
+                         placeholder="Введіть артикул (напр. ART-100)" 
+                         list="sku-list" 
+                         value={opSku} 
+                         onChange={handleSkuChange}
+                         className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-mono font-bold" 
+                      />
+                      <datalist id="sku-list">{products.map(p => <option key={p.id} value={p.sku}>{p.name}</option>)}</datalist>
                     </div>
-                  ) : (
-                    <input required placeholder="Введіть артикул..." list="sku-list" value={opSku} onChange={e=>{setOpSku(e.target.value.toUpperCase()); const m = products.find(p=>p.sku===e.target.value.toUpperCase()); if(m) setOpBox(m.boxNumber);}} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 w-full outline-none font-mono" />
-                  )}
-                  <datalist id="sku-list">{products.map(p => <option key={p.id} value={p.sku}>{p.name}</option>)}</datalist>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <input required type="number" placeholder="Кількість шт" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none font-bold" />
-                    <input placeholder="Коробка (A1...)" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none font-mono" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <input placeholder="Замовлення/Документ" value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none" />
-                    <input placeholder="Примітка" value={opNote} onChange={e=>setOpNote(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none" />
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Назва товару</label>
+                      <input 
+                         required 
+                         placeholder="Назва товару (заповнюється автоматично для існуючих)" 
+                         value={newProductName} 
+                         onChange={e=>setNewProductName(e.target.value)} 
+                         className={`bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none ${products.some(p => p.sku.toUpperCase() === opSku.toUpperCase()) ? 'bg-slate-50 text-slate-600 font-medium' : ''}`}
+                      />
+                    </div>
                   </div>
                   
-                  <button type="submit" className={`w-full mt-4 py-4 rounded-xl font-bold text-white shadow-md transition-all ${opType==='OUT'?'bg-amber-500 hover:bg-amber-600 shadow-amber-500/20':opType==='IN'?'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20':'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-600/20'}`}>
-                    Підтвердити операцію
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Кількість (шт)</label>
+                      <input required type="number" min="1" placeholder="Кількість шт" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-extrabold text-lg" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Місце / Коробка</label>
+                      <input placeholder="Коробка (A1...)" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-mono" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Замовлення / ТТН</label>
+                      <input placeholder="Документ" value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Примітка</label>
+                      <input placeholder="Коментар" value={opNote} onChange={e=>setOpNote(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none" />
+                    </div>
+                  </div>
+                  
+                  <button type="submit" className="w-full mt-6 py-4 rounded-xl font-bold text-white bg-emerald-500 hover:bg-emerald-600 shadow-md shadow-emerald-500/20 transition-all flex items-center justify-center gap-2">
+                    <ArrowDownLeft className="w-5 h-5"/> Оприбуткувати товар
                   </button>
                 </form>
               </div>
