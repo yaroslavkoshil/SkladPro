@@ -768,11 +768,11 @@ export default function App() {
                                   <td className="px-4 py-2 font-medium text-slate-800 whitespace-normal break-words" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
                                     {p.name}
                                   </td>
-                                  <td className="px-4 py-2 text-center font-bold text-emerald-600">+{p.receivedQty}</td>
-                                  <td className="px-4 py-2 text-center font-bold text-amber-500">-{p.sentQty}</td>
+                                  <td className="px-4 py-2 text-center text-lg font-black text-emerald-600">+{p.receivedQty}</td>
+                                  <td className="px-4 py-2 text-center text-lg font-black text-amber-500">-{p.sentQty}</td>
                                   <td className="px-4 py-2 text-center">
-                                    <span className={`text-base font-extrabold ${bal <= 0 ? 'text-rose-500' : 'text-slate-800'}`}>{bal}</span>
-                                    <span className="text-xs text-slate-400 ml-1">шт.</span>
+                                    <span className={`text-xl font-black ${bal <= 0 ? 'text-rose-600' : 'text-slate-800'}`}>{bal}</span>
+                                    <span className="text-sm font-bold text-slate-400 ml-1">шт.</span>
                                   </td>
                                   <td className="px-4 py-2 text-center">
                                     <button onClick={() => openProductModal(p)} className="px-2.5 py-1 border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded text-xs font-bold transition-colors inline-flex items-center gap-1">
