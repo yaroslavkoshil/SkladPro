@@ -544,8 +544,9 @@ export default function App() {
   const updateProductFromLogs = (targetSku, currentLogs, currentProducts) => {
     const clonedLogs = currentLogs.map(l => ({...l})); 
     let newReceived = 0; let newSent = 0;
+    const searchSku = targetSku.trim().toUpperCase();
     
-    const prodLogs = clonedLogs.filter(l => l.sku === targetSku).sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
+    const prodLogs = clonedLogs.filter(l => l.sku.trim().toUpperCase() === searchSku).sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
     
     let runningBalance = 0;
     prodLogs.forEach(pl => {
@@ -555,7 +556,7 @@ export default function App() {
     });
 
     clonedLogs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-    const newProducts = currentProducts.map(p => p.sku === targetSku ? { ...p, receivedQty: newReceived, sentQty: newSent } : p);
+    const newProducts = currentProducts.map(p => p.sku.trim().toUpperCase() === searchSku ? { ...p, receivedQty: newReceived, sentQty: newSent } : p);
     return { newProducts, newLogs: clonedLogs };
   };
 
@@ -618,7 +619,9 @@ export default function App() {
 
     setLogs(newLogs); setProducts(newProducts); setTrash(newTrash);
     pushToGithub(newProducts, newLogs, categoryOrder, newTrash);
-    if (selectedProduct && selectedProduct.sku === sku) setSelectedProduct(newProducts.find(p => p.sku === sku)); 
+    if (selectedProduct && selectedProduct.sku.trim().toUpperCase() === sku.trim().toUpperCase()) {
+      setSelectedProduct(newProducts.find(p => p.sku.trim().toUpperCase() === sku.trim().toUpperCase())); 
+    }
     showNotice('Запис переміщено у кошик');
   };
 
@@ -664,7 +667,9 @@ export default function App() {
     } : l);
     const { newProducts, newLogs } = updateProductFromLogs(sku, updatedLogs, products);
     setLogs(newLogs); setProducts(newProducts); pushToGithub(newProducts, newLogs);
-    if (selectedProduct && selectedProduct.sku === sku) setSelectedProduct(newProducts.find(p => p.sku === sku));
+    if (selectedProduct && selectedProduct.sku.trim().toUpperCase() === sku.trim().toUpperCase()) {
+      setSelectedProduct(newProducts.find(p => p.sku.trim().toUpperCase() === sku.trim().toUpperCase()));
+    }
     setEditingLogId(null); showNotice('Запис оновлено');
   };
 
