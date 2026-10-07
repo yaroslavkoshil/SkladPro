@@ -166,6 +166,29 @@ export default function App() {
     setTimeout(() => setNotification(null), 4000);
   };
 
+  const printBoxLabel = (boxNumber) => {
+    const win = window.open('', '_blank', 'width=400,height=400');
+    win.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Коробка ${boxNumber}</title>
+        <style>
+          @page { size: 10cm 10cm; margin: 0; }
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          html, body { width: 10cm; height: 10cm; display: flex; align-items: center; justify-content: center; }
+          .label { font-family: Arial Black, Arial, sans-serif; font-weight: 900; font-size: 4cm; text-align: center; line-height: 1; color: #000; }
+        </style>
+      </head>
+      <body onload="window.print(); window.close();">
+        <div class="label">${boxNumber}</div>
+      </body>
+      </html>
+    `);
+    win.document.close();
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     if (adminPassword === '0000') {
@@ -1046,7 +1069,12 @@ export default function App() {
                       <div key={box} className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
                         <div className="flex items-center justify-between mb-4">
                           <span className="font-bold text-slate-700 flex items-center gap-1.5"><Box className="w-4 h-4 text-indigo-500"/> Коробка <span className="text-indigo-600">{box}</span></span>
-                          <span className="text-xs font-bold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">{data.count} артикулів</span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">{data.count} артикулів</span>
+                            <button onClick={() => printBoxLabel(box)} className="text-xs font-bold text-slate-500 hover:text-slate-800 bg-white hover:bg-slate-100 px-2 py-1 rounded border border-slate-200 transition-colors flex items-center gap-1" title="Надрукувати ярлик">
+                              🖨️
+                            </button>
+                          </div>
                         </div>
                         <div className="text-2xl font-extrabold text-slate-800 mb-4">{data.items} <span className="text-sm font-normal text-slate-500">од. товарів</span></div>
                         <div className="mt-auto space-y-1">
