@@ -25,6 +25,18 @@
       "sortIndex": 1
     },
     {
+      "id": "prod-1791377188476-0",
+      "sku": "PIN121801200",
+      "name": "Phoenix 12/800 VE.Direct Schuko",
+      "category": "Інвертори",
+      "boxNumber": "10",
+      "receivedQty": 1,
+      "sentQty": 0,
+      "minQty": 10,
+      "updatedAt": "2026-10-07T14:56:36.293Z",
+      "sortIndex": 2
+    },
+    {
       "id": "prod-1791377188476-3",
       "sku": "PMP482306000",
       "name": "MultiPlus-II 48/3000/35-32 GX",
@@ -34,18 +46,6 @@
       "sentQty": 2,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 2
-    },
-    {
-      "id": "prod-1791377188476-0",
-      "sku": "PIN121801200",
-      "name": "Phoenix 12/800 VE.Direct Schuko",
-      "category": "Інвертори / Зарядні пристрої",
-      "boxNumber": "10",
-      "receivedQty": 1,
-      "sentQty": 0,
-      "minQty": 10,
-      "updatedAt": "2026-10-07T14:56:36.293Z",
       "sortIndex": 3
     },
     {
