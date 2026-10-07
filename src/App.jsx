@@ -46,10 +46,17 @@ export default function App() {
   // GitHub Sync State
   const [githubConfig, setGithubConfig] = useState(() => {
     const saved = localStorage.getItem('wh_github_config');
-    return saved ? JSON.parse(saved) : { token: '', owner: '', repo: '', path: 'database.json' };
+    // Pre-fill owner and repo for the public read
+    return saved ? JSON.parse(saved) : { token: '', owner: 'yaroslavkoshil', repo: 'SkladPro', path: 'database.json' };
   });
   const [fileSha, setFileSha] = useState(null);
-  const [syncStatus, setSyncStatus] = useState('idle'); // idle, syncing, success, error
+  const [syncStatus, setSyncStatus] = useState('idle');
+
+  // Auth State
+  const [isAdmin, setIsAdmin] = useState(() => {
+    return sessionStorage.getItem('wh_is_admin') === 'true';
+  });
+  const [adminPassword, setAdminPassword] = useState('');
 
   // Navigation
   const [activeTab, setActiveTab] = useState('inventory');
@@ -73,21 +80,62 @@ export default function App() {
   useEffect(() => { localStorage.setItem('wh_products_v1', JSON.stringify(products)); }, [products]);
   useEffect(() => { localStorage.setItem('wh_logs_v1', JSON.stringify(logs)); }, [logs]);
   useEffect(() => { localStorage.setItem('wh_github_config', JSON.stringify(githubConfig)); }, [githubConfig]);
+  useEffect(() => { sessionStorage.setItem('wh_is_admin', isAdmin); }, [isAdmin]);
 
   const showNotice = (msg, type = 'success') => {
     setNotification({ msg, type });
     setTimeout(() => setNotification(null), 4000);
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (adminPassword === '0000') {
+      setIsAdmin(true);
+      setAdminPassword('');
+      showNotice('Доступ дозволено. Режим редагування увімкнено!');
+      setActiveTab('operations');
+    } else {
+      showNotice('Невірний пароль!', 'error');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAdmin(false);
+    setActiveTab('inventory');
+    showNotice('Ви вийшли з режиму адміністратора');
+  };
+
   // -----------------------------------------------------
   // GitHub Cloud Synchronization Logic
   // -----------------------------------------------------
-  const hasGithubSetup = !!(githubConfig.token && githubConfig.owner && githubConfig.repo);
+  const hasGithubSetup = !!(githubConfig.owner && githubConfig.repo);
 
   const fetchFromGithub = async () => {
     if (!hasGithubSetup) return;
     setSyncStatus('syncing');
     try {
+      // First try to fetch from raw github content (works if repo is public, without token)
+      const rawRes = await fetch(`https://raw.githubusercontent.com/${githubConfig.owner}/${githubConfig.repo}/main/${githubConfig.path}?t=${Date.now()}`);
+      
+      if (rawRes.ok) {
+        const parsed = await rawRes.json();
+        if (parsed.products) setProducts(parsed.products);
+        if (parsed.logs) setLogs(parsed.logs);
+        setSyncStatus('success');
+        showNotice('Дані успішно завантажено!');
+        
+        // Try to fetch SHA silently in background for future pushes (requires token)
+        if (githubConfig.token) {
+           fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
+              headers: { 'Authorization': `token ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
+           }).then(r => r.json()).then(d => { if(d.sha) setFileSha(d.sha); }).catch(()=>{});
+        }
+        return;
+      }
+
+      // Fallback to API if private (requires token)
+      if (!githubConfig.token) throw new Error('Для приватного репозиторію потрібен токен');
+
       const res = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
         headers: { 'Authorization': `token ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
       });
@@ -107,12 +155,15 @@ export default function App() {
     } catch (err) {
       console.error(err);
       setSyncStatus('error');
-      showNotice('Помилка завантаження з GitHub. Перевірте налаштування.', 'error');
+      showNotice('Помилка завантаження. Можливо репозиторій приватний.', 'error');
     }
   };
 
   const pushToGithub = async (newProducts, newLogs) => {
-    if (!hasGithubSetup) return;
+    if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
+       showNotice('Для збереження потрібен токен в налаштуваннях!', 'error');
+       return;
+    }
     setSyncStatus('syncing');
     try {
       const content = b64EncodeUnicode(JSON.stringify({ products: newProducts, logs: newLogs }, null, 2));
@@ -183,6 +234,8 @@ export default function App() {
 
   const handleExecuteOperation = async (e) => {
     e.preventDefault();
+    if (!isAdmin) return showNotice('У вас немає прав для редагування', 'error');
+
     const qty = parseInt(opQty, 10);
     if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
 
@@ -240,7 +293,7 @@ export default function App() {
 
     setProducts(updatedProducts);
     setLogs(newLogs);
-    if (hasGithubSetup) await pushToGithub(updatedProducts, newLogs);
+    if (githubConfig.token) await pushToGithub(updatedProducts, newLogs);
   };
 
   const exportDataJSON = () => {
@@ -250,6 +303,7 @@ export default function App() {
   };
 
   const importDataJSON = (e) => {
+    if (!isAdmin) return showNotice('Потрібні права адміністратора', 'error');
     const fileReader = new FileReader();
     if (e.target.files && e.target.files[0]) {
       fileReader.readAsText(e.target.files[0], "UTF-8");
@@ -260,7 +314,7 @@ export default function App() {
             setProducts(parsed.products);
             if (parsed.logs) setLogs(parsed.logs);
             showNotice('Дані імпортовано локально!');
-            if (hasGithubSetup) pushToGithub(parsed.products, parsed.logs || logs);
+            if (githubConfig.token) pushToGithub(parsed.products, parsed.logs || logs);
           }
         } catch (err) {}
       };
@@ -268,11 +322,11 @@ export default function App() {
   };
 
   const TABS = [
-    { id: 'inventory', label: 'Товари та Залишки', icon: Layers },
-    { id: 'operations', label: 'Провести операцію', icon: Truck },
-    { id: 'history', label: 'Історія змін', icon: History },
-    { id: 'reconciliation', label: 'Звірка та Експорт', icon: BarChart3 },
-    { id: 'settings', label: 'Налаштування хмари', icon: Settings },
+    { id: 'inventory', label: 'Товари та Залишки', icon: Layers, adminOnly: false },
+    { id: 'history', label: 'Історія змін', icon: History, adminOnly: false },
+    { id: 'operations', label: 'Провести операцію', icon: Truck, adminOnly: true },
+    { id: 'reconciliation', label: 'Звірка та Експорт', icon: BarChart3, adminOnly: true },
+    { id: 'settings', label: 'Налаштування хмари', icon: Settings, adminOnly: true },
   ];
 
   return (
@@ -297,7 +351,7 @@ export default function App() {
         </div>
 
         <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
-          {TABS.map(tab => {
+          {TABS.filter(t => !t.adminOnly || isAdmin).map(tab => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (
@@ -315,6 +369,18 @@ export default function App() {
               </button>
             );
           })}
+          
+          <div className="my-4 border-t border-slate-100"></div>
+          
+          {!isAdmin ? (
+             <button onClick={() => { setActiveTab('login'); setIsMobileMenuOpen(false); }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${activeTab === 'login' ? 'bg-slate-100 text-slate-900' : 'text-slate-400 hover:bg-slate-50 hover:text-slate-900'}`}>
+               <Settings className="w-5 h-5" /> Увійти в Адмінку
+             </button>
+          ) : (
+             <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all text-rose-500 hover:bg-rose-50 border border-transparent hover:border-rose-100">
+               <XCircle className="w-5 h-5" /> Вийти з Адмінки
+             </button>
+          )}
         </nav>
 
         <div className="p-4 border-t border-slate-100 bg-slate-50/50">
@@ -359,7 +425,7 @@ export default function App() {
           <div className="max-w-6xl mx-auto space-y-6">
 
             {/* Global Metrics Header (Rendered on most tabs) */}
-            {activeTab !== 'settings' && activeTab !== 'operations' && (
+            {activeTab !== 'settings' && activeTab !== 'operations' && activeTab !== 'login' && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-2">
@@ -395,9 +461,33 @@ export default function App() {
                 </div>
               </div>
             )}
+            
+            {/* LOGIN TAB */}
+            {activeTab === 'login' && !isAdmin && (
+              <div className="max-w-md mx-auto mt-20 bg-white border border-slate-200 rounded-3xl p-8 shadow-xl text-center">
+                <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Settings className="w-8 h-8" />
+                </div>
+                <h2 className="text-2xl font-extrabold text-slate-800 mb-2">Панель Адміністратора</h2>
+                <p className="text-sm text-slate-500 mb-8">Введіть пароль для доступу до редагування залишків та налаштувань.</p>
+                <form onSubmit={handleLogin}>
+                  <input 
+                    type="password" 
+                    placeholder="Пароль" 
+                    value={adminPassword}
+                    onChange={(e) => setAdminPassword(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl p-4 text-center text-xl tracking-widest text-slate-800 outline-none transition-all mb-4" 
+                    autoFocus
+                  />
+                  <button type="submit" className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 rounded-xl font-bold transition-all">
+                    Увійти
+                  </button>
+                </form>
+              </div>
+            )}
 
             {/* SETTINGS TAB */}
-            {activeTab === 'settings' && (
+            {activeTab === 'settings' && isAdmin && (
               <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
                 <h2 className="text-2xl font-extrabold text-slate-800 mb-2 flex items-center gap-3">
                   <Server className="w-7 h-7 text-indigo-600" />
@@ -409,7 +499,7 @@ export default function App() {
                 
                 <div className="space-y-5">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2">Personal Access Token</label>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-2">Personal Access Token (Для збереження змін)</label>
                     <input type="password" placeholder="ghp_xxxxxxxxxxxx" value={githubConfig.token} onChange={e => setGithubConfig({...githubConfig, token: e.target.value})} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 rounded-xl p-3.5 text-slate-800 text-sm outline-none transition-all" />
                   </div>
                   <div className="grid grid-cols-2 gap-5">
@@ -440,7 +530,7 @@ export default function App() {
             )}
 
             {/* OPERATIONS TAB */}
-            {activeTab === 'operations' && (
+            {activeTab === 'operations' && isAdmin && (
               <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
                 <h2 className="text-2xl font-extrabold text-slate-800 mb-6 flex items-center gap-3">
                   <Truck className="w-7 h-7 text-indigo-600" />
