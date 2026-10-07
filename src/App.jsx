@@ -5,8 +5,6 @@ import {
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle, ScanLine,
   Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X
 } from 'lucide-react';
-import { BrowserMultiFormatReader } from '@zxing/browser';
-import { BarcodeFormat, DecodeHintType } from '@zxing/library';
 
 const OFFICIAL_CATEGORY_ORDER = [
   'Інвертори',
@@ -162,38 +160,59 @@ export default function App() {
   useEffect(() => { localStorage.setItem('wh_github_config', JSON.stringify(githubConfig)); }, [githubConfig]);
   useEffect(() => { sessionStorage.setItem('wh_is_admin', isAdmin); }, [isAdmin]);
 
-  // Scanner Effect
+  // Scanner Effect using native BarcodeDetector API (Chrome built-in)
   useEffect(() => {
-    let codeReader = null;
-    if (isScanning) {
-      const hints = new Map();
-      hints.set(DecodeHintType.POSSIBLE_FORMATS, [
-         BarcodeFormat.CODE_128, 
-         BarcodeFormat.CODE_39, 
-         BarcodeFormat.EAN_13, 
-         BarcodeFormat.EAN_8
-      ]);
+    let stream = null;
+    let animationId = null;
+    let active = true;
 
-      codeReader = new BrowserMultiFormatReader(hints, 500);
-      
-      codeReader.decodeFromVideoDevice(undefined, 'video-element', (result, err) => {
-        if (result) {
-           const decodedText = result.getText();
-           const foundProduct = products.find(p => p.sku === decodedText || p.sku.toLowerCase() === decodedText.toLowerCase());
-           if (foundProduct) {
-             if(codeReader) codeReader.reset();
-             setIsScanning(false);
-             setSearchQuery(decodedText);
-             openProductModal(foundProduct);
-             showNotice(`Товар знайдено: ${foundProduct.sku}`, 'success');
-           }
+    if (isScanning) {
+      (async () => {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } });
+          const video = document.getElementById('video-element');
+          if (!video || !active) return;
+          video.srcObject = stream;
+          await video.play();
+
+          if (!('BarcodeDetector' in window)) {
+            showNotice('Ваш браузер не підтримує BarcodeDetector. Спробуйте Chrome.', 'error');
+            return;
+          }
+          const detector = new window.BarcodeDetector({ formats: ['code_128', 'code_39', 'ean_13', 'ean_8', 'upc_a', 'upc_e'] });
+
+          const tick = async () => {
+            if (!active) return;
+            try {
+              const barcodes = await detector.detect(video);
+              if (barcodes.length > 0) {
+                const decodedText = barcodes[0].rawValue;
+                const foundProduct = products.find(p => p.sku === decodedText || p.sku.toLowerCase() === decodedText.toLowerCase());
+                if (foundProduct) {
+                  active = false;
+                  setIsScanning(false);
+                  setSearchQuery(decodedText);
+                  openProductModal(foundProduct);
+                  showNotice(`Товар знайдено: ${foundProduct.sku}`, 'success');
+                  return;
+                }
+              }
+            } catch(e) { /* ignore frame errors */ }
+            animationId = requestAnimationFrame(tick);
+          };
+          animationId = requestAnimationFrame(tick);
+        } catch (e) {
+          showNotice('Немає доступу до камери: ' + e.message, 'error');
         }
-      });
+      })();
     }
+
     return () => {
-      if (codeReader) {
-        codeReader.reset();
-      }
+      active = false;
+      if (animationId) cancelAnimationFrame(animationId);
+      if (stream) stream.getTracks().forEach(t => t.stop());
+      const video = document.getElementById('video-element');
+      if (video) { video.srcObject = null; }
     };
   }, [isScanning, products]);
 
