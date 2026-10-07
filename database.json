@@ -5,8 +5,8 @@
       "sku": "PIN121801200",
       "name": "Phoenix 12/800 VE.Direct Schuko",
       "category": "Інвертори",
-      "boxNumber": "10, 13",
-      "receivedQty": 6,
+      "boxNumber": "10",
+      "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T14:56:36.293Z"
@@ -262,7 +262,7 @@
       "receivedQty": 7,
       "sentQty": 3,
       "minQty": 10,
-      "updatedAt": "2026-10-07T12:46:28.476Z"
+      "updatedAt": "2026-10-07T14:59:12.162Z"
     },
     {
       "id": "prod-1791377188476-24",
@@ -1466,32 +1466,6 @@
   ],
   "logs": [
     {
-      "id": "log-1791384996293",
-      "timestamp": "2026-10-07T14:56:36.293Z",
-      "type": "IN",
-      "sku": "PIN121801200",
-      "productName": "Phoenix 12/800 VE.Direct Schuko",
-      "boxNumber": "13",
-      "changeQty": 3,
-      "prevBalance": 3,
-      "newBalance": 6,
-      "orderId": "ПОПОВНЕННЯ",
-      "note": "Прихід"
-    },
-    {
-      "id": "log-1791383975229",
-      "timestamp": "2026-10-07T14:39:35.229Z",
-      "type": "IN",
-      "sku": "PIN121801200",
-      "productName": "Phoenix 12/800 VE.Direct Schuko",
-      "boxNumber": "4",
-      "changeQty": 2,
-      "prevBalance": 1,
-      "newBalance": 3,
-      "orderId": "ПОПОВНЕННЯ",
-      "note": "Прихід"
-    },
-    {
       "id": "log-prod-1791377188476-64-hist-0",
       "timestamp": "2026-10-07T12:00:00.000Z",
       "type": "OUT",
@@ -1617,7 +1591,7 @@
       "boxNumber": "1",
       "changeQty": 1,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 4,
       "orderId": "20451551678415",
       "note": "Лях"
     },
@@ -2800,7 +2774,7 @@
       "boxNumber": "1",
       "changeQty": 1,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 5,
       "orderId": "20451539858285",
       "note": "Семирожкін"
     },
@@ -3099,7 +3073,7 @@
       "boxNumber": "1",
       "changeQty": 1,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 6,
       "orderId": "20451531472444",
       "note": "Відправка"
     },
