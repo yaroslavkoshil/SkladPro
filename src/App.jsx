@@ -166,7 +166,12 @@ export default function App() {
     if (isScanning) {
       const scanner = new Html5QrcodeScanner(
         "qr-reader",
-        { fps: 10, qrbox: { width: 250, height: 250 } },
+        { 
+          fps: 20, 
+          qrbox: { width: 350, height: 150 },
+          aspectRatio: 1.0,
+          rememberLastUsedCamera: true
+        },
         false
       );
       scanner.render(
@@ -657,7 +662,8 @@ export default function App() {
                 <div id="qr-reader" className="w-full"></div>
               </div>
               <div className="p-4 bg-slate-50 text-center text-sm font-medium text-slate-500">
-                Наведіть камеру на штрих-код або QR-код
+                <p>Наведіть камеру на штрих-код або QR-код.</p>
+                <p className="text-xs text-slate-400 mt-1">Тримайте код горизонтально всередині рамки (10-15 см від камери).</p>
               </div>
             </div>
           </div>
