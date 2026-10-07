@@ -193,10 +193,8 @@ export default function App() {
              setSearchQuery(decodedText);
              openProductModal(foundProduct);
              showNotice(`Товар знайдено: ${foundProduct.sku}`, 'success');
-           } else {
-             // Ignored unknown barcode, don't stop scanning
-             showNotice(`Невідомий код: ${decodedText} (Пропущено)`, 'error');
            }
+           // if not found, we just do nothing silently. The scanner keeps running until it hits the correct one.
         },
         (error) => { /* ignore */ }
       );
