@@ -5,7 +5,7 @@ import {
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle, ScanLine,
   Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X
 } from 'lucide-react';
-import { Html5QrcodeScanner } from 'html5-qrcode';
+import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from 'html5-qrcode';
 
 const OFFICIAL_CATEGORY_ORDER = [
   'Інвертори',
@@ -164,11 +164,21 @@ export default function App() {
   // Scanner Effect
   useEffect(() => {
     if (isScanning) {
+      const formatsToSupport = [
+        Html5QrcodeSupportedFormats.CODE_128,
+        Html5QrcodeSupportedFormats.CODE_39,
+        Html5QrcodeSupportedFormats.EAN_13,
+        Html5QrcodeSupportedFormats.EAN_8,
+        Html5QrcodeSupportedFormats.UPC_A,
+        Html5QrcodeSupportedFormats.UPC_E,
+        Html5QrcodeSupportedFormats.QR_CODE
+      ];
       const scanner = new Html5QrcodeScanner(
         "qr-reader",
         { 
-          fps: 20, 
-          qrbox: { width: 350, height: 150 },
+          fps: 15, 
+          qrbox: { width: 300, height: 60 },
+          formatsToSupport: formatsToSupport,
           aspectRatio: 1.0,
           rememberLastUsedCamera: true
         },
