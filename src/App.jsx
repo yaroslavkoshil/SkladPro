@@ -1246,7 +1246,7 @@ export default function App() {
                           <div className={`text-lg font-extrabold ${log.type==='OUT' ? 'text-amber-500' : 'text-emerald-500'}`}>
                             {log.type === 'OUT' ? '-' : '+'}{log.changeQty} <span className="text-sm">шт</span>
                           </div>
-                          <div className="text-xs text-slate-400 font-medium">Залишок: {log.newBalance} шт</div>
+
                           {isAdmin && (
                             <div className="flex gap-3 mt-1.5 opacity-50 hover:opacity-100 transition-opacity">
                                <button onClick={() => startEditingLog(log)} className="text-[11px] text-indigo-600 hover:text-indigo-800 uppercase font-extrabold flex items-center gap-1">✎ Редаг.</button>
