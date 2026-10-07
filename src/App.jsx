@@ -652,7 +652,11 @@ export default function App() {
                       <thead className="bg-slate-50 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
                         <tr>
                           <th className="p-4 pl-6">Артикул (SKU)</th>
-                          <th className="p-4">Назва товару</th>
+                          <th className="p-0">
+                            <div className="resize-x overflow-hidden w-64 min-w-[200px] max-w-[1000px] p-4 relative group" title="Потягніть правий нижній кут, щоб змінити ширину">
+                              Назва товару
+                            </div>
+                          </th>
                           <th className="p-4 text-center">Всього отримано</th>
                           <th className="p-4 text-center">Відправлено</th>
                           <th className="p-4 text-center">Поточний залишок</th>
@@ -667,7 +671,7 @@ export default function App() {
                           return (
                             <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
                               <td className="p-4 pl-6 font-mono font-bold text-indigo-600">{p.sku}</td>
-                              <td className="p-4 font-medium text-slate-800">
+                              <td className="p-4 font-medium text-slate-800 whitespace-normal break-words">
                                 <div className="flex flex-col gap-1">
                                   <span>{p.name}</span>
                                   <div>
