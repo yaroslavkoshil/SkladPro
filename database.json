@@ -109,6 +109,18 @@
       "sortIndex": 8
     },
     {
+      "id": "prod-1791377188476-0",
+      "sku": "PIN121801200",
+      "name": "Phoenix 12/800 VE.Direct Schuko",
+      "category": "Інвертори / Зарядні пристрої",
+      "boxNumber": "10",
+      "receivedQty": 1,
+      "sentQty": 0,
+      "minQty": 10,
+      "updatedAt": "2026-10-07T14:56:36.293Z",
+      "sortIndex": 9
+    },
+    {
       "id": "prod-1791377188476-10",
       "sku": "BPP900455070",
       "name": "GX Touch 70",
@@ -118,7 +130,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 9
+      "sortIndex": 10
     },
     {
       "id": "prod-1791377188476-11",
@@ -130,7 +142,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 10
+      "sortIndex": 11
     },
     {
       "id": "prod-1791377188476-12",
@@ -142,7 +154,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 11
+      "sortIndex": 12
     },
     {
       "id": "prod-1791377188476-13",
@@ -154,7 +166,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 12
+      "sortIndex": 13
     },
     {
       "id": "prod-1791377188476-14",
@@ -166,7 +178,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 13
+      "sortIndex": 14
     },
     {
       "id": "prod-1791377188476-15",
@@ -178,7 +190,7 @@
       "sentQty": 2,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 14
+      "sortIndex": 15
     },
     {
       "id": "prod-1791377188476-16",
@@ -190,7 +202,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 15
+      "sortIndex": 16
     },
     {
       "id": "prod-1791377188476-17",
@@ -202,7 +214,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 16
+      "sortIndex": 17
     },
     {
       "id": "prod-1791377188476-18",
@@ -214,7 +226,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 17
+      "sortIndex": 18
     },
     {
       "id": "prod-1791377188476-19",
@@ -226,7 +238,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 18
+      "sortIndex": 19
     },
     {
       "id": "prod-1791377188476-20",
@@ -238,7 +250,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 19
+      "sortIndex": 20
     },
     {
       "id": "prod-1791377188476-21",
@@ -250,7 +262,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 20
+      "sortIndex": 21
     },
     {
       "id": "prod-1791377188476-22",
@@ -262,7 +274,7 @@
       "sentQty": 3,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 21
+      "sortIndex": 22
     },
     {
       "id": "prod-1791377188476-23",
@@ -274,7 +286,7 @@
       "sentQty": 3,
       "minQty": 10,
       "updatedAt": "2026-10-07T14:59:12.162Z",
-      "sortIndex": 22
+      "sortIndex": 23
     },
     {
       "id": "prod-1791377188476-24",
@@ -286,7 +298,7 @@
       "sentQty": 4,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 23
+      "sortIndex": 24
     },
     {
       "id": "prod-1791377188476-25",
@@ -298,7 +310,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 24
+      "sortIndex": 25
     },
     {
       "id": "prod-1791377188476-26",
@@ -310,7 +322,7 @@
       "sentQty": 8,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 25
+      "sortIndex": 26
     },
     {
       "id": "prod-1791377188476-27",
@@ -322,7 +334,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 26
+      "sortIndex": 27
     },
     {
       "id": "prod-1791377188476-28",
@@ -334,18 +346,6 @@
       "sentQty": 4,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 27
-    },
-    {
-      "id": "prod-1791377188476-0",
-      "sku": "PIN121801200",
-      "name": "Phoenix 12/800 VE.Direct Schuko",
-      "category": "Зарядні пристрої",
-      "boxNumber": "10",
-      "receivedQty": 1,
-      "sentQty": 0,
-      "minQty": 10,
-      "updatedAt": "2026-10-07T14:56:36.293Z",
       "sortIndex": 28
     },
     {
@@ -5020,8 +5020,8 @@
   ],
   "categories": [
     "Інвертори",
-    "Зарядні пристрої",
     "Інвертори / Зарядні пристрої",
+    "Зарядні пристрої",
     "DC-DC перетворювачі",
     "Сонячні контролери заряду",
     "Трансформатори та Гальванічні ізолятори",
