@@ -738,8 +738,6 @@ export default function App() {
                       <datalist id="sku-list">{products.map(p => <option key={p.id} value={p.sku}>{p.name}</option>)}</datalist>
                     </div>
 
-                    </div>
-
                     <div>
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Назва товару</label>
                       <input 
