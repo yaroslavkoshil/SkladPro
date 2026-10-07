@@ -25,6 +25,18 @@
       "sortIndex": 1
     },
     {
+      "id": "prod-1791377188476-0",
+      "sku": "PIN121801200",
+      "name": "Phoenix 12/800 VE.Direct Schuko",
+      "category": "Інвертори / Зарядні пристрої",
+      "boxNumber": "10",
+      "receivedQty": 1,
+      "sentQty": 0,
+      "minQty": 10,
+      "updatedAt": "2026-10-07T14:56:36.293Z",
+      "sortIndex": 2
+    },
+    {
       "id": "prod-1791377188476-3",
       "sku": "PMP482306000",
       "name": "MultiPlus-II 48/3000/35-32 GX",
@@ -34,7 +46,7 @@
       "sentQty": 2,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 2
+      "sortIndex": 3
     },
     {
       "id": "prod-1791377188476-4",
@@ -46,7 +58,7 @@
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T13:06:11.229Z",
-      "sortIndex": 3
+      "sortIndex": 4
     },
     {
       "id": "prod-1791377188476-5",
@@ -58,7 +70,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 4
+      "sortIndex": 5
     },
     {
       "id": "prod-1791377188476-6",
@@ -70,7 +82,7 @@
       "sentQty": 4,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 5
+      "sortIndex": 6
     },
     {
       "id": "prod-1791377188476-7",
@@ -82,7 +94,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 6
+      "sortIndex": 7
     },
     {
       "id": "prod-1791377188476-8",
@@ -94,7 +106,7 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 7
+      "sortIndex": 8
     },
     {
       "id": "prod-1791377188476-9",
@@ -106,18 +118,6 @@
       "sentQty": 1,
       "minQty": 10,
       "updatedAt": "2026-10-07T12:46:28.476Z",
-      "sortIndex": 8
-    },
-    {
-      "id": "prod-1791377188476-0",
-      "sku": "PIN121801200",
-      "name": "Phoenix 12/800 VE.Direct Schuko",
-      "category": "Інвертори / Зарядні пристрої",
-      "boxNumber": "10",
-      "receivedQty": 1,
-      "sentQty": 0,
-      "minQty": 10,
-      "updatedAt": "2026-10-07T14:56:36.293Z",
       "sortIndex": 9
     },
     {
