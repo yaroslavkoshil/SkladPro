@@ -6,7 +6,7 @@
       "name": "Phoenix 12/800 VE.Direct Schuko",
       "category": "Інвертори",
       "boxNumber": "1",
-      "receivedQty": 4,
+      "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T13:26:44.825Z"
@@ -50,7 +50,7 @@
       "name": "MultiPlus-II 48/5000/70-50",
       "category": "Інвертори / Зарядні пристрої",
       "boxNumber": "Б/Н",
-      "receivedQty": 4,
+      "receivedQty": 1,
       "sentQty": 0,
       "minQty": 10,
       "updatedAt": "2026-10-07T13:06:11.229Z"
@@ -1466,32 +1466,6 @@
   ],
   "logs": [
     {
-      "id": "log-1791379604825",
-      "timestamp": "2026-10-07T13:26:44.825Z",
-      "type": "IN",
-      "sku": "PIN121801200",
-      "productName": "Phoenix 12/800 VE.Direct Schuko",
-      "boxNumber": "1",
-      "changeQty": 3,
-      "prevBalance": 1,
-      "newBalance": 4,
-      "orderId": "ПОПОВНЕННЯ",
-      "note": "Прихід"
-    },
-    {
-      "id": "log-1791378371229",
-      "timestamp": "2026-10-07T13:06:11.229Z",
-      "type": "IN",
-      "sku": "PMP482505012",
-      "productName": "MultiPlus-II 48/5000/70-50",
-      "boxNumber": "Б/Н",
-      "changeQty": 3,
-      "prevBalance": 1,
-      "newBalance": 4,
-      "orderId": "43543534654",
-      "note": "Прихід"
-    },
-    {
       "id": "log-prod-1791377188476-64-hist-0",
       "timestamp": "2026-10-07T12:00:00.000Z",
       "type": "OUT",
@@ -1864,7 +1838,7 @@
       "boxNumber": "5",
       "changeQty": 3,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 5,
       "orderId": "20451549453014",
       "note": "Бортніченко"
     },
@@ -2007,9 +1981,9 @@
       "boxNumber": "5",
       "changeQty": 3,
       "prevBalance": 0,
-      "newBalance": 0,
-      "orderId": "ВІДПРАВКА",
-      "note": "ТТН 20 4515 4855 1458 - Прохоренко"
+      "newBalance": 8,
+      "orderId": "ТТН 20 4515 4855 1458",
+      "note": "Прохоренко"
     },
     {
       "id": "log-prod-1791377188476-71-hist-1",
@@ -3073,7 +3047,7 @@
       "boxNumber": "5",
       "changeQty": 1,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 11,
       "orderId": "20451532398479",
       "note": "Калінін"
     },
@@ -3177,7 +3151,7 @@
       "boxNumber": "5",
       "changeQty": 1,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 12,
       "orderId": "20451529434797",
       "note": "Макогон"
     },
