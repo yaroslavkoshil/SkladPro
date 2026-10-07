@@ -350,10 +350,11 @@ export default function App() {
       else { updatedReceived += qty; newBalance = currentBalance + qty; }
 
       const finalBox = box.trim() ? box.trim().toUpperCase() : targetProduct.boxNumber;
-      // Only update the product's primary boxNumber if it didn't have one yet
-      const updatedBox = targetProduct.boxNumber && targetProduct.boxNumber !== 'Б/Н' 
-        ? targetProduct.boxNumber 
-        : finalBox;
+      // Accumulate boxes: add new box if it's different from existing ones
+      const existingBoxes = (targetProduct.boxNumber || '').split(',').map(b => b.trim()).filter(Boolean);
+      const updatedBox = (box.trim() && !existingBoxes.includes(box.trim().toUpperCase()))
+        ? [...existingBoxes, box.trim().toUpperCase()].join(', ')
+        : targetProduct.boxNumber || finalBox;
 
       updatedProducts = products.map(p => p.id === targetProduct.id ? 
         { ...p, receivedQty: updatedReceived, sentQty: updatedSent, boxNumber: updatedBox, updatedAt: new Date().toISOString() } : p);
@@ -773,7 +774,7 @@ export default function App() {
                       <Box className="w-4 h-4 text-slate-400" />
                       <select value={selectedBoxFilter} onChange={(e) => setSelectedBoxFilter(e.target.value)} className="bg-transparent text-sm text-slate-700 font-medium outline-none cursor-pointer">
                         <option value="ALL">Всі коробки ({allBoxes.length})</option>
-                        {allBoxes.map(b => <option key={b} value={b}>Коробка #{b}</option>)}
+                        {allBoxes.map(b => <option key={b} value={b}>{b}</option>)}
                       </select>
                     </div>
                     <div className="flex items-center gap-2 bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-200">
@@ -871,7 +872,7 @@ export default function App() {
                                   </td>
                                   <td className="px-4 py-2 pr-6 text-center">
                                     <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-slate-100 rounded text-slate-700 font-mono text-[10px] border border-slate-200 font-bold">
-                                      <Box className="w-3 h-3 text-slate-400"/> #{p.boxNumber}
+                                      <Box className="w-3 h-3 text-slate-400"/> {p.boxNumber}
                                     </span>
                                   </td>
                                 </tr>
@@ -977,7 +978,7 @@ export default function App() {
                                 <span className="text-slate-800 font-medium text-sm">{log.productName}</span>
                               </td>
                               <td className="p-4 text-center">
-                                 <span className="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">#{log.boxNumber}</span>
+                                 <span className="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">{log.boxNumber}</span>
                               </td>
                               <td className={`p-4 text-center font-extrabold text-base ${log.type==='OUT'?'text-amber-500':'text-emerald-500'}`}>
                                 {log.type === 'OUT' ? '-' : '+'}{log.changeQty}
@@ -1044,7 +1045,7 @@ export default function App() {
                     {Object.entries(boxAnalytics).map(([box, data]) => (
                       <div key={box} className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col">
                         <div className="flex items-center justify-between mb-4">
-                          <span className="font-bold text-slate-700 flex items-center gap-1.5"><Box className="w-4 h-4 text-indigo-500"/> Коробка <span className="text-indigo-600">#{box}</span></span>
+                          <span className="font-bold text-slate-700 flex items-center gap-1.5"><Box className="w-4 h-4 text-indigo-500"/> Коробка <span className="text-indigo-600">{box}</span></span>
                           <span className="text-xs font-bold text-slate-500 bg-white px-2 py-1 rounded border border-slate-200">{data.count} артикулів</span>
                         </div>
                         <div className="text-2xl font-extrabold text-slate-800 mb-4">{data.items} <span className="text-sm font-normal text-slate-500">од. товарів</span></div>
@@ -1110,7 +1111,7 @@ export default function App() {
                 <div>
                   <div className="flex items-center gap-3 mb-2">
                     <span className="px-3 py-1 bg-indigo-100 text-indigo-700 font-bold font-mono text-sm rounded-lg">{selectedProduct.sku}</span>
-                    <span className="px-3 py-1 bg-slate-200 text-slate-600 font-bold font-mono text-sm rounded-lg flex items-center gap-1.5"><Box className="w-4 h-4"/> Коробка #{selectedProduct.boxNumber}</span>
+                    <span className="px-3 py-1 bg-slate-200 text-slate-600 font-bold font-mono text-sm rounded-lg flex items-center gap-1.5"><Box className="w-4 h-4"/> {selectedProduct.boxNumber}</span>
                     {isAdmin && (
                       <div className="flex gap-2">
                          <button onClick={startEditingProduct} className="text-xs text-indigo-600 hover:text-indigo-800 underline font-bold px-2">✎ Редагувати</button>
