@@ -120,6 +120,7 @@ export default function App() {
 
   // Operation Form State (for generic New Operation tab)
   const [opSku, setOpSku] = useState('');
+  const [opCategory, setOpCategory] = useState('');
   const [opQty, setOpQty] = useState('');
   const [opBox, setOpBox] = useState('');
   const [opNote, setOpNote] = useState('');
@@ -336,7 +337,7 @@ export default function App() {
   }, [products]);
 
   // Core execution logic for both New Operation form and Modal Quick Operation
-  const executeOperationCore = async (type, sku, qty, box, note, orderRef, newName = null, newMin = 10) => {
+  const executeOperationCore = async (type, sku, qty, box, note, orderRef, newName = null, newMin = 10, newCategory = 'Інше') => {
     if (!isAdmin) { showNotice('У вас немає прав для редагування', 'error'); return false; }
     
     let updatedProducts = [...products];
@@ -349,7 +350,7 @@ export default function App() {
 
       const finalBox = box.trim().toUpperCase() || 'Б/Н';
       updatedProducts = [{
-        id: `prod-${Date.now()}`, sku: trimmedSku, name: newName.trim(), boxNumber: finalBox,
+        id: `prod-${Date.now()}`, sku: trimmedSku, name: newName.trim(), boxNumber: finalBox, category: newCategory,
         receivedQty: qty, sentQty: 0, minQty: newMin, updatedAt: new Date().toISOString()
       }, ...products];
 
@@ -415,7 +416,7 @@ export default function App() {
       setOpBox(existing.boxNumber);
     } else {
       setNewProductName(''); 
-      setOpBox('');
+      setOpCategory('');
     }
   };
 
@@ -427,9 +428,9 @@ export default function App() {
     const existing = products.find(p => p.sku.toUpperCase() === opSku.trim().toUpperCase());
     const type = existing ? 'IN' : 'NEW';
     
-    const success = await executeOperationCore(type, opSku, qty, opBox, opNote, opOrderRef, newProductName, 10);
+    const success = await executeOperationCore(type, opSku, qty, opBox, opNote, opOrderRef, newProductName, 10, opCategory || 'Інше');
     if (success) {
-      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef(''); setOpBox('');
+      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef(''); setOpBox(''); setOpCategory('');
     }
   };
 
@@ -737,6 +738,8 @@ export default function App() {
                       <datalist id="sku-list">{products.map(p => <option key={p.id} value={p.sku}>{p.name}</option>)}</datalist>
                     </div>
 
+                    </div>
+
                     <div>
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Назва товару</label>
                       <input 
@@ -747,6 +750,21 @@ export default function App() {
                          className={`bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none ${products.some(p => p.sku.toUpperCase() === opSku.toUpperCase()) ? 'bg-slate-50 text-slate-600 font-medium' : ''}`}
                       />
                     </div>
+                    
+                    {/* Show category select only if it's a new product */}
+                    {!products.some(p => p.sku.toUpperCase() === opSku.toUpperCase()) && (
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Розділ (Категорія)</label>
+                        <select 
+                           value={opCategory} 
+                           onChange={e=>setOpCategory(e.target.value)} 
+                           className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none"
+                        >
+                           <option value="">-- Оберіть розділ (або залишіть Інше) --</option>
+                           {OFFICIAL_CATEGORY_ORDER.map(c => <option key={c} value={c}>{c}</option>)}
+                        </select>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
