@@ -259,7 +259,7 @@
       "name": "Blue Smart IP65 Charger 12/15 + DC connector",
       "category": "Зарядні пристрої",
       "boxNumber": "1, 2",
-      "receivedQty": 51,
+      "receivedQty": 7,
       "sentQty": 3,
       "minQty": 10,
       "updatedAt": "2026-10-07T14:59:12.162Z"
@@ -1465,19 +1465,6 @@
     }
   ],
   "logs": [
-    {
-      "id": "log-1791385134099",
-      "timestamp": "2026-10-07T14:58:54.099Z",
-      "type": "IN",
-      "sku": "BPC121531064R",
-      "productName": "Blue Smart IP65 Charger 12/15 + DC connector",
-      "boxNumber": "1",
-      "changeQty": 44,
-      "prevBalance": 4,
-      "newBalance": 48,
-      "orderId": "ПОПОВНЕННЯ",
-      "note": "Прихід"
-    },
     {
       "id": "log-1791384996293",
       "timestamp": "2026-10-07T14:56:36.293Z",
