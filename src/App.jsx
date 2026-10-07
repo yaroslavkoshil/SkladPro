@@ -82,6 +82,7 @@ export default function App() {
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBoxFilter, setSelectedBoxFilter] = useState('ALL');
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('ALL');
   const [statusFilter, setStatusFilter] = useState('ALL');
   
   // UI State
@@ -232,19 +233,21 @@ export default function App() {
   // -----------------------------------------------------
 
   const allBoxes = useMemo(() => Array.from(new Set(products.map(p => p.boxNumber.trim().toUpperCase()))).sort(), [products]);
+  const allCategories = useMemo(() => Array.from(new Set(products.map(p => p.category).filter(Boolean))).sort(), [products]);
 
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
       const currentBalance = p.receivedQty - p.sentQty;
       const matchesSearch = p.sku.toLowerCase().includes(searchQuery.toLowerCase()) || p.name.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesBox = selectedBoxFilter === 'ALL' || p.boxNumber.toUpperCase() === selectedBoxFilter.toUpperCase();
+      const matchesCategory = selectedCategoryFilter === 'ALL' || p.category === selectedCategoryFilter;
       let matchesStatus = true;
       if (statusFilter === 'IN_STOCK') matchesStatus = currentBalance > p.minQty;
       if (statusFilter === 'LOW_STOCK') matchesStatus = currentBalance > 0 && currentBalance <= p.minQty;
       if (statusFilter === 'OUT_OF_STOCK') matchesStatus = currentBalance <= 0;
-      return matchesSearch && matchesBox && matchesStatus;
+      return matchesSearch && matchesBox && matchesCategory && matchesStatus;
     });
-  }, [products, searchQuery, selectedBoxFilter, statusFilter]);
+  }, [products, searchQuery, selectedBoxFilter, selectedCategoryFilter, statusFilter]);
 
   const summaryMetrics = useMemo(() => {
     let totalItemsCount = products.length;
@@ -643,7 +646,14 @@ export default function App() {
                     <input type="text" placeholder="Пошук за артикулом, назвою чи коробкою..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 pl-11 pr-4 py-3 rounded-xl text-sm outline-none transition-all" />
                   </div>
                   
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div className="flex items-center gap-2 bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-200">
+                      <Layers className="w-4 h-4 text-slate-400" />
+                      <select value={selectedCategoryFilter} onChange={(e) => setSelectedCategoryFilter(e.target.value)} className="bg-transparent text-sm text-slate-700 font-medium outline-none cursor-pointer max-w-[150px]">
+                        <option value="ALL">Всі розділи ({allCategories.length})</option>
+                        {allCategories.map(c => <option key={c} value={c}>{c}</option>)}
+                      </select>
+                    </div>
                     <div className="flex items-center gap-2 bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-200">
                       <Box className="w-4 h-4 text-slate-400" />
                       <select value={selectedBoxFilter} onChange={(e) => setSelectedBoxFilter(e.target.value)} className="bg-transparent text-sm text-slate-700 font-medium outline-none cursor-pointer">
@@ -703,7 +713,8 @@ export default function App() {
                               <td className="p-4 font-medium text-slate-800 whitespace-normal break-words" style={{ width: nameColWidth, minWidth: nameColWidth, maxWidth: nameColWidth }}>
                                 <div className="flex flex-col gap-1">
                                   <span>{p.name}</span>
-                                  <div>
+                                  <div className="flex flex-wrap gap-2 items-center mt-1">
+                                    {p.category && <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-600 border border-indigo-100">{p.category}</span>}
                                     {bal <= 0 && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-rose-100 text-rose-700 border border-rose-200">Немає в наявності</span>}
                                     {bal > 0 && bal <= p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-100 text-amber-700 border border-amber-200">Закінчується ({bal} шт)</span>}
                                     {bal > p.minQty && <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">В наявності</span>}
