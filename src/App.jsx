@@ -177,7 +177,7 @@ export default function App() {
         "qr-reader",
         { 
           fps: 15, 
-          qrbox: { width: 300, height: 60 },
+          qrbox: { width: 300, height: 30 },
           formatsToSupport: formatsToSupport,
           aspectRatio: 1.0,
           rememberLastUsedCamera: true
@@ -186,12 +186,17 @@ export default function App() {
       );
       scanner.render(
         (decodedText) => {
-           scanner.clear();
-           setIsScanning(false);
-           setSearchQuery(decodedText);
            const foundProduct = products.find(p => p.sku === decodedText || p.sku.toLowerCase() === decodedText.toLowerCase());
-           if (foundProduct) openProductModal(foundProduct);
-           else showNotice(`Знайдено код: ${decodedText}, але товару немає в базі`, 'error');
+           if (foundProduct) {
+             scanner.clear();
+             setIsScanning(false);
+             setSearchQuery(decodedText);
+             openProductModal(foundProduct);
+             showNotice(`Товар знайдено: ${foundProduct.sku}`, 'success');
+           } else {
+             // Ignored unknown barcode, don't stop scanning
+             showNotice(`Невідомий код: ${decodedText} (Пропущено)`, 'error');
+           }
         },
         (error) => { /* ignore */ }
       );
