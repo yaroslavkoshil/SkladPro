@@ -1838,7 +1838,7 @@
       "boxNumber": "5",
       "changeQty": 3,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 5,
       "orderId": "20451549453014",
       "note": "Бортніченко"
     },
@@ -1981,9 +1981,9 @@
       "boxNumber": "5",
       "changeQty": 3,
       "prevBalance": 0,
-      "newBalance": 0,
-      "orderId": "ВІДПРАВКА",
-      "note": "ТТН 20 4515 4855 1458 - Прохоренко"
+      "newBalance": 8,
+      "orderId": "ТТН 20 4515 4855 1458",
+      "note": "Прохоренко"
     },
     {
       "id": "log-prod-1791377188476-71-hist-1",
@@ -3047,7 +3047,7 @@
       "boxNumber": "5",
       "changeQty": 1,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 11,
       "orderId": "20451532398479",
       "note": "Калінін"
     },
@@ -3151,7 +3151,7 @@
       "boxNumber": "5",
       "changeQty": 1,
       "prevBalance": 0,
-      "newBalance": 0,
+      "newBalance": 12,
       "orderId": "20451529434797",
       "note": "Макогон"
     },
