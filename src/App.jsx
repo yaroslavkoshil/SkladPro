@@ -3,7 +3,7 @@ import {
   Package, Truck, History, CheckCircle2, AlertTriangle, XCircle, Search, 
   PlusCircle, MinusCircle, Box, Download, Upload, RefreshCw, BarChart3, 
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle,
-  Cloud, CloudOff, Settings, Save, Github, RefreshCcw
+  Cloud, CloudOff, Settings, Save, Server, RefreshCcw
 } from 'lucide-react';
 
 const INITIAL_PRODUCTS = [
@@ -326,7 +326,7 @@ export default function App() {
         {activeTab === 'settings' && (
           <div className="max-w-2xl mx-auto w-full bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-xl">
             <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-              <Github className="w-6 h-6 text-slate-300" />
+              <Server className="w-6 h-6 text-slate-300" />
               Хмарна синхронізація через GitHub
             </h2>
             <p className="text-sm text-slate-400 mb-6">
