@@ -455,14 +455,23 @@ export default function App() {
     setIsEditingProduct(false); showNotice('Товар оновлено');
   };
 
-  const handleDeleteLog = (logId) => {
-    if (!window.confirm('Ви впевнені, що хочете видалити цей запис історії? Це змінить залишки товару.')) return;
-    const { newProducts, newLogs } = updateProductFromLogs(selectedProduct.sku, logs.filter(l => l.id !== logId), products);
-    setLogs(newLogs); setProducts(newProducts); pushToGithub(newProducts, newLogs);
-    setSelectedProduct(newProducts.find(p => p.sku === selectedProduct.sku)); showNotice('Запис видалено');
+  const handleDeleteProduct = () => {
+    if (!window.confirm('УВАГА! Ви дійсно хочете видалити цей товар? УСЯ його історія операцій також буде назавжди видалена!')) return;
+    const newProducts = products.filter(p => p.id !== selectedProduct.id);
+    const newLogs = logs.filter(l => l.sku !== selectedProduct.sku);
+    setProducts(newProducts); setLogs(newLogs); pushToGithub(newProducts, newLogs);
+    setSelectedProduct(null); showNotice('Товар та його історію видалено');
   };
 
-  const handleSaveLogEdit = (logId) => {
+  const handleDeleteLog = (logId, sku) => {
+    if (!window.confirm('Ви впевнені, що хочете видалити цей запис історії? Це змінить залишки товару.')) return;
+    const { newProducts, newLogs } = updateProductFromLogs(sku, logs.filter(l => l.id !== logId), products);
+    setLogs(newLogs); setProducts(newProducts); pushToGithub(newProducts, newLogs);
+    if (selectedProduct && selectedProduct.sku === sku) setSelectedProduct(newProducts.find(p => p.sku === sku)); 
+    showNotice('Запис видалено');
+  };
+
+  const handleSaveLogEdit = (logId, sku) => {
     const qty = parseInt(editLogData.changeQty, 10);
     if (isNaN(qty) || qty <= 0) return showNotice('Кількість повинна бути більше 0', 'error');
     let updatedDate = new Date(editLogData.timestamp);
@@ -470,9 +479,9 @@ export default function App() {
     const updatedLogs = logs.map(l => l.id === logId ? { 
       ...l, changeQty: qty, note: editLogData.note, orderId: editLogData.orderId, timestamp: updatedDate.toISOString()
     } : l);
-    const { newProducts, newLogs } = updateProductFromLogs(selectedProduct.sku, updatedLogs, products);
+    const { newProducts, newLogs } = updateProductFromLogs(sku, updatedLogs, products);
     setLogs(newLogs); setProducts(newProducts); pushToGithub(newProducts, newLogs);
-    setSelectedProduct(newProducts.find(p => p.sku === selectedProduct.sku));
+    if (selectedProduct && selectedProduct.sku === sku) setSelectedProduct(newProducts.find(p => p.sku === sku));
     setEditingLogId(null); showNotice('Запис оновлено');
   };
 
@@ -898,6 +907,7 @@ export default function App() {
                         <th className="p-4 text-center">Зміна</th>
                         <th className="p-4 text-center">Залишок після</th>
                         <th className="p-4 pr-6">Документ / Примітка</th>
+                        {isAdmin && <th className="p-4 pr-6 text-center">Дії</th>}
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
@@ -909,11 +919,39 @@ export default function App() {
                       }, {})).map(([date, dayLogs]) => (
                         <React.Fragment key={date}>
                           <tr className="bg-slate-100 border-y border-slate-200">
-                            <td colSpan="7" className="p-3 pl-6 font-extrabold text-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
+                            <td colSpan={isAdmin ? "8" : "7"} className="p-3 pl-6 font-extrabold text-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
                               📅 ОПЕРАЦІЇ ЗА {date.toUpperCase()} <span className="ml-2 text-xs font-medium text-slate-500 bg-white px-2 py-0.5 rounded-full border border-slate-200">{dayLogs.length} записів</span>
                             </td>
                           </tr>
                           {dayLogs.map(log => (
+                             editingLogId === log.id ? (
+                                <tr key={log.id} className="bg-indigo-50 border-y border-indigo-100">
+                                   <td colSpan={isAdmin ? "8" : "7"} className="p-4">
+                                     <div className="flex flex-wrap gap-3 items-end">
+                                        <div className="flex flex-col gap-1 w-24">
+                                          <label className="text-[10px] font-bold text-slate-500 uppercase">Кіл-ть</label>
+                                          <input type="number" className="p-2 rounded border border-slate-300 font-bold text-sm" value={editLogData.changeQty} onChange={e=>setEditLogData({...editLogData, changeQty: e.target.value})} />
+                                        </div>
+                                        <div className="flex flex-col gap-1 flex-1 min-w-[120px]">
+                                          <label className="text-[10px] font-bold text-slate-500 uppercase">ТТН</label>
+                                          <input type="text" className="p-2 rounded border border-slate-300 text-sm font-medium" value={editLogData.orderId || ''} onChange={e=>setEditLogData({...editLogData, orderId: e.target.value})} />
+                                        </div>
+                                        <div className="flex flex-col gap-1 flex-1 min-w-[150px]">
+                                          <label className="text-[10px] font-bold text-slate-500 uppercase">Примітка</label>
+                                          <input type="text" className="p-2 rounded border border-slate-300 text-sm font-medium" value={editLogData.note || ''} onChange={e=>setEditLogData({...editLogData, note: e.target.value})} />
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                          <label className="text-[10px] font-bold text-slate-500 uppercase">Час</label>
+                                          <input type="datetime-local" className="p-2 rounded border border-slate-300 text-sm font-medium" value={getLocalDatetimeLocal(editLogData.timestamp)} onChange={e => { const local = new Date(e.target.value); if(!isNaN(local.getTime())) setEditLogData({...editLogData, timestamp: local.toISOString()}) }} />
+                                        </div>
+                                        <div className="flex gap-2">
+                                           <button onClick={() => handleSaveLogEdit(log.id, log.sku)} className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded font-bold text-xs shadow-sm transition-colors">Зберегти</button>
+                                           <button onClick={() => setEditingLogId(null)} className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded font-bold text-xs shadow-sm transition-colors">Скасувати</button>
+                                        </div>
+                                     </div>
+                                   </td>
+                                </tr>
+                             ) : (
                             <tr key={log.id} className="hover:bg-slate-50/80 transition-colors">
                               <td className="p-4 pl-6 text-xs font-medium text-slate-500">{new Date(log.timestamp).toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' })}</td>
                               <td className="p-4">
@@ -944,7 +982,16 @@ export default function App() {
                                 {log.orderId && <span className="font-bold text-slate-700 mr-2">[{log.orderId}]</span>}
                                 {log.note}
                               </td>
+                              {isAdmin && (
+                                <td className="p-4 pr-6 text-center">
+                                  <div className="flex gap-2 justify-center opacity-50 hover:opacity-100 transition-opacity">
+                                    <button onClick={() => startEditingLog(log)} className="text-[10px] text-indigo-600 hover:text-indigo-800 uppercase font-extrabold flex items-center gap-1">✎ Редаг.</button>
+                                    <button onClick={() => handleDeleteLog(log.id, log.sku)} className="text-[10px] text-rose-500 hover:text-rose-700 uppercase font-extrabold flex items-center gap-1">× Видал.</button>
+                                  </div>
+                                </td>
+                              )}
                             </tr>
+                            )
                           ))}
                         </React.Fragment>
                       ))}
@@ -1053,7 +1100,12 @@ export default function App() {
                   <div className="flex items-center gap-3 mb-2">
                     <span className="px-3 py-1 bg-indigo-100 text-indigo-700 font-bold font-mono text-sm rounded-lg">{selectedProduct.sku}</span>
                     <span className="px-3 py-1 bg-slate-200 text-slate-600 font-bold font-mono text-sm rounded-lg flex items-center gap-1.5"><Box className="w-4 h-4"/> Коробка #{selectedProduct.boxNumber}</span>
-                    {isAdmin && <button onClick={startEditingProduct} className="text-xs text-indigo-600 hover:text-indigo-800 underline font-bold px-2">✎ Редагувати</button>}
+                    {isAdmin && (
+                      <div className="flex gap-2">
+                         <button onClick={startEditingProduct} className="text-xs text-indigo-600 hover:text-indigo-800 underline font-bold px-2">✎ Редагувати</button>
+                         <button onClick={handleDeleteProduct} className="text-xs text-rose-500 hover:text-rose-700 underline font-bold px-2">× Видалити товар</button>
+                      </div>
+                    )}
                   </div>
                   <h2 className="text-2xl font-extrabold text-slate-800">{selectedProduct.name}</h2>
                 </div>
