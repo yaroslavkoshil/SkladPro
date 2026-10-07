@@ -115,6 +115,7 @@ export default function App() {
   const [editLogData, setEditLogData] = useState({});
   const [isEditingProduct, setIsEditingProduct] = useState(false);
   const [editProductData, setEditProductData] = useState({});
+  const [expandedBoxes, setExpandedBoxes] = useState({});
 
 
   // Operation Form State (for generic New Operation tab)
@@ -1078,13 +1079,20 @@ export default function App() {
                         </div>
                         <div className="text-2xl font-extrabold text-slate-800 mb-4">{data.items} <span className="text-sm font-normal text-slate-500">од. товарів</span></div>
                         <div className="mt-auto space-y-1">
-                           {data.products.slice(0, 3).map(p => (
+                           {(expandedBoxes[box] ? data.products : data.products.slice(0, 3)).map(p => (
                              <div key={p.id} className="flex justify-between text-xs text-slate-500 items-center">
                                <span className="truncate pr-2">{p.sku} - {p.name}</span>
                                <span className="font-bold whitespace-nowrap">{p.receivedQty - p.sentQty} шт</span>
                              </div>
                            ))}
-                           {data.products.length > 3 && <div className="text-xs text-slate-400 italic pt-1">та ще {data.products.length - 3}...</div>}
+                           {data.products.length > 3 && (
+                             <button 
+                               onClick={() => setExpandedBoxes(prev => ({...prev, [box]: !prev[box]}))}
+                               className="text-[10px] font-bold text-indigo-500 hover:text-indigo-700 uppercase pt-2 w-full text-left outline-none"
+                             >
+                               {expandedBoxes[box] ? 'ЗГОРНУТИ ↑' : `РОЗГОРНУТИ ВСІ (${data.products.length}) ↓`}
+                             </button>
+                           )}
                         </div>
                       </div>
                     ))}
