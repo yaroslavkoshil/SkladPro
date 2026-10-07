@@ -487,46 +487,8 @@ export default function App() {
           </div>
         )}
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-8">
-          <div className="max-w-7xl mx-auto space-y-6">
-
-            {/* Global Metrics Header */}
-            {activeTab !== 'settings' && activeTab !== 'operations' && activeTab !== 'login' && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-slate-100 rounded-lg"><Package className="w-4 h-4 text-slate-600" /></div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Позицій</span>
-                  </div>
-                  <div className="text-3xl font-extrabold text-slate-800">{summaryMetrics.totalItemsCount}</div>
-                </div>
-                
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-emerald-50 rounded-lg"><ArrowDownLeft className="w-4 h-4 text-emerald-600" /></div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Отримано</span>
-                  </div>
-                  <div className="text-3xl font-extrabold text-emerald-600">+{summaryMetrics.totalReceived}</div>
-                </div>
-
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-amber-50 rounded-lg"><ArrowUpRight className="w-4 h-4 text-amber-600" /></div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Відправлено</span>
-                  </div>
-                  <div className="text-3xl font-extrabold text-amber-500">-{summaryMetrics.totalSent}</div>
-                </div>
-
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -z-10 opacity-50"></div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-indigo-50 rounded-lg"><Box className="w-4 h-4 text-indigo-600" /></div>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">В наявності</span>
-                  </div>
-                  <div className="text-3xl font-extrabold text-indigo-600">{summaryMetrics.totalInStock}</div>
-                </div>
-              </div>
-            )}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">
+          <div className="w-full mx-auto space-y-6">
             
             {/* LOGIN TAB */}
             {activeTab === 'login' && !isAdmin && (
@@ -901,7 +863,7 @@ export default function App() {
       {selectedProduct && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setSelectedProduct(null)}></div>
-          <div className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="relative w-full max-w-5xl bg-white rounded-3xl shadow-2xl flex flex-col max-h-[95vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             
             <div className="p-6 border-b border-slate-100 flex items-start justify-between bg-slate-50">
               <div>
@@ -948,12 +910,12 @@ export default function App() {
                   </div>
                   
                   <form onSubmit={handleModalOperation}>
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                    <div className="flex flex-wrap gap-4 items-end">
                       
-                      <div className="md:col-span-4">
+                      <div className="flex-shrink-0">
                         <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Кількість (шт)</label>
                         <div className="flex gap-2">
-                          <input type="number" required min="1" value={modalOpQty} onChange={e=>setModalOpQty(e.target.value)} className="w-24 bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-3 font-extrabold text-lg text-center outline-none" />
+                          <input type="number" required min="1" value={modalOpQty} onChange={e=>setModalOpQty(e.target.value)} className="w-20 bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-3 font-extrabold text-lg text-center outline-none" />
                           <div className="flex gap-1">
                             {[1,2,5,10].map(n => (
                               <button type="button" key={n} onClick={() => setModalOpQty(String((parseInt(modalOpQty)||0) + n))} className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm border border-slate-200 transition-colors">+{n}</button>
@@ -962,12 +924,12 @@ export default function App() {
                         </div>
                       </div>
 
-                      <div className="md:col-span-3">
+                      <div className="flex-1 min-w-[200px]">
                         <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">№ ТТН / Замовлення</label>
                         <input type="text" placeholder="напр. ТТН-2041" value={modalOpOrderRef} onChange={e=>setModalOpOrderRef(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-3 outline-none text-sm font-medium" />
                       </div>
 
-                      <div className="md:col-span-5">
+                      <div className="flex-1 min-w-[250px]">
                         <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Примітка</label>
                         <input type="text" placeholder="Коментар" value={modalOpNote} onChange={e=>setModalOpNote(e.target.value)} className="w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-3 outline-none text-sm font-medium" />
                       </div>
