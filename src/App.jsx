@@ -135,45 +135,39 @@ export default function App() {
   const hasGithubSetup = !!(githubConfig.owner && githubConfig.repo);
 
   const fetchFromGithub = async () => {
-    if (!hasGithubSetup) return;
+    if (!hasGithubSetup) {
+      showNotice('Заповніть налаштування хмари!', 'error');
+      return;
+    }
     setSyncStatus('syncing');
     try {
-      const rawRes = await fetch(`https://raw.githubusercontent.com/${githubConfig.owner}/${githubConfig.repo}/main/${githubConfig.path}?t=${Date.now()}`);
-      if (rawRes.ok) {
-        const parsed = await rawRes.json();
-        if (parsed.products) setProducts(parsed.products);
-        if (parsed.logs) setLogs(parsed.logs);
-        setSyncStatus('success');
-        showNotice('Дані успішно завантажено!');
-        
-        if (githubConfig.token) {
-           fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
-              headers: { 'Authorization': `token ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
-           }).then(r => r.json()).then(d => { if(d.sha) setFileSha(d.sha); }).catch(()=>{});
-        }
-        return;
+      let parsed = null;
+      
+      // If we have a token, fetch directly from API to bypass CDN cache
+      if (githubConfig.token) {
+        const res = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
+          headers: { 'Authorization': `token ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' },
+          cache: 'no-store'
+        });
+        if (!res.ok) throw new Error('API fetch failed');
+        const data = await res.json();
+        setFileSha(data.sha);
+        parsed = JSON.parse(b64DecodeUnicode(data.content));
+      } else {
+        // Fallback to raw (might be cached for 5 mins)
+        const rawRes = await fetch(`https://raw.githubusercontent.com/${githubConfig.owner}/${githubConfig.repo}/main/${githubConfig.path}?t=${Date.now()}`);
+        if (!rawRes.ok) throw new Error('Raw fetch failed');
+        parsed = await rawRes.json();
       }
 
-      if (!githubConfig.token) throw new Error('Для приватного репозиторію потрібен токен');
-
-      const res = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
-        headers: { 'Authorization': `token ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
-      });
-      if (res.status === 404) {
-        setSyncStatus('success');
-        return;
-      }
-      if (!res.ok) throw new Error('Network response was not ok');
-      const data = await res.json();
-      setFileSha(data.sha);
-      const parsed = JSON.parse(b64DecodeUnicode(data.content));
-      if (parsed.products) setProducts(parsed.products);
-      if (parsed.logs) setLogs(parsed.logs);
+      if (parsed && parsed.products) setProducts(parsed.products);
+      if (parsed && parsed.logs) setLogs(parsed.logs);
       setSyncStatus('success');
-      showNotice('Дані успішно завантажено з хмари GitHub!');
+      showNotice('Дані успішно оновлено!');
     } catch (err) {
       console.error(err);
       setSyncStatus('error');
+      showNotice('Помилка завантаження даних', 'error');
     }
   };
 
