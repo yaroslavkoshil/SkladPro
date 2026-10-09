@@ -3,8 +3,9 @@ import {
   Package, Truck, History, CheckCircle2, AlertTriangle, XCircle, Search, 
   PlusCircle, MinusCircle, Box, Download, Upload, RefreshCw, BarChart3, 
   Layers, ArrowDownLeft, ArrowUpRight, Filter, CheckCircle,
-  Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X, Trash2, RotateCcw
+  Cloud, CloudOff, Settings, Save, Server, RefreshCcw, Menu, Info, X, Trash2, RotateCcw, LayoutDashboard, Target, TrendingUp, TrendingDown,
 } from 'lucide-react';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const OFFICIAL_CATEGORY_ORDER = [
   'Інвертори',
@@ -127,7 +128,7 @@ export default function App() {
   const [adminPassword, setAdminPassword] = useState('');
 
   // Navigation
-  const [activeTab, setActiveTab] = useState('inventory');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Filters
@@ -452,7 +453,7 @@ export default function App() {
     }
   };
 
-  const handleExecuteOperation = async (e) => {
+  const handleExecuteInbound = async (e) => {
     e.preventDefault();
     const qty = parseInt(opQty, 10);
     if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
@@ -461,6 +462,20 @@ export default function App() {
     const type = existing ? 'IN' : 'NEW';
     
     const success = await executeOperationCore(type, opSku, qty, opBox, opNote, opOrderRef, newProductName, 10, opCategory || 'Інше');
+    if (success) {
+      setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef(''); setOpBox(''); setOpCategory('');
+    }
+  };
+
+  const handleExecuteOutbound = async (e) => {
+    e.preventDefault();
+    const qty = parseInt(opQty, 10);
+    if (isNaN(qty) || qty <= 0) return showNotice('Вкажіть коректну кількість', 'error');
+    
+    const existing = products.find(p => p.sku.toUpperCase() === opSku.trim().toUpperCase());
+    if (!existing) return showNotice('Товар з таким артикулом не знайдено!', 'error');
+    
+    const success = await executeOperationCore('OUT', opSku, qty, opBox, opNote, opOrderRef, newProductName, 10, opCategory || 'Інше');
     if (success) {
       setOpSku(''); setOpQty(''); setNewProductName(''); setOpNote(''); setOpOrderRef(''); setOpBox(''); setOpCategory('');
     }
@@ -707,11 +722,12 @@ export default function App() {
   };
 
   const TABS = [
+    { id: 'dashboard', label: 'Головна Панель', icon: LayoutDashboard, adminOnly: false },
     { id: 'inventory', label: 'Товари та Залишки', icon: Layers, adminOnly: false },
-    { id: 'history', label: 'Історія змін', icon: History, adminOnly: false },
-    { id: 'operations', label: 'Реєстрація операції', icon: Truck, adminOnly: true },
-    { id: 'reconciliation', label: 'Звірка та Аналітика', icon: BarChart3, adminOnly: false }, // Made public for manager to see analytics
-    { id: 'settings', label: 'Налаштування хмари', icon: Settings, adminOnly: true },
+    { id: 'inbound', label: 'Прийом товару (IN)', icon: ArrowDownLeft, adminOnly: true },
+    { id: 'outbound', label: 'Відвантаження (OUT)', icon: ArrowUpRight, adminOnly: true },
+    { id: 'history', label: 'Історія операцій', icon: History, adminOnly: false },
+    { id: 'settings', label: 'Налаштування системи', icon: Settings, adminOnly: true },
     { id: 'trash', label: 'Кошик', icon: Trash2, adminOnly: true },
   ];
 
@@ -827,6 +843,163 @@ export default function App() {
               </div>
             )}
 
+            {/* DASHBOARD TAB */}
+            {activeTab === 'dashboard' && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-2xl font-extrabold text-slate-800">Головна Панель</h2>
+                    <p className="text-sm text-slate-500 mt-1">Огляд поточного стану складу</p>
+                  </div>
+                  {isAdmin && (
+                    <div className="flex gap-2">
+                       <button onClick={() => setActiveTab('inbound')} className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-md flex items-center gap-2">
+                         <ArrowDownLeft className="w-4 h-4" /> Прийом
+                       </button>
+                       <button onClick={() => setActiveTab('outbound')} className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-bold shadow-md flex items-center gap-2">
+                         <ArrowUpRight className="w-4 h-4" /> Відвантаження
+                       </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* KPI Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                    <div className="p-4 bg-indigo-100 text-indigo-600 rounded-xl">
+                      <Layers className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-500 uppercase">Всього позицій (SKU)</p>
+                      <p className="text-3xl font-black text-slate-800">{products.length}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                    <div className="p-4 bg-emerald-100 text-emerald-600 rounded-xl">
+                      <Box className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-500 uppercase">Загальна к-ть одиниць</p>
+                      <p className="text-3xl font-black text-slate-800">
+                        {products.reduce((acc, p) => acc + (p.receivedQty - p.sentQty), 0).toLocaleString('uk-UA')}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-white p-6 rounded-2xl border border-rose-200 shadow-sm flex items-center gap-4 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                      <AlertTriangle className="w-24 h-24 text-rose-500" />
+                    </div>
+                    <div className="p-4 bg-rose-100 text-rose-600 rounded-xl relative z-10">
+                      <Target className="w-8 h-8" />
+                    </div>
+                    <div className="relative z-10">
+                      <p className="text-sm font-bold text-slate-500 uppercase">Критичні залишки</p>
+                      <p className="text-3xl font-black text-rose-600">
+                        {products.filter(p => (p.receivedQty - p.sentQty) <= p.minQty).length}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Chart Widget */}
+                  <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 lg:col-span-2">
+                    <h3 className="text-lg font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                       <TrendingUp className="w-5 h-5 text-indigo-500"/> Динаміка операцій (Останні 10 днів)
+                    </h3>
+                    <div className="h-64 w-full mt-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart
+                          data={Array.from({length: 10}).map((_, i) => {
+                            const d = new Date(); d.setDate(d.getDate() - (9 - i));
+                            const dateStr = d.toISOString().split('T')[0];
+                            const dayLogs = logs.filter(l => l.timestamp.startsWith(dateStr));
+                            const inQty = dayLogs.filter(l => l.type === 'IN').reduce((acc, l) => acc + Number(l.changeQty), 0);
+                            const outQty = dayLogs.filter(l => l.type === 'OUT').reduce((acc, l) => acc + Number(l.changeQty), 0);
+                            return { date: d.toLocaleDateString('uk-UA', { day: '2-digit', month: 'short' }), inQty, outQty };
+                          })}
+                          margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+                        >
+                          <defs>
+                            <linearGradient id="colorIn" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id="colorOut" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                          <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} dy={10} />
+                          <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
+                          <Tooltip 
+                            contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                            itemStyle={{ fontWeight: 'bold' }}
+                            labelStyle={{ color: '#64748b', marginBottom: '4px' }}
+                          />
+                          <Area type="monotone" dataKey="inQty" name="Отримано" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorIn)" />
+                          <Area type="monotone" dataKey="outQty" name="Відправлено" stroke="#f59e0b" strokeWidth={3} fillOpacity={1} fill="url(#colorOut)" />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+
+                  {/* Low Stock Widget */}
+                  <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
+                    <h3 className="text-lg font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                       <AlertTriangle className="w-5 h-5 text-rose-500"/> Потребують закупівлі
+                    </h3>
+                    <div className="space-y-3">
+                      {products.filter(p => (p.receivedQty - p.sentQty) <= p.minQty).slice(0, 5).map(p => {
+                        const bal = p.receivedQty - p.sentQty;
+                        return (
+                          <div key={p.id} className="flex items-center justify-between p-3 bg-rose-50/50 border border-rose-100 rounded-xl">
+                            <div>
+                              <p className="text-xs font-mono font-bold text-indigo-600">{p.sku}</p>
+                              <p className="text-sm font-bold text-slate-800">{p.name}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-lg font-black text-rose-600">{bal} шт</p>
+                              <p className="text-[10px] font-bold text-slate-500 uppercase">Мін: {p.minQty}</p>
+                            </div>
+                          </div>
+                        )
+                      })}
+                      {products.filter(p => (p.receivedQty - p.sentQty) <= p.minQty).length === 0 && (
+                        <p className="text-sm text-slate-500 italic text-center py-4">Всі товари в достатній кількості.</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Recent Activity Widget */}
+                  <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
+                    <h3 className="text-lg font-extrabold text-slate-800 flex items-center gap-2 mb-4">
+                       <History className="w-5 h-5 text-indigo-500"/> Останні операції
+                    </h3>
+                    <div className="space-y-3">
+                      {logs.slice(0, 5).map(log => (
+                        <div key={log.id} className="flex items-center gap-4 p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                          <div className={`p-2 rounded-lg ${log.type === 'OUT' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                             {log.type === 'OUT' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownLeft className="w-4 h-4" />}
+                          </div>
+                          <div className="flex-1">
+                             <p className="text-sm font-bold text-slate-800 line-clamp-1">{log.productName}</p>
+                             <p className="text-[10px] font-bold text-slate-500">{new Date(log.timestamp).toLocaleString('uk-UA')}</p>
+                          </div>
+                          <div className={`font-black ${log.type === 'OUT' ? 'text-amber-600' : 'text-emerald-600'}`}>
+                             {log.type === 'OUT' ? '-' : '+'}{log.changeQty}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* SETTINGS TAB */}
             {activeTab === 'settings' && isAdmin && (
               <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
@@ -869,27 +1042,29 @@ export default function App() {
               </div>
             )}
 
-            {/* OPERATIONS TAB */}
-            {activeTab === 'operations' && isAdmin && (
-              <div className="max-w-2xl bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-                <div className="mb-6">
-                   <h2 className="text-2xl font-extrabold text-slate-800 flex items-center gap-3">
-                     <ArrowDownLeft className="w-7 h-7 text-emerald-600" /> Оприбуткування товару
-                   </h2>
-                   <p className="text-sm text-slate-500 mt-2">Відвантаження товарів зі складу здійснюється через Картку товару в загальній таблиці.</p>
+            {/* INBOUND TAB */}
+            {activeTab === 'inbound' && isAdmin && (
+              <div className="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                <div className="mb-8">
+                   <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
+                     <ArrowDownLeft className="w-8 h-8" />
+                   </div>
+                   <h2 className="text-3xl font-extrabold text-slate-800">Прийом товару</h2>
+                   <p className="text-sm text-slate-500 mt-2">Додавайте нові товари або поповнюйте існуючі залишки.</p>
                 </div>
                 
-                <form onSubmit={handleExecuteOperation} className="space-y-5">
-                  <div className="grid gap-4">
+                <form onSubmit={handleExecuteInbound} className="space-y-6">
+                  <div className="grid gap-5">
                     <div className="relative">
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Артикул (SKU)</label>
                       <input 
                          required 
-                         placeholder="Введіть артикул (напр. ART-100)" 
+                         placeholder="Введіть артикул або проскануйте штрихкод" 
                          list="sku-list" 
                          value={opSku} 
                          onChange={handleSkuChange}
-                         className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-mono font-bold" 
+                         className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-mono font-bold text-lg" 
+                         autoFocus
                       />
                       <datalist id="sku-list">{products.map(p => <option key={p.id} value={p.sku}>{p.name}</option>)}</datalist>
                     </div>
@@ -898,10 +1073,10 @@ export default function App() {
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Назва товару</label>
                       <input 
                          required 
-                         placeholder="Назва товару (заповнюється автоматично для існуючих)" 
+                         placeholder="Вкажіть назву товару" 
                          value={newProductName} 
                          onChange={e=>setNewProductName(e.target.value)} 
-                         className={`bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none ${products.some(p => p.sku.toUpperCase() === opSku.toUpperCase()) ? 'bg-slate-50 text-slate-600 font-medium' : ''}`}
+                         className={`bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-medium ${products.some(p => p.sku.toUpperCase() === opSku.toUpperCase()) ? 'text-slate-500' : 'text-slate-800'}`}
                       />
                     </div>
                     
@@ -912,38 +1087,96 @@ export default function App() {
                         <select 
                            value={opCategory} 
                            onChange={e=>setOpCategory(e.target.value)} 
-                           className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none"
+                           className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-medium"
                         >
                            <option value="">-- Оберіть розділ (або залишіть Інше) --</option>
-                           {OFFICIAL_CATEGORY_ORDER.map(c => <option key={c} value={c}>{c}</option>)}
+                           {categoryOrder.map(c => <option key={c} value={c}>{c}</option>)}
                         </select>
                       </div>
                     )}
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Кількість (шт)</label>
-                      <input required type="number" min="1" placeholder="Кількість шт" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-extrabold text-lg" />
+                      <input required type="number" min="1" placeholder="Кіл-ть" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-extrabold text-2xl" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Місце / Коробка</label>
-                      <input placeholder="Коробка (A1...)" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-mono" />
+                      <input placeholder="напр. A1" value={opBox} onChange={e=>setOpBox(e.target.value)} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none font-mono font-bold text-xl" />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Замовлення / ТТН</label>
-                      <input placeholder="Документ" value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none" />
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Вхідний документ</label>
+                      <input placeholder="напр. ТТН..." value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Примітка</label>
-                      <input placeholder="Коментар" value={opNote} onChange={e=>setOpNote(e.target.value)} className="bg-white p-3.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none" />
+                      <input placeholder="Додатково" value={opNote} onChange={e=>setOpNote(e.target.value)} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 w-full outline-none" />
                     </div>
                   </div>
                   
-                  <button type="submit" className="w-full mt-6 py-4 rounded-xl font-bold text-white bg-emerald-500 hover:bg-emerald-600 shadow-md shadow-emerald-500/20 transition-all flex items-center justify-center gap-2">
-                    <ArrowDownLeft className="w-5 h-5"/> Оприбуткувати товар
+                  <button type="submit" className="w-full mt-8 py-5 rounded-2xl font-bold text-white text-lg bg-emerald-500 hover:bg-emerald-600 shadow-xl shadow-emerald-500/20 transition-all flex items-center justify-center gap-3">
+                    <ArrowDownLeft className="w-6 h-6"/> Підтвердити прийом
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {/* OUTBOUND TAB */}
+            {activeTab === 'outbound' && isAdmin && (
+              <div className="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                <div className="mb-8">
+                   <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6">
+                     <ArrowUpRight className="w-8 h-8" />
+                   </div>
+                   <h2 className="text-3xl font-extrabold text-slate-800">Відвантаження</h2>
+                   <p className="text-sm text-slate-500 mt-2">Оформлення відправки товарів та списання зі складу.</p>
+                </div>
+                
+                <form onSubmit={handleExecuteOutbound} className="space-y-6">
+                  <div className="grid gap-5">
+                    <div className="relative">
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Артикул (SKU)</label>
+                      <input 
+                         required 
+                         placeholder="Введіть артикул або проскануйте штрихкод" 
+                         list="sku-list" 
+                         value={opSku} 
+                         onChange={handleSkuChange}
+                         className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 w-full outline-none font-mono font-bold text-lg" 
+                         autoFocus
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Назва товару</label>
+                      <input 
+                         disabled
+                         placeholder="Заповниться автоматично" 
+                         value={newProductName} 
+                         className="bg-slate-100 text-slate-500 p-4 rounded-2xl border border-slate-200 w-full outline-none font-medium cursor-not-allowed"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Кількість (шт)</label>
+                      <input required type="number" min="1" placeholder="Кіл-ть" value={opQty} onChange={e=>setOpQty(e.target.value)} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 w-full outline-none font-extrabold text-2xl" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">№ Замовлення / ТТН</label>
+                      <input placeholder="напр. ТТН..." value={opOrderRef} onChange={e=>setOpOrderRef(e.target.value)} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 w-full outline-none" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Примітка</label>
+                    <input placeholder="Додатково" value={opNote} onChange={e=>setOpNote(e.target.value)} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 w-full outline-none" />
+                  </div>
+                  
+                  <button type="submit" className="w-full mt-8 py-5 rounded-2xl font-bold text-white text-lg bg-amber-500 hover:bg-amber-600 shadow-xl shadow-amber-500/20 transition-all flex items-center justify-center gap-3">
+                    <ArrowUpRight className="w-6 h-6"/> Підтвердити відвантаження
                   </button>
                 </form>
               </div>
@@ -1554,6 +1787,18 @@ export default function App() {
 
             </div>
           </div>
+        </div>
+      )}
+
+      {/* FAB (Floating Action Button) for quick inbound/outbound */}
+      {isAdmin && activeTab !== 'inbound' && activeTab !== 'outbound' && (
+        <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+          <button onClick={() => setActiveTab('inbound')} className="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center animate-in slide-in-from-bottom-5" title="Швидкий прийом">
+             <ArrowDownLeft className="w-6 h-6" />
+          </button>
+          <button onClick={() => setActiveTab('outbound')} className="w-14 h-14 bg-amber-500 hover:bg-amber-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center animate-in slide-in-from-bottom-5 delay-75" title="Швидке відвантаження">
+             <ArrowUpRight className="w-6 h-6" />
+          </button>
         </div>
       )}
 
